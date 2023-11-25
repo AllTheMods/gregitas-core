@@ -16,17 +16,18 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.jetbrains.annotations.Nullable;
 
-public class PressureHatchMachine extends TieredIOPartMachine {
-    protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(PressureHatchMachine.class, TieredIOPartMachine.MANAGED_FIELD_HOLDER);
+public class PressureHatchPartMachine extends TieredIOPartMachine {
+    protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(PressureHatchPartMachine.class, TieredIOPartMachine.MANAGED_FIELD_HOLDER);
+
     @Getter
     @Persisted
     private final NotifiablePressureContainer pressureContainer;
     @Nullable
     protected TickableSubscription updateSubs;
 
-    public PressureHatchMachine(IMachineBlockEntity holder, int tier, IO io, double minPressure, double maxPressure) {
+    public PressureHatchPartMachine(IMachineBlockEntity holder, int tier, IO io, double minPressure, double maxPressure) {
         super(holder, tier, io);
-        this.pressureContainer = new NotifiablePressureContainer(this, io, maxPressure, maxPressure, 1.0D);
+        this.pressureContainer = new NotifiablePressureContainer(this, io, minPressure, maxPressure, 1.0D);
     }
 
     @Override

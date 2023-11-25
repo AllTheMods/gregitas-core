@@ -1,10 +1,13 @@
 package com.allthemods.gravitas2.machine;
 
+import com.allthemods.gravitas2.machine.multiblock.part.PressureHatchPartMachine;
 import com.allthemods.gravitas2.recipe.type.GregitasRecipeTypes;
 import com.allthemods.gravitas2.mixin.PartAbilityAccessor;
+import com.allthemods.gravitas2.util.GregitasConstants;
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability;
+import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.*;
 import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
@@ -46,6 +49,22 @@ public class GregitasMachines {
             new int[] {GTValues.IV, GTValues.LuV, GTValues.ZPM, GTValues.UV, GTValues.UHV};
     public static final Int2LongFunction defaultTankSizeFunction = tier -> (tier <= GTValues.LV ? 8 : tier == GTValues.MV ? 12 : tier == GTValues.HV ? 16 : tier == GTValues.EV ? 32 : 64) * FluidHelper.getBucket();
 
+
+    public static final MachineDefinition[] PRESSURE_HATCH = registerPressureTieredMachines("pressure_hatch", (holder, tier) -> {
+        double min = GregitasConstants.P[GregitasConstants.EAP];
+        double max = GregitasConstants.P[GregitasConstants.EAP];
+        if (tier < GregitasConstants.EAP) min = GregitasConstants.P[tier];
+        else if (tier > GregitasConstants.EAP) max = GregitasConstants.P[tier];
+
+        tier = Math.abs(GregitasConstants.EAP - tier);
+        return new PressureHatchPartMachine(holder, tier, IO.BOTH, min, max);
+    }, (tier, builder) -> builder
+            .langValue("%s Pressure Hatch".formatted(GregitasConstants.PNF[tier]))
+            .abilities(PRESSURE_CONTAINER)
+            .rotationState(RotationState.ALL)
+            .overlayTieredHullRenderer("pressure_hatch")
+            .register(),
+            0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
 
     public static final MultiblockMachineDefinition BURNER_REACTOR = GREGITAS_REGISTRATE.multiblock("burner_reactor", WorkableElectricMultiblockMachine::new)
             .langValue("Burner Reactor")
@@ -100,6 +119,7 @@ public class GregitasMachines {
                 .compassNode(name)
                 .register(), tiers);
     }
+
     public static MachineDefinition[] registerTieredMachines(String name,
                                                              BiFunction<IMachineBlockEntity, Integer, MetaMachine> factory,
                                                              BiFunction<Integer, MachineBuilder<MachineDefinition>, MachineDefinition> builder,
@@ -107,6 +127,18 @@ public class GregitasMachines {
         MachineDefinition[] definitions = new MachineDefinition[GTValues.TIER_COUNT];
         for (int tier : tiers) {
             var register = REGISTRATE.machine(GTValues.VN[tier].toLowerCase(Locale.ROOT) + "_" + name, holder -> factory.apply(holder, tier))
+                    .tier(tier);
+            definitions[tier] = builder.apply(tier, register);
+        }
+        return definitions;
+    }
+    public static MachineDefinition[] registerPressureTieredMachines(String name,
+                                                             BiFunction<IMachineBlockEntity, Integer, MetaMachine> factory,
+                                                             BiFunction<Integer, MachineBuilder<MachineDefinition>, MachineDefinition> builder,
+                                                             int... tiers) {
+        MachineDefinition[] definitions = new MachineDefinition[GregitasConstants.P.length];
+        for (int tier : tiers) {
+            var register = REGISTRATE.machine(GregitasConstants.PN[tier].toLowerCase(Locale.ROOT) + "_" + name, holder -> factory.apply(holder, tier))
                     .tier(tier);
             definitions[tier] = builder.apply(tier, register);
         }

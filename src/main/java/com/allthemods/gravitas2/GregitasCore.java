@@ -1,16 +1,25 @@
 package com.allthemods.gravitas2;
 
 import com.allthemods.gravitas2.capability.GregitasCapabilities;
+import com.allthemods.gravitas2.capability.IPressureContainer;
 import com.allthemods.gravitas2.machine.GregitasMachines;
 import com.allthemods.gravitas2.recipe.capability.GregitasRecipeCapabilities;
 import com.allthemods.gravitas2.recipe.type.GregitasRecipeTypes;
 import com.allthemods.gravitas2.registry.GregitasRegistry;
+import com.gregtechceu.gtceu.api.blockentity.forge.MetaMachineBlockEntityImpl;
+import com.gregtechceu.gtceu.api.capability.IPlatformEnergyStorage;
 import com.gregtechceu.gtceu.api.capability.forge.GTCapability;
+import com.gregtechceu.gtceu.api.capability.forge.GTEnergyHelperImpl;
+import com.gregtechceu.gtceu.api.machine.MetaMachine;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
+import net.minecraftforge.common.capabilities.*;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.level.ExplosionEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,6 +29,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @Mod(GregitasCore.MOD_ID)
 public class GregitasCore {
@@ -66,5 +77,27 @@ public class GregitasCore {
     @SubscribeEvent
     public void registerCapabilities(RegisterCapabilitiesEvent event) {
         GregitasCapabilities.register(event);
+    }
+
+    @SubscribeEvent
+    public void addBECapabilities(AttachCapabilitiesEvent<BlockEntity> event) {
+        if (event.getObject() instanceof MetaMachineBlockEntityImpl mte) {
+            MetaMachine machine = mte.getMetaMachine();
+            event.addCapability(GregitasCore.id("pressure"), new ICapabilityProvider() {
+                @Override
+                public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> capability, @Nullable Direction side) {
+                    if (capability == GregitasCapabilities.CAPABILITY_PRESSURE_CONTAINER) {
+                        if (machine instanceof IPressureContainer pressureContainer) {
+                            return GregitasCapabilities.CAPABILITY_PRESSURE_CONTAINER.orEmpty(capability, LazyOptional.of(() -> pressureContainer));
+                        }
+                        var list = machine.getTraits().stream().filter(IPressureContainer.class::isInstance).filter(t -> t.hasCapability(side)).map(IPressureContainer.class::cast).toList();
+                        if (!list.isEmpty()) {
+                            return GregitasCapabilities.CAPABILITY_PRESSURE_CONTAINER.orEmpty(capability, LazyOptional.of(() -> list.get(0)));
+                        }
+                    }
+                    return LazyOptional.empty();
+                }
+            });
+        }
     }
 }
