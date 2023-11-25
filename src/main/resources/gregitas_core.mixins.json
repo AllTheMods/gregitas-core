@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "com.allthemods.gravitas2.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "mixins": [
+    "PartAbilityAccessor"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
