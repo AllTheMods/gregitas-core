@@ -1,0 +1,18 @@
+{
+  "block.gregitas_core.burner_reactor": "Burner Reactor",
+  "block.gregitas_core.close_space_vacuum_pressure_pipe": "Close Space Vacuum Pressure Pipe",
+  "block.gregitas_core.electron_degeneracy_pressure_pressure_pipe": "Electron Degeneracy Pressure Pressure Pipe",
+  "block.gregitas_core.extremely_high_vacuum_pressure_pipe": "Extremely High Vacuum Pressure Pipe",
+  "block.gregitas_core.high_pressure_pressure_pipe": "High Pressure Pressure Pipe",
+  "block.gregitas_core.high_vacuum_pressure_pipe": "High Vacuum Pressure Pipe",
+  "block.gregitas_core.intergalactic_void_vacuum_pressure_pipe": "Intergalactic Void Vacuum Pressure Pipe",
+  "block.gregitas_core.low_pressure_pressure_pipe": "Low Pressure Pressure Pipe",
+  "block.gregitas_core.low_vacuum_pressure_pipe": "Low Vacuum Pressure Pipe",
+  "block.gregitas_core.medium_pressure_pressure_pipe": "Medium Pressure Pressure Pipe",
+  "block.gregitas_core.medium_vacuum_pressure_pipe": "Medium Vacuum Pressure Pipe",
+  "block.gregitas_core.neutron_star_pressure_pressure_pipe": "Neutron Star Pressure Pressure Pipe",
+  "block.gregitas_core.ultra_high_pressure_pressure_pipe": "Ultra High Pressure Pressure Pipe",
+  "block.gregitas_core.ultra_high_vacuum_pressure_pipe": "Ultra High Vacuum Pressure Pipe",
+  "block.gregitas_core.white_dwarf_pressure_pressure_pipe": "White Dwarf Pressure Pressure Pipe",
+  "gregitas_core.multiblock.blast_furnace.temperature": "Current Temperature: %sK"
+}
