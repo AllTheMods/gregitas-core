@@ -2,22 +2,22 @@ package com.allthemods.gravitas2.recipe.capability;
 
 import com.gregtechceu.gtceu.api.capability.recipe.RecipeCapability;
 import com.gregtechceu.gtceu.api.recipe.content.ContentModifier;
+import com.gregtechceu.gtceu.api.recipe.content.SerializerFloat;
 import com.gregtechceu.gtceu.api.recipe.content.SerializerInteger;
 
-public class TemperatureRecipeCapability extends RecipeCapability<Integer> {
+public class TemperatureRecipeCapability extends RecipeCapability<Float> {
     public static final TemperatureRecipeCapability CAP = new TemperatureRecipeCapability();
 
-
     protected TemperatureRecipeCapability() {
-        super("temp", 0xFF0033AA, SerializerInteger.INSTANCE);
+        super("temp", 0xFFEE9933, SerializerFloat.INSTANCE);
     }
 
     @Override
-    public Integer copyInner(Integer content) {
+    public Float copyInner(Float content) {
         return content;
     }
 
-    public Integer copyWithModifier(Integer content, ContentModifier modifier){
-        return modifier.apply(content).intValue();
+    public Float copyWithModifier(Float content, ContentModifier modifier){
+        return modifier.apply(content).floatValue();
     }
 }

@@ -4,6 +4,10 @@
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "mixins": [
+    "CoilWorkableElectricMultiblockMachineMixin",
+    "GTMachinesMixin",
+    "GTRecipeModifiersMixin",
+    "MaterialRecipeHandlerMixin",
     "PartAbilityAccessor"
   ],
   "client": [

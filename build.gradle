@@ -10,6 +10,9 @@ base {
 version = project.mod_version
 group = project.maven_group
 
+def modId = project.mod_id
+def generatedResources = file("src/generated")
+
 java {
     sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
 }
@@ -26,7 +29,7 @@ loom {
         // specify the mixin configs used in this mod
         // this will be added to the jar manifest as well!
         mixinConfigs = [
-                "examplemod.mixins.json"
+                "${modId}.mixins.json"
         ]
 
         // missing access transformers?
@@ -37,6 +40,22 @@ loom {
         // also, any names used in your access transformer will need to be
         // in SRG mapped ("func_" / "field_" with MCP class names) to work!
         // (both of these things may be subject to change in the future)
+    }
+
+    runs {
+        data {
+            data()
+            programArgs "--all", "--mod", modId
+            programArgs "--output", generatedResources.absolutePath
+            programArgs "--existing", file("src/main/resources").absolutePath
+        }
+    }
+
+}
+
+sourceSets {
+    main {
+        resources.srcDir generatedResources
     }
 }
 
@@ -69,6 +88,20 @@ repositories {
             includeGroup("com.simibubi.create")
         }
     }
+    maven {
+        // Patchouli
+        name = "BlameJared"
+        url = "https://maven.blamejared.com"
+    }
+    maven {
+        url = "https://maven.theillusivec4.top/"
+    }
+    maven {
+        url "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    } // Curse Forge File
 }
 
 dependencies {
@@ -83,7 +116,7 @@ dependencies {
     }
 
     // your forge dependency, this is **required** when using Forge Loom in forge mode!
-    forge "net.minecraftforge:forge:${project.forge_version}"
+    forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
 
     // additional dependencies can be specified using loom's regular format
     // specifying a "mod" dependency (like modImplementation or modApi)
@@ -102,7 +135,17 @@ dependencies {
     modImplementation("com.gregtechceu.gtceu:gtceu-forge-${project.minecraft_version}:${project.gtceu_version}") { transitive = false }
     modImplementation("com.lowdragmc.ldlib:ldlib-forge-${project.minecraft_version}:${project.ldlib_version}") { transitive = false }
     modImplementation("com.tterrag.registrate:Registrate:${project.registrate_version}")
+    modImplementation("dev.latvian.mods:kubejs-forge:${project.kubejs_version}")
+    modImplementation("curse.maven:tfcambiental-940350:${project.tfcambiental_file}")
+    modImplementation("curse.maven:terrafirmacraft-302973:${project.terrafirmacraft_file}")
 
+    modRuntimeOnly("vazkii.patchouli:Patchouli:${project.minecraft_version}-${project.patchouli_version}-FORGE")
+    modRuntimeOnly("top.theillusivec4.curios:curios-forge:${project.curios_version}+${project.minecraft_version}")
+    modRuntimeOnly("dev.toma.configuration:configuration-forge-${project.minecraft_version}:${project.configuration_version}")
+
+    // Mixin Extras
+    implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:${project.mixinextras_version}"))
+    implementation(include("io.github.llamalad7:mixinextras-forge:${project.mixinextras_version}"))
 
     // lombok
     compileOnly 'org.projectlombok:lombok:1.18.24'

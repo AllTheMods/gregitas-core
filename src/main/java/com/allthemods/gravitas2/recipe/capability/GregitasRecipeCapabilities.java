@@ -5,10 +5,10 @@ import com.gregtechceu.gtceu.api.registry.GTRegistries;
 public class GregitasRecipeCapabilities {
 
     public static final TemperatureRecipeCapability TEMP = TemperatureRecipeCapability.CAP;
-    public static final PressureRecipeCapability PSI = PressureRecipeCapability.CAP;
+    public static final PressureRecipeCapability PRESSURE = PressureRecipeCapability.CAP;
 
     public static void init() {
         GTRegistries.RECIPE_CAPABILITIES.register(TEMP.name, TEMP);
-        GTRegistries.RECIPE_CAPABILITIES.register(PSI.name, PSI);
+        GTRegistries.RECIPE_CAPABILITIES.register(PRESSURE.name, PRESSURE);
     }
 }

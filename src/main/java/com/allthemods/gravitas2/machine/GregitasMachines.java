@@ -13,6 +13,7 @@ import com.gregtechceu.gtceu.api.machine.*;
 import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
+import com.gregtechceu.gtceu.api.pattern.TraceabilityPredicate;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.api.recipe.OverclockingLogic;
 import com.gregtechceu.gtceu.api.registry.registrate.MachineBuilder;
@@ -58,12 +59,12 @@ public class GregitasMachines {
 
         tier = Math.abs(GregitasConstants.EAP - tier);
         return new PressureHatchPartMachine(holder, tier, IO.BOTH, min, max);
-    }, (tier, builder) -> builder
-            .langValue("%s Pressure Hatch".formatted(GregitasConstants.PNF[tier]))
-            .abilities(PRESSURE_CONTAINER)
-            .rotationState(RotationState.ALL)
-            .overlayTieredHullRenderer("pressure_hatch")
-            .register(),
+        }, (tier, builder) -> builder
+                    .langValue("%s Pressure Hatch".formatted(GregitasConstants.PNF[tier]))
+                    .abilities(PRESSURE_CONTAINER)
+                    .rotationState(RotationState.ALL)
+                    .overlayTieredHullRenderer("pressure_hatch")
+                    .register(),
             0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
 
     public static final MultiblockMachineDefinition BURNER_REACTOR = GREGITAS_REGISTRATE.multiblock("burner_reactor", WorkableElectricMultiblockMachine::new)
@@ -82,7 +83,7 @@ public class GregitasMachines {
                     .where('X', blocks(GTBlocks.CASING_INVAR_HEATPROOF.get()).setMinGlobalLimited(25)
                             .or(autoAbilities(definition.getRecipeTypes()))
                             .or(autoAbilities(true, false, false)
-                            .or(abilities(PRESSURE_CONTAINER).setMaxGlobalLimited(1).setPreviewCount(1))))
+                            .or(pressurePredicate())))
                     .where('F', frames(GTMaterials.MaragingSteel300))
                     .where('C', blocks(GTBlocks.CASING_STAINLESS_CLEAN.get()))
                     .where('K', blocks(GCyMBlocks.MOLYBDENUM_DISILICIDE_COIL_BLOCK.get()))
@@ -95,6 +96,9 @@ public class GregitasMachines {
             .register();
 
 
+    public static TraceabilityPredicate pressurePredicate() {
+        return abilities(PRESSURE_CONTAINER).setMaxGlobalLimited(1).setPreviewCount(1);
+    }
 
     public static MachineDefinition[] registerSimpleMachines(String name, GTRecipeType recipeType, Int2LongFunction tankScalingFunction) {
         return registerSimpleMachines(name, recipeType, tankScalingFunction, ELECTRIC_TIERS);

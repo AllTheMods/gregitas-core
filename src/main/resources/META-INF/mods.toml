@@ -39,7 +39,7 @@ license = "LGPLv3" # Want to make your mod open source? Check out https://choose
         mandatory = true # do you **need** this mod to be able to launch?
         # A version range using interval notation.
         # Brackets mean "inclusive" bounds, while parentheses mean "exclusive".
-        versionRange = "[47,47.1.3]" # This essentially means any forge >= 47
+        versionRange = "[47,)" # This essentially means any forge >= 47
         ordering = "NONE" # Use this if you want your mod to be loaded specifically BEFORE or AFTER another mod
         side = "BOTH" # Specify where this mod is required: can be BOTH, CLIENT or SERVER
 
