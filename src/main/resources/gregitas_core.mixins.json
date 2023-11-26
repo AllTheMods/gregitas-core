@@ -9,7 +9,8 @@
     "GTRecipeModifiersMixin",
     "MaterialRecipeHandlerMixin",
     "MetaMachineBlockEntityImplMixin",
-    "PartAbilityAccessor"
+    "PartAbilityAccessor",
+    "SizedIngredientMixin"
   ],
   "client": [
   ],

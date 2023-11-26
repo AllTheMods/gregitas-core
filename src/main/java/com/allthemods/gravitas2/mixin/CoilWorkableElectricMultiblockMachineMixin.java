@@ -1,6 +1,7 @@
 package com.allthemods.gravitas2.mixin;
 
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
+import com.gregtechceu.gtceu.api.machine.TickableSubscription;
 import com.gregtechceu.gtceu.api.machine.multiblock.CoilWorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
@@ -8,6 +9,7 @@ import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
 import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.common.capabilities.heat.HeatCapability;
 import net.dries007.tfc.common.capabilities.heat.IHeatBlock;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.CalendarWorldData;
@@ -31,6 +33,9 @@ public abstract class CoilWorkableElectricMultiblockMachineMixin extends Workabl
     @Persisted(key = "currentTemp") @DescSynced
     private float gregitas$currentTemp = 273.15F;
 
+    @Unique
+    private TickableSubscription gregitas$temperatureTick = null;
+
     public CoilWorkableElectricMultiblockMachineMixin(IMachineBlockEntity holder, Object... args) {
         super(holder, args);
     }
@@ -50,7 +55,28 @@ public abstract class CoilWorkableElectricMultiblockMachineMixin extends Workabl
     public void onLoad() {
         super.onLoad();
         if (this.getLevel() instanceof ServerLevel level) {
-            this.gregitas$currentTemp = Climate.getTemperature(level, this.getPos(), CalendarWorldData.get(level).getCalendar());
+            if (getTemperature() == 0.0f) {
+                setTemperature(Climate.getTemperature(level, this.getPos(), CalendarWorldData.get(level).getCalendar()));
+            }
+        }
+        if (gregitas$temperatureTick == null) {
+            gregitas$temperatureTick = subscribeServerTick(this::gregitas$temperatureTick);
+        }
+    }
+
+    @Override
+    public void onUnload() {
+        super.onUnload();
+        if (gregitas$temperatureTick != null) {
+            gregitas$temperatureTick.unsubscribe();
+            gregitas$temperatureTick = null;
+        }
+    }
+
+    @Unique
+    private void gregitas$temperatureTick() {
+        if (this.getLevel() instanceof ServerLevel level) {
+            setTemperature(HeatCapability.adjustTempTowards(getTemperature(), Climate.getTemperature(level, this.getPos(), CalendarWorldData.get(level).getCalendar())));
         }
     }
 
