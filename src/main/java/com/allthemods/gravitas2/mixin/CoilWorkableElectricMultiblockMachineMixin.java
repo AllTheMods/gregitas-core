@@ -7,8 +7,14 @@ import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
 import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.common.capabilities.heat.IHeatBlock;
+import net.dries007.tfc.util.calendar.Calendar;
+import net.dries007.tfc.util.calendar.CalendarWorldData;
+import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateModels;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.server.level.ServerLevel;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
@@ -38,6 +44,14 @@ public abstract class CoilWorkableElectricMultiblockMachineMixin extends Workabl
     public void setTemperature(float temp) {
         gregitas$currentTemp = temp + 273.15F;
         this.onChanged();
+    }
+
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        if (this.getLevel() instanceof ServerLevel level) {
+            this.gregitas$currentTemp = Climate.getTemperature(level, this.getPos(), CalendarWorldData.get(level).getCalendar());
+        }
     }
 
     @Override

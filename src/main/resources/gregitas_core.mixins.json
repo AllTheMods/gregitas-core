@@ -8,6 +8,7 @@
     "GTMachinesMixin",
     "GTRecipeModifiersMixin",
     "MaterialRecipeHandlerMixin",
+    "MetaMachineBlockEntityImplMixin",
     "PartAbilityAccessor"
   ],
   "client": [
