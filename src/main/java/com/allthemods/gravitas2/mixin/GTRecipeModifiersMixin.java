@@ -13,23 +13,21 @@ import org.spongepowered.asm.mixin.injection.At;
 import javax.annotation.Nonnull;
 
 @Mixin(value = GTRecipeModifiers.class, remap = false)
-public class GTRecipeModifiersMixin {
+public abstract class GTRecipeModifiersMixin {
 
     // make EBF need heating up, instead of immediately being at target temperature.
     // god this is evil. I love it.
     @ModifyExpressionValue(method = "ebfOverclock", at = @At(value = "INVOKE", target = "Lcom/gregtechceu/gtceu/api/block/ICoilType;getCoilTemperature()I"))
-    private static int gregitas$modifyEbfHeatValue(int original, MetaMachine machine, @Nonnull GTRecipe recipe) {
-        int heat = recipe.data.contains("ebf_temp") ? recipe.data.getInt("ebf_temp") : 0;
+    private static int gregitas$modifyEbfHeatValue(int originalCoilTemp, MetaMachine machine, @Nonnull GTRecipe recipe) {
         int coilTier = 1;
         if (machine instanceof CoilWorkableElectricMultiblockMachine coilMachine) {
-            heat = coilMachine.getCoilType().getCoilTemperature();
             coilTier = coilMachine.getCoilTier() + 1;
         }
         if (machine instanceof IHeatBlock heatBlock) {
             float currentTemp = heatBlock.getTemperature();
-            heatBlock.setTemperature(HeatCapability.adjustTempTowards(currentTemp, heat, coilTier / 1.5f));
+            heatBlock.setTemperature(HeatCapability.adjustTempTowards(currentTemp, originalCoilTemp, coilTier / 1.5f));
             return Math.round(heatBlock.getTemperature() + 273.15F);
         }
-        return original;
+        return originalCoilTemp;
     }
 }

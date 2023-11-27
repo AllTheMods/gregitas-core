@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = MetaMachineBlockEntityImpl.class, remap = false)
-public class MetaMachineBlockEntityImplMixin extends MetaMachineBlockEntity {
+public abstract class MetaMachineBlockEntityImplMixin extends MetaMachineBlockEntity {
     protected MetaMachineBlockEntityImplMixin(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
         super(type, pos, blockState);
     }
