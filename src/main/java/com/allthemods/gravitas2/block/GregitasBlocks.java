@@ -20,9 +20,9 @@ public class GregitasBlocks {
     private static void generatePressurePipeBlocks() {
         for (int i = 0; i < PressurePipeType.values().length; ++i) {
             var type = PressurePipeType.values()[i];
-            PRESSURE_PIPE_BLOCKS[i] = GREGITAS_REGISTRATE.block("%s_pressure_pipe".formatted(type.getSerializedName()), (p) -> new PressurePipeBlock(p, type))
+            PRESSURE_PIPE_BLOCKS[i] = GREGITAS_REGISTRATE.block("%s_pipe".formatted(type.getSerializedName()), (p) -> new PressurePipeBlock(p, type))
                     .initialProperties(() -> Blocks.IRON_BLOCK)
-                    .properties(p -> p.dynamicShape().noOcclusion().noLootTable())
+                    .properties(p -> p.dynamicShape().noOcclusion())
                     .blockstate(NonNullBiConsumer.noop())
                     .addLayer(() -> RenderType::cutoutMipped)
                     .item(PressurePipeBlockItem::new)
