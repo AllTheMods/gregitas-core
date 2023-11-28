@@ -1,17 +1,19 @@
 {
   "required": true,
-  "package": "com.allthemods.gravitas2.mixin",
+  "package": "com.allthemods.gravitas2.core.mixin",
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "mixins": [
     "CoilWorkableElectricMultiblockMachineMixin",
+    "CommonProxyImplMixin",
     "GTMachinesMixin",
     "GTRecipeModifiersMixin",
     "MaterialRecipeHandlerMixin",
     "MetaMachineBlockEntityImplMixin",
     "NotifiableItemStackHandlerMixin",
     "PartAbilityAccessor",
-    "TagPrefixItemMixin"
+    "TagPrefixItemMixin",
+    "TerraFirmaCraftMixin"
   ],
   "client": [
   ],

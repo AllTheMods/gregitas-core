@@ -52,3 +52,19 @@ license = "LGPLv3" # Want to make your mod open source? Check out https://choose
         versionRange = "[1.20.1,)"
         ordering = "NONE"
         side = "BOTH"
+
+    # And another dependency, use this if you want to require a certain Minecraft version.
+    [[dependencies.gregitas_core]]
+        modId = "gtceu"
+        mandatory = true
+        versionRange = "[1.0.16,)"
+        ordering = "AFTER"
+        side = "BOTH"
+
+    # And another dependency, use this if you want to require a certain Minecraft version.
+    [[dependencies.gregitas_core]]
+        modId = "tfc"
+        mandatory = true
+        versionRange = "[3.1.0-beta,)"
+        ordering = "AFTER"
+        side = "BOTH"

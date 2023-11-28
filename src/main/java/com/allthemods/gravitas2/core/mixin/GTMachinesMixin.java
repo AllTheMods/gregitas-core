@@ -1,4 +1,4 @@
-package com.allthemods.gravitas2.mixin;
+package com.allthemods.gravitas2.core.mixin;
 
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiController;
 import com.gregtechceu.gtceu.common.data.GTMachines;

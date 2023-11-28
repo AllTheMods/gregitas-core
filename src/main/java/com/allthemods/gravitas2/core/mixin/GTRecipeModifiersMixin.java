@@ -1,4 +1,4 @@
-package com.allthemods.gravitas2.mixin;
+package com.allthemods.gravitas2.core.mixin;
 
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.CoilWorkableElectricMultiblockMachine;

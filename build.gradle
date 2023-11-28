@@ -8,6 +8,8 @@ base {
 }
 
 version = project.mod_version
+mod_id = project.mod_id
+mod_author = project.mod_author
 group = project.maven_group
 
 def modId = project.mod_id
@@ -140,12 +142,10 @@ dependencies {
 
 processResources {
     // define properties that can be used during resource processing
-    inputs.property "version", project.version
+    inputs.property "version", version
 
-    // this will replace the property "${version}" in your mods.toml
-    // with the version you've defined in your gradle.properties
     filesMatching("META-INF/mods.toml") {
-        expand "version": project.version
+        expand "version": version
     }
 }
 
@@ -169,12 +169,12 @@ jar {
     // add some additional metadata to the jar manifest
     manifest {
         attributes([
-                "Specification-Title"     : project.mod_id,
-                "Specification-Vendor"    : project.mod_author,
+                "Specification-Title"     : mod_id,
+                "Specification-Vendor"    : mod_author,
                 "Specification-Version"   : "1",
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : version,
-                "Implementation-Vendor"   : project.mod_author,
+                "Implementation-Vendor"   : mod_author,
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }

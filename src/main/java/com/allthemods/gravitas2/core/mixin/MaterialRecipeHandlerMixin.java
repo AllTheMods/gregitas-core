@@ -1,4 +1,4 @@
-package com.allthemods.gravitas2.mixin;
+package com.allthemods.gravitas2.core.mixin;
 
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.BlastProperty;

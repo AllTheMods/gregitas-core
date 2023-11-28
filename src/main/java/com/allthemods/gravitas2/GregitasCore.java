@@ -8,22 +8,16 @@ import com.allthemods.gravitas2.machine.GregitasMachines;
 import com.allthemods.gravitas2.recipe.capability.GregitasRecipeCapabilities;
 import com.allthemods.gravitas2.recipe.type.GregitasRecipeTypes;
 import com.allthemods.gravitas2.registry.GregitasRegistry;
-import com.allthemods.gravitas2.util.GregitasUtil;
 import com.gregtechceu.gtceu.api.block.ActiveBlock;
-import com.gregtechceu.gtceu.common.block.CoilBlock;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.config.ConfigHolder;
 import com.lumintorious.tfcambiental.api.AmbientalRegistry;
 import com.lumintorious.tfcambiental.modifier.TempModifier;
 import com.tterrag.registrate.providers.ProviderType;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
-import net.minecraftforge.event.entity.item.ItemEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
@@ -78,4 +72,14 @@ public class GregitasCore {
     public void registerCapabilities(RegisterCapabilitiesEvent event) {
         GregitasCapabilities.register(event);
     }
+
+    public static final Object LOCK = new Object();
+    public static boolean isTfcSetup = false;
+    public static void onTfcSetup() {
+        synchronized (LOCK) {
+            isTfcSetup = true;
+            LOCK.notify();
+        }
+    }
+
 }

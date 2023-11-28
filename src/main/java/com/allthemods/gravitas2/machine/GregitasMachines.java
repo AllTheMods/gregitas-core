@@ -2,7 +2,7 @@ package com.allthemods.gravitas2.machine;
 
 import com.allthemods.gravitas2.machine.multiblock.part.PressureHatchPartMachine;
 import com.allthemods.gravitas2.recipe.type.GregitasRecipeTypes;
-import com.allthemods.gravitas2.mixin.PartAbilityAccessor;
+import com.allthemods.gravitas2.core.mixin.PartAbilityAccessor;
 import com.allthemods.gravitas2.util.GregitasConstants;
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTValues;

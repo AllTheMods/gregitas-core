@@ -1,4 +1,4 @@
-package com.allthemods.gravitas2.mixin;
+package com.allthemods.gravitas2.core.mixin;
 
 import com.allthemods.gravitas2.util.GregitasUtil;
 import com.allthemods.gravitas2.util.WrappingHeatHandler;

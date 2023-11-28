@@ -2,12 +2,27 @@ package com.allthemods.gravitas2.block;
 
 import com.allthemods.gravitas2.item.PressurePipeBlockItem;
 import com.allthemods.gravitas2.pipelike.pressure.PressurePipeType;
+import com.google.common.collect.Table;
+import com.google.common.collect.Tables;
+import com.gregtechceu.gtceu.api.block.RendererMaterialBlock;
+import com.gregtechceu.gtceu.api.data.chemical.material.Material;
+import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey;
 import com.gregtechceu.gtceu.api.item.LaserPipeBlockItem;
+import com.gregtechceu.gtceu.api.item.tool.GTToolType;
+import com.gregtechceu.gtceu.api.registry.GTRegistries;
 import com.gregtechceu.gtceu.common.block.LaserPipeBlock;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
+import net.dries007.tfc.common.blocks.rock.Ore;
+import net.dries007.tfc.common.blocks.rock.Rock;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 import static com.allthemods.gravitas2.registry.GregitasRegistry.GREGITAS_REGISTRATE;
 
