@@ -59,7 +59,7 @@ public class GregitasMachines {
         tier = Math.abs(GregitasConstants.EAP - tier);
         return new PressureHatchPartMachine(holder, tier, IO.BOTH, min, max);
         }, (tier, builder) -> builder
-                    .langValue("%s Pressure Hatch".formatted(GregitasConstants.PNF[tier]))
+                    .langValue("%s Hatch".formatted(GregitasConstants.PRESSURE_NAMES[tier]))
                     .abilities(PRESSURE_CONTAINER)
                     .rotationState(RotationState.ALL)
                     .overlayTieredHullRenderer("pressure_hatch")

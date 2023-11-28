@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "gregitas_core:ultra_high_vacuum_pipe"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "gregitas_core:blocks/ultra_high_vacuum_pipe"
+}
