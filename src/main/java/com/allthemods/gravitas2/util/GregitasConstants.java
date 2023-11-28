@@ -11,11 +11,6 @@ public class GregitasConstants {
     public static final double EARTH_PRESSURE = 101_325;
 
     /**
-     * Earth's Temperature in Kelvin
-     */
-    public static final int EARTH_TEMPERATURE = 298;
-
-    /**
      * The main pressure thresholds
      */
     public static final double[] P = new double[]{

@@ -60,7 +60,7 @@ public class NotifiablePressureContainer extends NotifiableRecipeHandlerTrait<Do
     @Override
     public List<Double> handleRecipeInner(IO io, GTRecipe recipe, List<Double> left, @Nullable String slotName, boolean simulate) {
         IPressureContainer container = this;
-        double pressure = left.stream().reduce(0d, Double::sum);
+        double pressure = left.stream().reduce(0.0d, Double::sum);
 
         final double containerPressure = container.getPressure();
         double pressureToChange;
