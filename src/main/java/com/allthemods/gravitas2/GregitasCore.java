@@ -73,13 +73,4 @@ public class GregitasCore {
         GregitasCapabilities.register(event);
     }
 
-    public static final Object LOCK = new Object();
-    public static boolean isTfcSetup = false;
-    public static void onTfcSetup() {
-        synchronized (LOCK) {
-            isTfcSetup = true;
-            LOCK.notify();
-        }
-    }
-
 }

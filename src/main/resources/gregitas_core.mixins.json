@@ -5,15 +5,13 @@
   "minVersion": "0.8",
   "mixins": [
     "CoilWorkableElectricMultiblockMachineMixin",
-    "CommonProxyImplMixin",
     "GTMachinesMixin",
     "GTRecipeModifiersMixin",
     "MaterialRecipeHandlerMixin",
     "MetaMachineBlockEntityImplMixin",
     "NotifiableItemStackHandlerMixin",
     "PartAbilityAccessor",
-    "TagPrefixItemMixin",
-    "TerraFirmaCraftMixin"
+    "TagPrefixItemMixin"
   ],
   "client": [
   ],

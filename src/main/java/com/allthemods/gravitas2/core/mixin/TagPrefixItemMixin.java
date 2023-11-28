@@ -8,6 +8,7 @@ import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
 import com.gregtechceu.gtceu.api.item.TagPrefixItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.extensions.IForgeItem;
@@ -18,17 +19,21 @@ import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(value = TagPrefixItem.class, remap = false)
-public abstract class TagPrefixItemMixin implements IForgeItem {
+public abstract class TagPrefixItemMixin extends Item implements IForgeItem {
 
     @Shadow @Final public TagPrefix tagPrefix;
 
     @Shadow @Final public Material material;
 
+    public TagPrefixItemMixin(Properties properties) {
+        super(properties);
+    }
+
     /**
      * @author Screret
      * @reason no hurty bad ingot!
      */
-    @Overwrite
+    @Overwrite(remap = true)
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
         if (slotId < 0) return;
         if (level.isClientSide()) return;
