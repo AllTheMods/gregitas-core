@@ -1,6 +1,7 @@
 package com.allthemods.gravitas2;
 
 import com.allthemods.gravitas2.data.tag.GregitasTagPrefixes;
+import com.allthemods.gravitas2.material.GregitasMaterials;
 import com.allthemods.gravitas2.recipe.capability.GregitasRecipeCapabilities;
 import com.gregtechceu.gtceu.api.addon.GTAddon;
 import com.gregtechceu.gtceu.api.addon.IGTAddon;
@@ -24,6 +25,11 @@ public class GregitasGTAddon implements IGTAddon {
     @Override
     public void registerTagPrefixes() {
         GregitasTagPrefixes.init();
+    }
+
+    @Override
+    public void registerMaterials() {
+        GregitasMaterials.init();
     }
 
     public static final ContentJS<Double> PRESSURE_IN = new ContentJS<>(NumberComponent.ANY_DOUBLE, GregitasRecipeCapabilities.PRESSURE, false);

@@ -21,7 +21,7 @@ public class NotifiablePressureContainer extends NotifiableRecipeHandlerTrait<Do
     public static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(NotifiablePressureContainer.class, NotifiableRecipeHandlerTrait.MANAGED_FIELD_HOLDER);
 
     @Getter
-    protected IO handlerIO;
+    protected IO handlerIO = IO.BOTH;
     @Getter
     private final double minPressure;
     @Getter
@@ -42,9 +42,8 @@ public class NotifiablePressureContainer extends NotifiableRecipeHandlerTrait<Do
      *
      * @param volume the volume of the container, must be nonzero
      */
-    public NotifiablePressureContainer(MetaMachine machine, IO handlerIO, double minPressure, double maxPressure, double volume) {
+    public NotifiablePressureContainer(MetaMachine machine, double minPressure, double maxPressure, double volume) {
         super(machine);
-        this.handlerIO = handlerIO;
         this.minPressure = minPressure;
         this.maxPressure = maxPressure;
         this.volume = volume;

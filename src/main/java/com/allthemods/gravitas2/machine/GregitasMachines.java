@@ -7,11 +7,10 @@ import com.allthemods.gravitas2.util.GregitasConstants;
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability;
-import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.*;
+import com.gregtechceu.gtceu.api.machine.multiblock.CoilWorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
-import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
 import com.gregtechceu.gtceu.api.pattern.TraceabilityPredicate;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
@@ -57,7 +56,7 @@ public class GregitasMachines {
         else if (tier > GregitasConstants.EAP) max = GregitasConstants.P[tier];
 
         tier = Math.abs(GregitasConstants.EAP - tier);
-        return new PressureHatchPartMachine(holder, tier, IO.BOTH, min, max);
+        return new PressureHatchPartMachine(holder, tier, min, max);
         }, (tier, builder) -> builder
                     .langValue("%s Hatch".formatted(GregitasConstants.PRESSURE_NAMES[tier]))
                     .abilities(PRESSURE_CONTAINER)
@@ -66,7 +65,7 @@ public class GregitasMachines {
                     .register(),
             0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
 
-    public static final MultiblockMachineDefinition BURNER_REACTOR = GREGITAS_REGISTRATE.multiblock("burner_reactor", WorkableElectricMultiblockMachine::new)
+    public static final MultiblockMachineDefinition BURNER_REACTOR = GREGITAS_REGISTRATE.multiblock("burner_reactor", CoilWorkableElectricMultiblockMachine::new)
             .langValue("Burner Reactor")
             .rotationState(RotationState.NON_Y_AXIS)
             .recipeType(GregitasRecipeTypes.BURNER_REACTOR_RECIPES)

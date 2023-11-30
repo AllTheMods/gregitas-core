@@ -140,7 +140,7 @@ public class GregitasTagPrefixes {
             .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.MARBLE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), false, Rock.MARBLE.color());
 
     public static void init() {
-        TagPrefix.ORES.remove(TagPrefix.oreDeepslate);
+        //TagPrefix.ORES.remove(TagPrefix.oreDeepslate);
         TagPrefix.ORES.remove(TagPrefix.oreTuff);
         TagPrefix.ORES.remove(TagPrefix.oreSand);
         TagPrefix.ORES.remove(TagPrefix.oreRedSand);

@@ -1,11 +1,18 @@
 package com.allthemods.gravitas2.core.mixin;
 
 import com.gregtechceu.gtceu.api.block.ICoilType;
+import com.gregtechceu.gtceu.api.capability.IEnergyContainer;
+import com.gregtechceu.gtceu.api.capability.recipe.EURecipeCapability;
+import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.TickableSubscription;
 import com.gregtechceu.gtceu.api.machine.multiblock.CoilWorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
+import com.gregtechceu.gtceu.api.recipe.GTRecipe;
+import com.gregtechceu.gtceu.api.recipe.RecipeHelper;
+import com.gregtechceu.gtceu.api.recipe.content.Content;
+import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
@@ -13,12 +20,14 @@ import net.dries007.tfc.common.capabilities.heat.HeatCapability;
 import net.dries007.tfc.common.capabilities.heat.IHeatBlock;
 import net.dries007.tfc.util.climate.Climate;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.server.level.ServerLevel;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -28,6 +37,8 @@ public abstract class CoilWorkableElectricMultiblockMachineMixin extends Workabl
 
     @Shadow private ICoilType coilType;
     @Shadow public abstract int getCoilTier();
+
+    @Shadow public abstract ICoilType getCoilType();
 
     // Temperature, in Kelvin (because GT uses kelvin instead of celsius.)
     @Unique
@@ -82,6 +93,16 @@ public abstract class CoilWorkableElectricMultiblockMachineMixin extends Workabl
     public void onWorking() {
         super.onWorking();
         this.setTemperature(HeatCapability.adjustTempTowards(getTemperature(), coilType.getCoilTemperature(), (getCoilTier() + 1) / 1.5f));
+        /* nah too evil.
+        if (getTemperature() <= getCoilType().getCoilTemperature()) {
+            if (!this.getCapabilitiesProxy().contains(IO.IN, EURecipeCapability.CAP)) return;
+
+            if (getRecipeLogic().getLastRecipe() == null) return;
+            long EUt = RecipeHelper.getInputEUt(getRecipeLogic().getLastRecipe());
+            GTRecipe recipe = GTRecipeBuilder.ofRaw().EUt(EUt).buildRawRecipe();
+            getRecipeLogic().handleTickRecipe(recipe);
+        }
+        */
     }
 
     @Override

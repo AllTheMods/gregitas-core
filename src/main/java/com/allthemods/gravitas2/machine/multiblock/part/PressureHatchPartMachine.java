@@ -25,9 +25,9 @@ public class PressureHatchPartMachine extends TieredIOPartMachine {
     @Nullable
     protected TickableSubscription updateSubs;
 
-    public PressureHatchPartMachine(IMachineBlockEntity holder, int tier, IO io, double minPressure, double maxPressure) {
-        super(holder, tier, io);
-        this.pressureContainer = new NotifiablePressureContainer(this, io, minPressure, maxPressure, 1.0D);
+    public PressureHatchPartMachine(IMachineBlockEntity holder, int tier, double minPressure, double maxPressure) {
+        super(holder, tier, IO.BOTH);
+        this.pressureContainer = new NotifiablePressureContainer(this, minPressure, maxPressure, 1.0D);
     }
 
     @Override

@@ -20,7 +20,7 @@ public abstract class GTMachinesMixin {
     private static void gregitas$addEbfText(IMultiController controller, List<Component> textList, CallbackInfo ci) {
         if (controller instanceof IHeatBlock heatBlock && controller.isFormed()) {
             Heat heat = Heat.getHeat(heatBlock.getTemperature());
-            textList.add(Component.translatable("gregitas_core.multiblock.blast_furnace.temperature", Component.literal(String.valueOf((int) (heatBlock.getTemperature()))).withStyle(heat != null ? heat.getColor() : ChatFormatting.BLUE)));
+            textList.add(Component.translatable("gregitas_core.multiblock.blast_furnace.temperature", Component.literal(String.valueOf((int) (heatBlock.getTemperature() + 273.15F))).withStyle(heat != null ? heat.getColor() : ChatFormatting.BLUE)));
         }
     }
 }
