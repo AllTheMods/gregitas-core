@@ -7,8 +7,11 @@
     "CoilWorkableElectricMultiblockMachineMixin",
     "GTMachinesMixin",
     "GTRecipeModifiersMixin",
+    "HotbarManagerMixin",
+    "IOWorkerMixin",
     "MaterialRecipeHandlerMixin",
     "MetaMachineBlockEntityImplMixin",
+    "MixinDataFixTypes",
     "NotifiableItemStackHandlerMixin",
     "PartAbilityAccessor",
     "TagPrefixItemMixin"

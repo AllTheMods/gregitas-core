@@ -3,6 +3,7 @@ package com.allthemods.gravitas2;
 import com.allthemods.gravitas2.block.GregitasBlocks;
 import com.allthemods.gravitas2.block.entity.GregitasBlockEntities;
 import com.allthemods.gravitas2.capability.GregitasCapabilities;
+import com.allthemods.gravitas2.data.fixers.GregitasDataFixes;
 import com.allthemods.gravitas2.data.lang.LangHandler;
 import com.allthemods.gravitas2.machine.GregitasMachines;
 import com.allthemods.gravitas2.recipe.capability.GregitasRecipeCapabilities;
@@ -29,6 +30,7 @@ import java.util.Optional;
 public class GregitasCore {
     public static final String MOD_ID = "gregitas_core";
     public static final Logger LOGGER = LogManager.getLogger();
+    public static final int DATA_FIXER_VERSION = 1;
 
     public GregitasCore() {
         ConfigHolder.init();
@@ -44,6 +46,7 @@ public class GregitasCore {
         GregitasBlockEntities.init();
         GregitasRecipeTypes.init();
         GregitasMachines.init();
+        GregitasDataFixes.register();
 
         GregitasRegistry.GREGITAS_REGISTRATE.addDataGenerator(ProviderType.LANG, LangHandler::init);
 
