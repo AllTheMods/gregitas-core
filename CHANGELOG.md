@@ -1,1 +1,2 @@
-- fix crash with materials
+- fix basalt ore having the wrong base block
+- add thing to convert from old ore block IDs
