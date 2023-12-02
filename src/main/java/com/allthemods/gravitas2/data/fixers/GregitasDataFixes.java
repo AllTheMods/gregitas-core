@@ -7,6 +7,7 @@ import com.mojang.datafixers.schemas.Schema;
 import net.minecraft.SharedConstants;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.datafix.fixes.BlockRenameFix;
+import net.minecraft.util.datafix.fixes.ItemRenameFix;
 import net.minecraft.util.datafix.schemas.NamespacedSchema;
 
 import java.util.concurrent.ExecutorService;
@@ -39,6 +40,19 @@ public class GregitasDataFixes {
         // For v1, need to upgrade gregitas:ore/<material>/<stone> and gtceu:tfc_<stone>_<material>_ore to gtceu:<stone>_<material>_ore
         Schema schemaV1 = builder.addSchema(1, SAME_NAMESPACED);
         builder.addFixer(BlockRenameFix.create(schemaV1, "update_gregitas_ore_blocks", blockId -> {
+            ResourceLocation id = ResourceLocation.tryParse(blockId);
+            if (id == null) return blockId;
+            if (id.getNamespace().equals("gregitas")) {
+                String[] path = id.getPath().split("/");
+                if (path.length >= 2) {
+                    return "gtceu:%s_%s_ore".formatted(path[1], path[0]);
+                }
+            } else if (id.getNamespace().equals("gtceu") && id.getPath().startsWith("tfc_")) {
+                return "gtceu:" + id.getPath().substring(4);
+            }
+            return blockId;
+        }));
+        builder.addFixer(ItemRenameFix.create(schemaV1, "update_gregitas_ore_items", blockId -> {
             ResourceLocation id = ResourceLocation.tryParse(blockId);
             if (id == null) return blockId;
             if (id.getNamespace().equals("gregitas")) {
