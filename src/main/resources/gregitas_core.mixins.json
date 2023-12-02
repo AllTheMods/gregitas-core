@@ -14,7 +14,8 @@
     "MixinDataFixTypes",
     "NotifiableItemStackHandlerMixin",
     "PartAbilityAccessor",
-    "TagPrefixItemMixin"
+    "TagPrefixItemMixin",
+    "TagPrefixOreTypeAccessor"
   ],
   "client": [
   ],

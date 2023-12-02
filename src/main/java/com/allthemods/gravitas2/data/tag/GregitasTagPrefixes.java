@@ -1,5 +1,6 @@
 package com.allthemods.gravitas2.data.tag;
 
+import com.allthemods.gravitas2.core.mixin.TagPrefixOreTypeAccessor;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconType;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
 import net.dries007.tfc.common.blocks.TFCBlocks;
@@ -76,7 +77,7 @@ public class GregitasTagPrefixes {
             .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.CHALK).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), false, Rock.CHALK.color());
 
     public static final TagPrefix oreRhyolite = TagPrefix.oreTagPrefix("rhyolite")
-            .langValue("Shale %s Ore")
+            .langValue("Rhyolite %s Ore")
             .materialIconType(MaterialIconType.ore)
             .miningToolTag(BlockTags.MINEABLE_WITH_PICKAXE)
             .unificationEnabled(true)
@@ -145,5 +146,10 @@ public class GregitasTagPrefixes {
         TagPrefix.ORES.remove(TagPrefix.oreSand);
         TagPrefix.ORES.remove(TagPrefix.oreRedSand);
         TagPrefix.ORES.remove(TagPrefix.oreGravel);
+        TagPrefixOreTypeAccessor oreBasaltAccessor = (TagPrefixOreTypeAccessor)(Object)TagPrefix.ORES.get(TagPrefix.oreBasalt);
+        // nope, it works. IntelliJ doesn't know what it's talking about.
+        //noinspection DataFlowIssue
+        oreBasaltAccessor.setIsNether(false);
+        oreBasaltAccessor.setStoneType(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.BASALT).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState());
     }
 }
