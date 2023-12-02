@@ -9,8 +9,6 @@
     "GTRecipeModifiersMixin",
     "MaterialRecipeHandlerMixin",
     "MetaMachineBlockEntityImplMixin",
-    "MixinDataFixTypes",
-    "NbtUtilsMixin",
     "NotifiableItemStackHandlerMixin",
     "PartAbilityAccessor",
     "TagPrefixItemMixin",

@@ -3,12 +3,13 @@ package com.allthemods.gravitas2;
 import com.allthemods.gravitas2.block.GregitasBlocks;
 import com.allthemods.gravitas2.block.entity.GregitasBlockEntities;
 import com.allthemods.gravitas2.capability.GregitasCapabilities;
-import com.allthemods.gravitas2.data.fixers.GregitasDataFixes;
 import com.allthemods.gravitas2.data.lang.LangHandler;
 import com.allthemods.gravitas2.machine.GregitasMachines;
 import com.allthemods.gravitas2.recipe.capability.GregitasRecipeCapabilities;
 import com.allthemods.gravitas2.recipe.type.GregitasRecipeTypes;
 import com.allthemods.gravitas2.registry.GregitasRegistry;
+import com.allthemods.gravitas2.util.GregitasUtil;
+import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.block.ActiveBlock;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.config.ConfigHolder;
@@ -16,11 +17,17 @@ import com.lumintorious.tfcambiental.api.AmbientalRegistry;
 import com.lumintorious.tfcambiental.modifier.TempModifier;
 import com.tterrag.registrate.providers.ProviderType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.MissingMappingsEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -46,7 +53,6 @@ public class GregitasCore {
         GregitasBlockEntities.init();
         GregitasRecipeTypes.init();
         GregitasMachines.init();
-        GregitasDataFixes.register();
 
         GregitasRegistry.GREGITAS_REGISTRATE.addDataGenerator(ProviderType.LANG, LangHandler::init);
 
@@ -74,6 +80,15 @@ public class GregitasCore {
     // Register mod-bus events in init (like on line 49, with IEventBus#addListener)
     public void registerCapabilities(RegisterCapabilitiesEvent event) {
         GregitasCapabilities.register(event);
+    }
+
+    // try to repair old ore block IDs
+    @SubscribeEvent
+    public void missingMappings(MissingMappingsEvent event) {
+        event.getMappings(ForgeRegistries.Keys.BLOCKS, GTCEu.MOD_ID).forEach(GregitasUtil::remap);
+        //event.getMappings(ForgeRegistries.Keys.BLOCKS, "gregitas").forEach(GregitasUtil::remap);
+        event.getMappings(ForgeRegistries.Keys.ITEMS, GTCEu.MOD_ID).forEach(GregitasUtil::remap);
+        //event.getMappings(ForgeRegistries.Keys.ITEMS, "gregitas").forEach(GregitasUtil::remap);
     }
 
 }
