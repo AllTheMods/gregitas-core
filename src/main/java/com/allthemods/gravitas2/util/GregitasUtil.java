@@ -15,6 +15,7 @@ public class GregitasUtil {
 
     public static ItemStack tickItemHeat(ItemStack stack) {
         if (!(stack.getItem() instanceof TagPrefixItem tagPrefixItem)) return stack;
+        if (tagPrefixItem.tagPrefix != TagPrefix.ingotHot) return stack;
 
         if (HeatCapability.has(stack)) {
             IHeat heat = HeatCapability.get(stack);
