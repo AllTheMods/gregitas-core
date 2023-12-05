@@ -35,15 +35,15 @@ public class GregitasUtil {
     }
 
     private static <T> T remapId(ResourceLocation id, IForgeRegistry<T> registry) {
-        /*if (id.getNamespace().equals("gregitas")) {
+        if (id.getNamespace().equals("gregitas")) {
             String[] path = id.getPath().split("/");
-            if (path.length >= 2) {
-                ResourceLocation newId = GTCEu.id("%s_%s_ore".formatted(path[1], path[0]));
+            if (path.length == 3) {
+                ResourceLocation newId = GTCEu.id("%s_%s_ore".formatted(path[2], path[1]));
                 if (registry.containsKey(newId)) {
                     return registry.getValue(newId);
                 }
             }
-        } else */if (id.getNamespace().equals("gtceu") && id.getPath().startsWith("tfc_")) {
+        } else if (id.getNamespace().equals("gtceu") && id.getPath().startsWith("tfc_")) {
             ResourceLocation newId = GTCEu.id(id.getPath().substring(4));
             if (registry.containsKey(newId)) {
                 return registry.getValue(newId);

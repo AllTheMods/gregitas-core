@@ -2,6 +2,7 @@ package com.allthemods.gravitas2.core.mixin;
 
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiController;
 import com.gregtechceu.gtceu.common.data.GTMachines;
+import com.gregtechceu.gtceu.utils.FormattingUtil;
 import net.dries007.tfc.common.capabilities.heat.Heat;
 import net.dries007.tfc.common.capabilities.heat.IHeatBlock;
 import net.minecraft.ChatFormatting;
@@ -20,7 +21,7 @@ public abstract class GTMachinesMixin {
     private static void gregitas$addEbfText(IMultiController controller, List<Component> textList, CallbackInfo ci) {
         if (controller instanceof IHeatBlock heatBlock && controller.isFormed()) {
             Heat heat = Heat.getHeat(heatBlock.getTemperature());
-            textList.add(Component.translatable("gregitas_core.multiblock.blast_furnace.temperature", Component.literal(String.valueOf((int) (heatBlock.getTemperature() + 273.15F))).withStyle(heat != null ? heat.getColor() : ChatFormatting.BLUE)));
+            textList.add(Component.translatable("gregitas_core.multiblock.blast_furnace.temperature", Component.literal(FormattingUtil.formatNumbers((int) heatBlock.getTemperature())).withStyle(heat != null ? heat.getColor() : ChatFormatting.DARK_GRAY)));
         }
     }
 }
