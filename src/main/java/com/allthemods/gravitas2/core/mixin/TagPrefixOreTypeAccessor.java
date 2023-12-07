@@ -12,8 +12,11 @@ import java.util.function.Supplier;
 public interface TagPrefixOreTypeAccessor {
 
     @Accessor @Mutable
+    void setStoneType(Supplier<BlockState> state);
+
+    @Accessor @Mutable
     void setIsNether(boolean isNether);
 
     @Accessor @Mutable
-    void setStoneType(Supplier<BlockState> state);
+    void setIsSand(boolean isSand);
 }

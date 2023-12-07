@@ -37,7 +37,6 @@ import java.util.Optional;
 public class GregitasCore {
     public static final String MOD_ID = "gregitas_core";
     public static final Logger LOGGER = LogManager.getLogger();
-    public static final int DATA_FIXER_VERSION = 1;
 
     public GregitasCore() {
         ConfigHolder.init();

@@ -1,113 +1,96 @@
 package com.allthemods.gravitas2.material;
 
-
+import com.allthemods.gravitas2.material.materials.*;
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
-import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet;
 
-import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @SuppressWarnings("unused")
 public class GregitasMaterials {
 
-    // random stuff
-    public static final Material KaolinClay = new Material.Builder("kaolin_clay")
-            .dust()
-            .color(0xba997b).secondaryColor(0x876a50).iconSet(MaterialIconSet.FINE)
-            .components(Aluminium, 2, Silicon, 2, Oxygen, 9, Hydrogen, 4)
-            .buildAndRegister()
-            .setFormula("Al2Si2O5(OH)4", true);
+    public static final Set<Material> GREGITAS_MATERIALS = new HashSet<>();
 
-    // ore stone dusts
-    public static final Material Gabbro = new Material.Builder("gabbro")
-            .dust()
-            .color(0x4C4C4C).secondaryColor(0x707159).iconSet(MaterialIconSet.ROUGH)
-            .components(Calcium, 2, Manganese, 1, Silicon, 4, Aluminium, 6, Oxygen, 14)
-            .buildAndRegister()
-            .setFormula("(CaMn(SiAl2)2O6)(CaAl2Si2O8)", true);
+    //region element
+    public static Material WeaponsGradeNaquadah;
+    public static Material LowGradeHypogen;
+    public static Material HighGradeHypogen;
+    public static Material WeaponsGradeHypogen;
+    public static Material InfinityMatter;
+    public static Material Time;
+    public static Material AllTheModium;
+    public static Material Unobtainium;
+    public static Material Certus;
+    //endregion
 
-    public static final Material Shale = new Material.Builder("shale")
-            .dust()
-            .color(0x383838).secondaryColor(0x4C4C4C).iconSet(MaterialIconSet.ROUGH)
-            .components(KaolinClay, 3, NetherQuartz, 1, Calcite, 1)
-            .buildAndRegister();
+    //region first degree
+    public static Material KaolinClay;
+    public static Material IgneousAlloy;
+    public static Material AllthemodiumNaquadahMixture;
+    public static Material Spacetime;
+    public static Material InfinityHypogenAlloy;
+    public static Material InfinityMatterSulfate;
+    public static Material Nitinol;
+    public static Material Trichlorocertane;
+    public static Material Dichlorocertane;
+    public static Material Chlorocertane;
+    public static Material CertusTetrachloride;
+    public static Material Certane;
+    //endregion
 
-    public static final Material Claystone = new Material.Builder("claystone")
-            .dust()
-            .color(0xBA8524).secondaryColor(0x707159).iconSet(MaterialIconSet.FINE)
-            .components(Clay, 2, KaolinClay, 2, Iron, 1, Potassium, 1)
-            .buildAndRegister();
+    //region unknown composition
+    public static Material Gabbro;
+    public static Material Shale;
+    public static Material Claystone;
+    public static Material Limestone;
+    public static Material Conglomerate;
+    public static Material Dolomite;
+    public static Material Chert;
+    public static Material Chalk;
+    public static Material Rhyolite;
+    public static Material Dacite;
+    public static Material Slate;
+    public static Material Phyllite;
+    public static Material Schist;
+    public static Material Gneiss;
 
-    public static final Material Limestone = new Material.Builder("limestone")
-            .dust()
-            .color(0xcacac9).secondaryColor(0xD1B1A1).iconSet(MaterialIconSet.FINE)
-            .components(Calcium, 1, Carbon, 1, Oxygen, 3)
-            .buildAndRegister();
+    public static Material Space;
+    public static Material TraceMinerals;
+    public static Material ExtraterrestialMaterials;
+    public static Material StarMatter;
+    public static Material RawHypogen;
+    public static Material DirtyHypogen;
+    public static Material DirtyHypogenSolution;
+    public static Material PurifiedHypogenSolution;
+    public static Material ImpureHypogenSolution;
+    public static Material AcidicPurifiedHypogenSolution;
+    public static Material AcidicImpureHypogenSolution;
+    public static Material WeaponsGradeHypogenSolution;
+    public static Material PurifiedHypogenWaste;
+    public static Material ImpureHypogenWaste;
+    public static Material InfinityMatterPrecursor;
+    public static Material ImpureInfinityMatter;
+    public static Material ReactiveInfinityMatter;
+    public static Material SpacetimeJunk;
+    public static Material Igneous;
+    //endregion
 
-    public static final Material Conglomerate = new Material.Builder("conglomerate")
-            .dust()
-            .color(0x876B62).secondaryColor(0x6a7451)
-            .components(Limestone, 1, Silicon, 1, Oxygen, 4, Iron, 1)
-            .buildAndRegister()
-            .setFormula("(CaCO3)(SiO2)(FeO2)", true);
-
-    public static final Material Dolomite = new Material.Builder("dolomite")
-            .dust()
-            .color(0x4C4C4C).secondaryColor(0x383838)
-            .components(Calcium, 1, Magnesium, 1, Carbon, 2, Oxygen, 6)
-            .buildAndRegister()
-            .setFormula("CaMg(CO3)2", true);
-
-    public static final Material Chert = new Material.Builder("chert")
-            .dust()
-            .color(0x9F5224).secondaryColor(0xd7c48c)
-            .components(NetherQuartz, 1, Quartzite, 1)
-            .buildAndRegister();
-
-    public static final Material Chalk = new Material.Builder("chalk")
-            .dust()
-            .color(0xFFFCF5).secondaryColor(0xcacac9)
-            .components(Limestone, 1)
-            .buildAndRegister();
-
-    public static final Material Rhyolite = new Material.Builder("rhyolite")
-            .dust()
-            .color(0x876B62).secondaryColor(0x7d6354)
-            .components(NetherQuartz, 2, Calcium, 1, Aluminium, 2, Silicon, 2, Oxygen, 8)
-            .buildAndRegister()
-            .setFormula("(SiO2)(CaAl2SiO8)", true);
-
-    public static final Material Dacite = new Material.Builder("dacite")
-            .dust()
-            .color(0x707070).secondaryColor(0x7d6354)
-            .components(NetherQuartz, 2, Calcium, 1, Aluminium, 2, Silicon, 2, Oxygen, 8)
-            .buildAndRegister();
-
-    public static final Material Slate = new Material.Builder("slate")
-            .dust()
-            .color(0x8F7748).secondaryColor(0x707159)
-            .components(Shale, 1)
-            .buildAndRegister();
-
-    public static final Material Phyllite = new Material.Builder("phyllite")
-            .dust()
-            .color(0x706C8A).secondaryColor(0x707159)
-            .components(Graphite, 2, Mica, 1)
-            .buildAndRegister();
-
-    public static final Material Schist = new Material.Builder("schist")
-            .dust()
-            .color(0x677535).secondaryColor(0x6a7451)
-            .components(Mica, 1, Talc, 1, Graphite, 1)
-            .buildAndRegister();
-
-    public static final Material Gneiss = new Material.Builder("gneiss")
-            .dust()
-            .color(0x876B62).secondaryColor(0x6a7451)
-            .components(NetherQuartz, 2, Calcium, 1, Aluminium, 2, Silicon, 2, Oxygen, 8)
-            .buildAndRegister()
-            .setFormula("(SiO2)(CaAl2SiO8)", true);
+    //region higher degree
+    public static Material UltraHighGradeHypogenSeparationAgent;
+    public static Material HypogenSolderCatalyst;
+    public static Material SpacetimeReactionCatalyst;
+    //endregion
 
     public static void init() {
+        GregitasElementMaterials.init();
+        GregitasFirstDegreeMaterials.init();
+        GregitasUnknownCompositionMaterials.init();
+        GregitasHigherDegreeMaterials.init();
+    }
 
+    public static Material registerMaterial(Material.Builder builder) {
+        Material material = builder.buildAndRegister();
+        GREGITAS_MATERIALS.add(material);
+        return material;
     }
 }

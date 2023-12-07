@@ -10,7 +10,6 @@
     "MaterialRecipeHandlerMixin",
     "MetaMachineBlockEntityImplMixin",
     "NotifiableItemStackHandlerMixin",
-    "PartAbilityAccessor",
     "TagPrefixItemMixin",
     "TagPrefixOreTypeAccessor"
   ],

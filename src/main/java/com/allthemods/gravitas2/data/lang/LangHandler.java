@@ -2,6 +2,7 @@ package com.allthemods.gravitas2.data.lang;
 
 import com.allthemods.gravitas2.data.tag.GregitasTagPrefixes;
 import com.allthemods.gravitas2.material.GregitasMaterials;
+import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.utils.FormattingUtil;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 
@@ -32,19 +33,10 @@ public class LangHandler extends com.gregtechceu.gtceu.data.lang.LangHandler {
         provider.add(GregitasTagPrefixes.oreMarble.getUnlocalizedName(), GregitasTagPrefixes.oreMarble.langValue());
 
         // Materials
-        provider.add(GregitasMaterials.Gabbro.getUnlocalizedName(), FormattingUtil.toEnglishName(GregitasMaterials.Gabbro.getName()));
-        provider.add(GregitasMaterials.Shale.getUnlocalizedName(), FormattingUtil.toEnglishName(GregitasMaterials.Shale.getName()));
-        provider.add(GregitasMaterials.Claystone.getUnlocalizedName(), FormattingUtil.toEnglishName(GregitasMaterials.Claystone.getName()));
-        provider.add(GregitasMaterials.Limestone.getUnlocalizedName(), FormattingUtil.toEnglishName(GregitasMaterials.Limestone.getName()));
-        provider.add(GregitasMaterials.Conglomerate.getUnlocalizedName(), FormattingUtil.toEnglishName(GregitasMaterials.Conglomerate.getName()));
-        provider.add(GregitasMaterials.Dolomite.getUnlocalizedName(), FormattingUtil.toEnglishName(GregitasMaterials.Dolomite.getName()));
-        provider.add(GregitasMaterials.Chert.getUnlocalizedName(), FormattingUtil.toEnglishName(GregitasMaterials.Chert.getName()));
-        provider.add(GregitasMaterials.Chalk.getUnlocalizedName(), FormattingUtil.toEnglishName(GregitasMaterials.Chalk.getName()));
-        provider.add(GregitasMaterials.Rhyolite.getUnlocalizedName(), FormattingUtil.toEnglishName(GregitasMaterials.Rhyolite.getName()));
-        provider.add(GregitasMaterials.Dacite.getUnlocalizedName(), FormattingUtil.toEnglishName(GregitasMaterials.Dacite.getName()));
-        provider.add(GregitasMaterials.Slate.getUnlocalizedName(), FormattingUtil.toEnglishName(GregitasMaterials.Slate.getName()));
-        provider.add(GregitasMaterials.Phyllite.getUnlocalizedName(), FormattingUtil.toEnglishName(GregitasMaterials.Phyllite.getName()));
-        provider.add(GregitasMaterials.Schist.getUnlocalizedName(), FormattingUtil.toEnglishName(GregitasMaterials.Schist.getName()));
-        provider.add(GregitasMaterials.Gneiss.getUnlocalizedName(), FormattingUtil.toEnglishName(GregitasMaterials.Gneiss.getName()));
+        for (Material material : GregitasMaterials.GREGITAS_MATERIALS) {
+            provider.add(material.getUnlocalizedName(), FormattingUtil.toEnglishName(material.getName()));
+        }
+        replace(provider, GregitasMaterials.AllTheModium.getUnlocalizedName(), "AllTheModium");
+        replace(provider, GregitasMaterials.AllthemodiumNaquadahMixture.getUnlocalizedName(), "AllTheModium-Naquadah Mixture");
     }
 }
