@@ -6,7 +6,7 @@ import com.gregtechceu.gtceu.common.data.GTElements;
 @SuppressWarnings("unused")
 public class GregitasElements {
 
-    public static final Element WeaponsGradeNaquadah = GTElements.createAndRegister(174, 351, 140, null, "WeaponsGradeNaquadah", "Nq+-351", true);
+    public static final Element WeaponsGradeNaquadah = GTElements.createAndRegister(174, 351, 140, null, "WeaponsGradeNaquadah", "Nq++", true);
     public static final Element Hypogen = GTElements.createAndRegister(183, 426, 80, null, "Hypogen", "Hy", false);
     public static final Element Hypogen422 = GTElements.createAndRegister(183, 422, 80, null, "Hypogen-422", "Hy-422", true);
     public static final Element Hypogen414 = GTElements.createAndRegister(183, 414, 80, null, "Hypogen-414", "Hy-414", true);

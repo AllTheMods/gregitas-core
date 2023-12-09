@@ -13,6 +13,9 @@ public class LangHandler extends com.gregtechceu.gtceu.data.lang.LangHandler {
         // GUI text
         provider.add("gregitas_core.multiblock.blast_furnace.temperature", "Current Temperature: %sK");
 
+        provider.add("gregitas_core.message.enter_ally_area", "You entered an allied area owned by ");
+        provider.add("gregitas_core.message.enter_area", "You entered an area owned by ");
+        provider.add("gregitas_core.message.leave_area", "You left an area owned by ");
 
         // Tag Prefixes
         provider.add(GregitasTagPrefixes.oreGabbro.getUnlocalizedName(), GregitasTagPrefixes.oreGabbro.langValue());

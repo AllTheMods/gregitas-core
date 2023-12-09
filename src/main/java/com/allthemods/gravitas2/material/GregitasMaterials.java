@@ -2,6 +2,10 @@ package com.allthemods.gravitas2.material;
 
 import com.allthemods.gravitas2.material.materials.*;
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
+import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags;
+import com.gregtechceu.gtceu.api.data.chemical.material.properties.DustProperty;
+import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey;
+import com.gregtechceu.gtceu.common.data.GTMaterials;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -82,6 +86,13 @@ public class GregitasMaterials {
     //endregion
 
     public static void init() {
+        GTMaterials.Bismuth.addFlags(MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_ROD);
+        GTMaterials.Nickel.addFlags(MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_ROD);
+        GTMaterials.Astatine.setProperty(PropertyKey.DUST, new DustProperty());
+        GTMaterials.Iodine.setProperty(PropertyKey.DUST, new DustProperty());
+
+        GTMaterials.CertusQuartz.setFormula("CtO2", true);
+
         GregitasElementMaterials.init();
         GregitasFirstDegreeMaterials.init();
         GregitasUnknownCompositionMaterials.init();

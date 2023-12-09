@@ -1,3 +1,2 @@
-- re-enable remapper for `gregitas` namespace ore blocks
-- fix EBF heat number showing the wrong value
-- fix EBF heat number not being formatted correctly
+- add "entered area" messages
+- move material property setters to core

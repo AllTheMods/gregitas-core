@@ -69,7 +69,7 @@ public class GregitasTagPrefixes {
             .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.CHERT).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), false, Rock.CHERT.color());
 
     public static final TagPrefix oreChalk = TagPrefix.oreTagPrefix("chalk")
-            .langValue("Shale %s Ore")
+            .langValue("Chalk %s Ore")
             .materialIconType(MaterialIconType.ore)
             .miningToolTag(BlockTags.MINEABLE_WITH_PICKAXE)
             .unificationEnabled(true)

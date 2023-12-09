@@ -111,13 +111,13 @@ public class GregitasCore {
 
         if (newTeam != null && (!newTeam.equals(oldTeam))) {
             if (newTeam.getRankForPlayer(player.getUUID()).isAllyOrBetter()) {
-                player.displayClientMessage(Component.literal("You entered an allied area owned by ").append(newTeam.getColoredName()).withStyle(ChatFormatting.GREEN), true);
+                player.displayClientMessage(Component.translatable("gregitas_core.message.enter_ally_area").append(newTeam.getColoredName()).withStyle(ChatFormatting.GREEN), true);
             } else {
-                player.displayClientMessage(Component.literal("You entered an area owned by ").append(newTeam.getColoredName()).withStyle(ChatFormatting.RED), true);
+                player.displayClientMessage(Component.translatable("gregitas_core.message.enter_area").append(newTeam.getColoredName()).withStyle(ChatFormatting.RED), true);
                 player.playNotifySound(SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.AMBIENT, 0.2f, 1);
             }
         } else if (newTeam == null && oldTeam != null) {
-            player.displayClientMessage(Component.literal("You left an area owned by ").append(oldTeam.getColoredName()).withStyle(ChatFormatting.GREEN), true);
+            player.displayClientMessage(Component.translatable("gregitas_core.message.leave_area").append(oldTeam.getColoredName()).withStyle(ChatFormatting.GREEN), true);
         }
     }
 }
