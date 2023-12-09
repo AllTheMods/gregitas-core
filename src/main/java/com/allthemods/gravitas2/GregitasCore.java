@@ -16,9 +16,14 @@ import com.gregtechceu.gtceu.config.ConfigHolder;
 import com.lumintorious.tfcambiental.api.AmbientalRegistry;
 import com.lumintorious.tfcambiental.modifier.TempModifier;
 import com.tterrag.registrate.providers.ProviderType;
+import dev.ftb.mods.ftbchunks.api.FTBChunksAPI;
+import dev.ftb.mods.ftblibrary.math.ChunkDimPos;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -26,8 +31,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.MissingMappingsEvent;
+import net.minecraftforge.event.entity.EntityEvent.EnteringSection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -90,4 +95,29 @@ public class GregitasCore {
         event.getMappings(ForgeRegistries.Keys.ITEMS, "gregitas").forEach(GregitasUtil::remap);
     }
 
+    @SuppressWarnings("resource")
+    @SubscribeEvent
+    public void detectEnteringClaimedChunks(EnteringSection event) {
+        if (!(event.getEntity() instanceof ServerPlayer player)) return;
+        if (!event.didChunkChange()) return;
+        if (!FTBChunksAPI.api().isManagerLoaded()) return;
+        var chunkManager = FTBChunksAPI.api().getManager();
+        var oldChunkDimPos = new ChunkDimPos(player.kjs$getLevel().dimension(), event.getOldPos().chunk());
+        var newChunkDimPos = new ChunkDimPos(player.kjs$getLevel().dimension(), event.getNewPos().chunk());
+        var oldChunkManager = chunkManager.getChunk(oldChunkDimPos);
+        var newChunkManager = chunkManager.getChunk(newChunkDimPos);
+        var oldTeam = oldChunkManager != null ? oldChunkManager.getTeamData().getTeam() : null;
+        var newTeam = newChunkManager != null ? newChunkManager.getTeamData().getTeam() : null;
+
+        if (newTeam != null && (!newTeam.equals(oldTeam))) {
+            if (newTeam.getRankForPlayer(player.getUUID()).isAllyOrBetter()) {
+                player.kjs$setStatusMessage(Component.literal("You entered an allied area owned by ").append(newTeam.getColoredName()).withStyle(ChatFormatting.GREEN));
+            } else {
+                player.kjs$setStatusMessage(Component.literal("You entered an area owned by ").append(newTeam.getColoredName()).withStyle(ChatFormatting.RED));
+                player.playNotifySound(SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.AMBIENT, 0.2f, 1);
+            }
+        } else if (newTeam == null && oldTeam != null) {
+            player.kjs$setStatusMessage(Component.literal("You left an area owned by ").append(oldTeam.getColoredName()).withStyle(ChatFormatting.GREEN));
+        }
+    }
 }

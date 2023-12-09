@@ -99,11 +99,26 @@ repositories {
         url = "https://maven.theillusivec4.top/"
     }
     maven {
+        // Curse Forge File
         url "https://cursemaven.com/"
         content {
             includeGroup "curse.maven"
         }
-    } // Curse Forge File
+    }
+    maven { // FTB Mods
+        url "https://maven.saps.dev/releases"
+        content {
+            includeGroup "dev.latvian.mods"
+            includeGroup "dev.ftb.mods"
+        }
+    }
+    maven {
+        url "https://maven.saps.dev/snapshots"
+        content {
+            includeGroup "dev.latvian.mods"
+            includeGroup "dev.ftb.mods"
+        }
+    }
 }
 
 dependencies {
@@ -125,6 +140,9 @@ dependencies {
     modImplementation("dev.latvian.mods:kubejs-forge:${project.kubejs_version}")
     modImplementation("curse.maven:tfcambiental-940350:${project.tfcambiental_file}")
     modImplementation("curse.maven:terrafirmacraft-302973:${project.terrafirmacraft_file}")
+    modImplementation("dev.ftb.mods:ftb-chunks-forge:${project.ftb_chunks_version}") { transitive = false }
+    modImplementation("dev.ftb.mods:ftb-library-forge:${project.ftb_library_version}") { transitive = false }
+    modImplementation("dev.ftb.mods:ftb-teams-forge:${project.ftb_teams_version}") { transitive = false }
 
     modRuntimeOnly("vazkii.patchouli:Patchouli:${project.minecraft_version}-${project.patchouli_version}-FORGE")
     modRuntimeOnly("top.theillusivec4.curios:curios-forge:${project.curios_version}+${project.minecraft_version}")
