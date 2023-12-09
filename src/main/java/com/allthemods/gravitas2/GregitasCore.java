@@ -102,8 +102,8 @@ public class GregitasCore {
         if (!event.didChunkChange()) return;
         if (!FTBChunksAPI.api().isManagerLoaded()) return;
         var chunkManager = FTBChunksAPI.api().getManager();
-        var oldChunkDimPos = new ChunkDimPos(player.kjs$getLevel().dimension(), event.getOldPos().chunk());
-        var newChunkDimPos = new ChunkDimPos(player.kjs$getLevel().dimension(), event.getNewPos().chunk());
+        var oldChunkDimPos = new ChunkDimPos(player.level().dimension(), event.getOldPos().chunk());
+        var newChunkDimPos = new ChunkDimPos(player.level().dimension(), event.getNewPos().chunk());
         var oldChunkManager = chunkManager.getChunk(oldChunkDimPos);
         var newChunkManager = chunkManager.getChunk(newChunkDimPos);
         var oldTeam = oldChunkManager != null ? oldChunkManager.getTeamData().getTeam() : null;
@@ -111,13 +111,13 @@ public class GregitasCore {
 
         if (newTeam != null && (!newTeam.equals(oldTeam))) {
             if (newTeam.getRankForPlayer(player.getUUID()).isAllyOrBetter()) {
-                player.kjs$setStatusMessage(Component.literal("You entered an allied area owned by ").append(newTeam.getColoredName()).withStyle(ChatFormatting.GREEN));
+                player.displayClientMessage(Component.literal("You entered an allied area owned by ").append(newTeam.getColoredName()).withStyle(ChatFormatting.GREEN), true);
             } else {
-                player.kjs$setStatusMessage(Component.literal("You entered an area owned by ").append(newTeam.getColoredName()).withStyle(ChatFormatting.RED));
+                player.displayClientMessage(Component.literal("You entered an area owned by ").append(newTeam.getColoredName()).withStyle(ChatFormatting.RED), true);
                 player.playNotifySound(SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.AMBIENT, 0.2f, 1);
             }
         } else if (newTeam == null && oldTeam != null) {
-            player.kjs$setStatusMessage(Component.literal("You left an area owned by ").append(oldTeam.getColoredName()).withStyle(ChatFormatting.GREEN));
+            player.displayClientMessage(Component.literal("You left an area owned by ").append(oldTeam.getColoredName()).withStyle(ChatFormatting.GREEN), true);
         }
     }
 }
