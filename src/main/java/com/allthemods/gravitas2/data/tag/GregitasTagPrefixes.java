@@ -154,7 +154,6 @@ public class GregitasTagPrefixes {
         oreBasaltAccessor.setIsNether(false);
 
         TagPrefixOreTypeAccessor oreGraniteAccessor = (TagPrefixOreTypeAccessor)(Object)TagPrefix.ORES.get(TagPrefix.oreGranite);
-        oreGraniteAccessor.setIsSand(true);
         oreGraniteAccessor.setStoneType(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.GRANITE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState());
     }
 }
