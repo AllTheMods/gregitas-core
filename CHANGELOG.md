@@ -1,1 +1,2 @@
 - buff EBF heating, disable ingot cooling with water
+- actually fix EBF heat number

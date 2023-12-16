@@ -24,7 +24,7 @@ public abstract class GTRecipeModifiersMixin {
             coilTier = coilMachine.getCoilTier() + 1;
         }
         if (machine instanceof IHeatBlock heatBlock) {
-            heatBlock.setTemperature(HeatCapability.adjustTempTowards(heatBlock.getTemperature(), originalCoilTemp + 273.15F, coilTier));
+            heatBlock.setTemperature(HeatCapability.adjustTempTowards(heatBlock.getTemperature(), originalCoilTemp - 273.15F, coilTier));
             return Math.round(heatBlock.getTemperature() + 273.15F);
         }
         return originalCoilTemp;
