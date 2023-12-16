@@ -1,2 +1,1 @@
-- add "entered area" messages
-- move material property setters to core
+- buff EBF heating, disable ingot cooling with water

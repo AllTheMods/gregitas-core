@@ -33,6 +33,7 @@ public abstract class TagPrefixItemMixin extends Item implements IForgeItem {
      * @author Screret
      * @reason no hurty bad ingot!
      */
+    /*
     @Overwrite(remap = true)
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
         if (slotId < 0) return;
@@ -53,4 +54,5 @@ public abstract class TagPrefixItemMixin extends Item implements IForgeItem {
         }
         return null;
     }
+    */
 }
