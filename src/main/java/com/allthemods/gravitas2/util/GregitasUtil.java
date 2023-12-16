@@ -13,19 +13,6 @@ import net.minecraftforge.registries.MissingMappingsEvent;
 
 public class GregitasUtil {
 
-    public static ItemStack tickItemHeat(ItemStack stack) {
-        if (!(stack.getItem() instanceof TagPrefixItem tagPrefixItem)) return stack;
-        if (tagPrefixItem.tagPrefix != TagPrefix.ingotHot) return stack;
-
-        if (HeatCapability.has(stack)) {
-            IHeat heat = HeatCapability.get(stack);
-            if (heat.getTemperature() <= 0.0f) {
-                return ChemicalHelper.get(TagPrefix.ingot, tagPrefixItem.material, stack.getCount());
-            }
-        }
-        return stack;
-    }
-
     public static <T> void remap(MissingMappingsEvent.Mapping<T> mapping) {
         ResourceLocation key = mapping.getKey();
         T newThing = remapId(key, mapping.getRegistry());

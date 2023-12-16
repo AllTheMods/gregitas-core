@@ -7,10 +7,7 @@
     "CoilWorkableElectricMultiblockMachineMixin",
     "GTMachinesMixin",
     "GTRecipeModifiersMixin",
-    "MaterialRecipeHandlerMixin",
     "MetaMachineBlockEntityImplMixin",
-    "NotifiableItemStackHandlerMixin",
-    "TagPrefixItemMixin",
     "TagPrefixOreTypeAccessor"
   ],
   "client": [
