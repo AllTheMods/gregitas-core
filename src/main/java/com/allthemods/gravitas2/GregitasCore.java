@@ -95,7 +95,6 @@ public class GregitasCore {
         event.getMappings(ForgeRegistries.Keys.ITEMS, "gregitas").forEach(GregitasUtil::remap);
     }
 
-    @SuppressWarnings("resource")
     @SubscribeEvent
     public void detectEnteringClaimedChunks(EnteringSection event) {
         if (!(event.getEntity() instanceof ServerPlayer player)) return;

@@ -15,10 +15,10 @@ import java.util.function.Consumer;
 public class GregitasRecipes {
 
     public static void addRecipes(Consumer<FinishedRecipe> provider) {
-        for (TagPrefix prefix : TagPrefix.ORES.keySet()) {
-            for (Material material : GTRegistries.MATERIALS) {
-                if (!material.hasProperty(PropertyKey.ORE)) continue;
+        for (Material material : GTRegistries.MATERIALS) {
+            if (!material.hasProperty(PropertyKey.ORE)) continue;
 
+            for (TagPrefix prefix : TagPrefix.ORES.keySet()) {
                 BlockEntry<? extends MaterialBlock> block = GTBlocks.MATERIAL_BLOCKS.get(prefix, material);
                 if (block != null && block.isPresent()) {
                     new CollapseRecipeBuilder().ingredient(block.get()).result(block.get()).save(provider);

@@ -77,6 +77,7 @@ public class GregitasMaterials {
     public static Material ReactiveInfinityMatter;
     public static Material SpacetimeJunk;
     public static Material Igneous;
+    public static Material BioMedium;
     //endregion
 
     //region higher degree
@@ -92,6 +93,8 @@ public class GregitasMaterials {
         GTMaterials.Iodine.setProperty(PropertyKey.DUST, new DustProperty());
 
         GTMaterials.CertusQuartz.setFormula("CtO2", true);
+
+        GTMaterials.HastelloyC276.addFlags(MaterialFlags.GENERATE_BOLT_SCREW);
 
         GregitasElementMaterials.init();
         GregitasFirstDegreeMaterials.init();

@@ -201,18 +201,22 @@ public class GregitasUnknownCompositionMaterials {
                         .color(0xbeebe0)
         );
 
-
         SpacetimeJunk = GregitasMaterials.registerMaterial(
                 new Material.Builder("spacetime_junk")
                         .dust()
                         .color(0x734b6c)
         );
 
-
         Igneous = GregitasMaterials.registerMaterial(
                 new Material.Builder("igneous")
                         .dust()
                         .color(0xbebebe)
+        );
+
+        BioMedium = GregitasMaterials.registerMaterial(
+                new Material.Builder("bio_medium")
+                        .fluid()
+                        .color(0xb5ba54)
         );
 
     }
