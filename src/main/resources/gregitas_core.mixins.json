@@ -9,6 +9,7 @@
     "GTRecipeModifiersMixin",
     "MetaMachineBlockEntityImplMixin",
     "MixinHelpersMixin",
+    "PlacedItemBlockEntityMixin",
     "TagPrefixOreTypeAccessor"
   ],
   "client": [
