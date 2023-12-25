@@ -1,3 +1,2 @@
-- buff EBF heating, disable ingot cooling with water
-- actually fix EBF heat number
-- make GT ore blocks able to collapse
+- add mixin to stop placing items in others' claims
+- begin new UHV content
