@@ -1,5 +1,7 @@
 package com.allthemods.gravitas2;
 
+import com.allthemods.gravitas2.block.CleanerroomFilterType;
+import com.allthemods.gravitas2.block.GregitasBlocks;
 import com.allthemods.gravitas2.data.recipe.GregitasRecipes;
 import com.allthemods.gravitas2.data.tag.GregitasTagPrefixes;
 import com.allthemods.gravitas2.material.GregitasMaterials;
@@ -7,6 +9,7 @@ import com.allthemods.gravitas2.recipe.capability.GregitasRecipeCapabilities;
 import com.gregtechceu.gtceu.api.addon.GTAddon;
 import com.gregtechceu.gtceu.api.addon.IGTAddon;
 import com.gregtechceu.gtceu.api.addon.events.KJSRecipeKeyEvent;
+import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.integration.kjs.recipe.components.ContentJS;
 import com.mojang.datafixers.util.Pair;
 import dev.latvian.mods.kubejs.recipe.component.NumberComponent;
@@ -18,7 +21,7 @@ import java.util.function.Consumer;
 public class GregitasGTAddon implements IGTAddon {
     @Override
     public void initializeAddon() {
-
+        GTBlocks.ALL_FILTERS.put(CleanerroomFilterType.INSTANCE, GregitasBlocks.ULTRA_STERILIZING_FILTER_CASING);
     }
 
     @Override

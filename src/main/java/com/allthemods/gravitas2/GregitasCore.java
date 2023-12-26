@@ -11,6 +11,7 @@ import com.allthemods.gravitas2.registry.GregitasRegistry;
 import com.allthemods.gravitas2.util.GregitasUtil;
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.block.ActiveBlock;
+import com.gregtechceu.gtceu.api.machine.multiblock.CleanroomType;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.config.ConfigHolder;
 import com.lumintorious.tfcambiental.api.AmbientalRegistry;
@@ -42,6 +43,8 @@ import java.util.Optional;
 public class GregitasCore {
     public static final String MOD_ID = "gregitas_core";
     public static final Logger LOGGER = LogManager.getLogger();
+
+    public static final CleanroomType CLEANER_ROOM = new CleanroomType("cleanerroom", "gregitas_core.recipe.cleanerroom.display_name");
 
     public GregitasCore() {
         ConfigHolder.init();
