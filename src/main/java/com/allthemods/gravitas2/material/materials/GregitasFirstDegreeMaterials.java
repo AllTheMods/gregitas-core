@@ -13,13 +13,12 @@ import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 public class GregitasFirstDegreeMaterials {
 
     public static void init() {
-        KaolinClay = new Material.Builder("kaolin_clay")
-                .dust()
-                .color(0xba997b).secondaryColor(0x876a50).iconSet(MaterialIconSet.FINE)
-                .components(Aluminium, 2, Silicon, 2, Oxygen, 9, Hydrogen, 4)
-                .buildAndRegister()
-                .setFormula("Al2Si2O5(OH)4", true);
-        GregitasMaterials.GREGITAS_MATERIALS.add(KaolinClay);
+        KaolinClay = GregitasMaterials.registerMaterial(
+                new Material.Builder("kaolin_clay")
+                        .dust()
+                        .color(0xba997b).secondaryColor(0x876a50).iconSet(MaterialIconSet.FINE)
+                        .components(Aluminium, 2, Silicon, 2, Oxygen, 9, Hydrogen, 4)
+        ).setFormula("Al2Si2O5(OH)4", true);
 
         AllthemodiumNaquadahMixture = GregitasMaterials.registerMaterial(
                 new Material.Builder("allthemodium_naquadah_mixture")
