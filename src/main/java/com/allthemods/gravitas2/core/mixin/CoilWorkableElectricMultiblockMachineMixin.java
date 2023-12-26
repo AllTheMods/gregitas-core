@@ -1,18 +1,12 @@
 package com.allthemods.gravitas2.core.mixin;
 
+import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.block.ICoilType;
-import com.gregtechceu.gtceu.api.capability.IEnergyContainer;
-import com.gregtechceu.gtceu.api.capability.recipe.EURecipeCapability;
-import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.TickableSubscription;
 import com.gregtechceu.gtceu.api.machine.multiblock.CoilWorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
-import com.gregtechceu.gtceu.api.recipe.GTRecipe;
-import com.gregtechceu.gtceu.api.recipe.RecipeHelper;
-import com.gregtechceu.gtceu.api.recipe.content.Content;
-import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
@@ -20,14 +14,12 @@ import net.dries007.tfc.common.capabilities.heat.HeatCapability;
 import net.dries007.tfc.common.capabilities.heat.IHeatBlock;
 import net.dries007.tfc.util.climate.Climate;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.server.level.ServerLevel;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.List;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -43,7 +35,7 @@ public abstract class CoilWorkableElectricMultiblockMachineMixin extends Workabl
     // Temperature, in Kelvin (because GT uses kelvin instead of celsius.)
     @Unique
     @Persisted(key = "currentTemp") @DescSynced
-    private float gregitas$currentTemp = 273.15F;
+    private float gregitas$currentTemp = 273;
     @Unique
     private TickableSubscription gregitas$temperatureTick = null;
 
@@ -53,12 +45,12 @@ public abstract class CoilWorkableElectricMultiblockMachineMixin extends Workabl
 
     @Override
     public float getTemperature() {
-        return gregitas$currentTemp - 273.15F;
+        return gregitas$currentTemp - 273;
     }
 
     @Override
     public void setTemperature(float temp) {
-        gregitas$currentTemp = temp + 273.15F;
+        gregitas$currentTemp = temp + 273;
         this.onChanged();
     }
 
@@ -92,7 +84,7 @@ public abstract class CoilWorkableElectricMultiblockMachineMixin extends Workabl
     @Override
     public void onWorking() {
         super.onWorking();
-        this.setTemperature(HeatCapability.adjustTempTowards(getTemperature(), coilType.getCoilTemperature() - 273.15F, (getCoilTier() + 1) / 1.5f));
+        this.setTemperature(HeatCapability.adjustTempTowards(getTemperature(), (coilType.getCoilTemperature() + 100 * Math.max(0, this.getTier() - GTValues.MV)) - 273, (getCoilTier() + 1) / 1.5f));
         /* nah too evil.
         if (getTemperature() <= getCoilType().getCoilTemperature()) {
             if (!this.getCapabilitiesProxy().contains(IO.IN, EURecipeCapability.CAP)) return;
