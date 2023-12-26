@@ -26,6 +26,11 @@ import static com.allthemods.gravitas2.registry.GregitasRegistry.GREGITAS_REGIST
 @SuppressWarnings("removal")
 public class GregitasBlocks {
 
+
+    static {
+        GREGITAS_REGISTRATE.creativeModeTab(() -> GregitasCreativeModeTabs.GREGITAS_CORE);
+    }
+
     @SuppressWarnings("unchecked")
     public static final BlockEntry<PressurePipeBlock>[] PRESSURE_PIPE_BLOCKS = new BlockEntry[PressurePipeType.values().length];
 
