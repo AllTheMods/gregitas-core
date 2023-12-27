@@ -1,19 +1,27 @@
 package com.allthemods.gravitas2.material;
 
 import com.allthemods.gravitas2.material.materials.*;
+import com.google.common.collect.ImmutableMap;
+import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.DustProperty;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey;
+import com.gregtechceu.gtceu.api.data.chemical.material.stack.UnificationEntry;
+import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 @SuppressWarnings("unused")
 public class GregitasMaterials {
 
     public static final Set<Material> GREGITAS_MATERIALS = new HashSet<>();
+
+    public static Map<UnificationEntry, Long> MATERIAL_AMOUNT_MAP;
 
     //region element
     public static Material WeaponsGradeNaquadah;
@@ -78,6 +86,7 @@ public class GregitasMaterials {
     public static Material SpacetimeJunk;
     public static Material Igneous;
     public static Material BioMedium;
+    public static Material Sculk;
     //endregion
 
     //region higher degree
@@ -100,6 +109,14 @@ public class GregitasMaterials {
         GregitasFirstDegreeMaterials.init();
         GregitasUnknownCompositionMaterials.init();
         GregitasHigherDegreeMaterials.init();
+
+        TagPrefix.block.setIgnored(Sculk, Blocks.SCULK);
+        TagPrefix.plate.setIgnored(Sculk, Blocks.SCULK_VEIN);
+
+        MATERIAL_AMOUNT_MAP = ImmutableMap.ofEntries(
+                Map.entry(new UnificationEntry(TagPrefix.block, Sculk), GTValues.M),
+                Map.entry(new UnificationEntry(TagPrefix.plate, Sculk), GTValues.M / 4)
+        );
     }
 
     public static Material registerMaterial(Material.Builder builder) {

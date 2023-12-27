@@ -11,6 +11,7 @@
     "MixinHelpersMixin",
     "PlaceBlockSpecialPacketMixin",
     "PlacedItemBlockEntityMixin",
+    "TagPrefixMixin",
     "TagPrefixOreTypeAccessor"
   ],
   "client": [

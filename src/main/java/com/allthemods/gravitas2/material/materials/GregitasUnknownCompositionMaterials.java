@@ -219,5 +219,12 @@ public class GregitasUnknownCompositionMaterials {
                         .color(0xb5ba54)
         );
 
+        Sculk = GregitasMaterials.registerMaterial(
+                new Material.Builder("sculk")
+                        .fluid().dust()
+                        .color(0x111b21).secondaryColor(0x009295)
+                        .iconSet(MaterialIconSet.SHINY)
+        );
+
     }
 }
