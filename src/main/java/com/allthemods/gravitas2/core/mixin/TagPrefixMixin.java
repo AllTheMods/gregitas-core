@@ -18,7 +18,7 @@ public abstract class TagPrefixMixin {
 
     @Shadow private long materialAmount;
 
-    @Inject(method = "getMaterialAmount", at = @At("TAIL"), locals = LocalCapture.CAPTURE_FAILHARD)
+    @Inject(method = "getMaterialAmount", at = @At("TAIL"), locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
     private void gregitas$fixMaterialAmounts(@Nullable Material material, CallbackInfoReturnable<Long> cir, UnificationEntry key) {
         if (cir.getReturnValue() == materialAmount) {
             cir.setReturnValue(GregitasMaterials.MATERIAL_AMOUNT_MAP.getOrDefault(key, materialAmount));
