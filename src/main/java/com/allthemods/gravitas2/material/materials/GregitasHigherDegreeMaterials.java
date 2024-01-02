@@ -6,6 +6,9 @@ import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet;
 
 import static com.allthemods.gravitas2.material.GregitasMaterials.*;
+import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags.DECOMPOSITION_BY_CENTRIFUGING;
+import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags.NO_SMASHING;
+import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet.ROUGH;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 
 public class GregitasHigherDegreeMaterials {
@@ -58,6 +61,14 @@ public class GregitasHigherDegreeMaterials {
                         .iconSet(MaterialIconSet.ROUGH)
                         .color(0x839689)
                         .components(Igneous, 1, Zinc, 1)
+        );
+
+        Slate = GregitasMaterials.registerMaterial(
+                new Material.Builder("slate")
+                        .dust()
+                        .color(0x8F7748).secondaryColor(0x707159).iconSet(ROUGH)
+                        .flags(NO_SMASHING, DECOMPOSITION_BY_CENTRIFUGING)
+                        .components(SiliconDioxide, 4, Biotite, 1)
         );
 
     }

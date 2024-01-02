@@ -8,6 +8,8 @@ import com.gregtechceu.gtceu.api.fluids.FluidState;
 import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
 
 import static com.allthemods.gravitas2.material.GregitasMaterials.*;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Saltpeter;
 
 public class GregitasUnknownCompositionMaterials {
 
@@ -72,16 +74,10 @@ public class GregitasUnknownCompositionMaterials {
                         .color(0x707070).secondaryColor(0x7d6354)
         );
 
-        Slate = GregitasMaterials.registerMaterial(
-                new Material.Builder("slate")
-                        .dust()
-                        .color(0x8F7748).secondaryColor(0x707159)
-        );
-
         Phyllite = GregitasMaterials.registerMaterial(
                 new Material.Builder("phyllite")
                         .dust()
-                        .color(0x706C8A).secondaryColor(0x707159)
+                        .color(0x706C8A).secondaryColor(0x707159).iconSet(MaterialIconSet.ROUGH)
         );
 
         Schist = GregitasMaterials.registerMaterial(

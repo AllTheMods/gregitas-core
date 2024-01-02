@@ -10,6 +10,9 @@ import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey;
 import com.gregtechceu.gtceu.api.data.chemical.material.stack.UnificationEntry;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
+import lombok.Getter;
+import net.dries007.tfc.common.blocks.TFCBlocks;
+import net.dries007.tfc.common.blocks.rock.Rock;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.HashSet;
@@ -109,6 +112,21 @@ public class GregitasMaterials {
         GregitasFirstDegreeMaterials.init();
         GregitasUnknownCompositionMaterials.init();
         GregitasHigherDegreeMaterials.init();
+
+        TagPrefix.rock.setIgnored(Gabbro);
+        TagPrefix.rock.setIgnored(Shale);
+        TagPrefix.rock.setIgnored(Claystone);
+        TagPrefix.rock.setIgnored(Limestone);
+        TagPrefix.rock.setIgnored(Conglomerate);
+        TagPrefix.rock.setIgnored(Dolomite);
+        TagPrefix.rock.setIgnored(Chert);
+        TagPrefix.rock.setIgnored(Chalk);
+        TagPrefix.rock.setIgnored(Rhyolite);
+        TagPrefix.rock.setIgnored(Dacite);
+        TagPrefix.rock.setIgnored(Slate);
+        TagPrefix.rock.setIgnored(Phyllite);
+        TagPrefix.rock.setIgnored(Schist);
+        TagPrefix.rock.setIgnored(Gneiss);
 
         TagPrefix.block.setIgnored(Sculk, Blocks.SCULK);
         TagPrefix.plate.setIgnored(Sculk, Blocks.SCULK_VEIN);

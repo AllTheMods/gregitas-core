@@ -5,31 +5,42 @@ import com.allthemods.gravitas2.block.entity.GregitasBlockEntities;
 import com.allthemods.gravitas2.capability.GregitasCapabilities;
 import com.allthemods.gravitas2.data.lang.LangHandler;
 import com.allthemods.gravitas2.machine.GregitasMachines;
+import com.allthemods.gravitas2.material.GregitasMaterials;
 import com.allthemods.gravitas2.recipe.capability.GregitasRecipeCapabilities;
 import com.allthemods.gravitas2.recipe.type.GregitasRecipeTypes;
 import com.allthemods.gravitas2.registry.GregitasRegistry;
 import com.allthemods.gravitas2.util.GregitasUtil;
 import com.gregtechceu.gtceu.GTCEu;
+import com.gregtechceu.gtceu.api.addon.GTAddon;
 import com.gregtechceu.gtceu.api.block.ActiveBlock;
+import com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper;
+import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
 import com.gregtechceu.gtceu.api.machine.multiblock.CleanroomType;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
+import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.config.ConfigHolder;
 import com.lumintorious.tfcambiental.api.AmbientalRegistry;
 import com.lumintorious.tfcambiental.modifier.TempModifier;
 import com.tterrag.registrate.providers.ProviderType;
 import dev.ftb.mods.ftbchunks.api.FTBChunksAPI;
 import dev.ftb.mods.ftblibrary.math.ChunkDimPos;
+import net.dries007.tfc.common.blocks.TFCBlocks;
+import net.dries007.tfc.common.blocks.rock.Rock;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
+import net.minecraftforge.event.server.ServerStartedEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.MissingMappingsEvent;
@@ -38,6 +49,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
+import java.util.function.Supplier;
 
 @Mod(GregitasCore.MOD_ID)
 public class GregitasCore {
@@ -96,6 +108,30 @@ public class GregitasCore {
         event.getMappings(ForgeRegistries.Keys.BLOCKS, "gregitas").forEach(GregitasUtil::remap);
         event.getMappings(ForgeRegistries.Keys.ITEMS, GTCEu.MOD_ID).forEach(GregitasUtil::remap);
         event.getMappings(ForgeRegistries.Keys.ITEMS, "gregitas").forEach(GregitasUtil::remap);
+    }
+
+    @SubscribeEvent
+    public void loadComplete(ServerStartingEvent event) {
+        ChemicalHelper.registerUnificationItems(TagPrefix.rock, GTMaterials.Granite, TFCBlocks.ROCK_BLOCKS.get(Rock.GRANITE).values().stream().map(Supplier::get).toArray(ItemLike[]::new));
+        ChemicalHelper.registerUnificationItems(TagPrefix.rock, GTMaterials.Diorite, TFCBlocks.ROCK_BLOCKS.get(Rock.DIORITE).values().stream().map(Supplier::get).toArray(ItemLike[]::new));
+        ChemicalHelper.registerUnificationItems(TagPrefix.rock, GregitasMaterials.Gabbro, TFCBlocks.ROCK_BLOCKS.get(Rock.GABBRO).values().stream().map(Supplier::get).toArray(ItemLike[]::new));
+        ChemicalHelper.registerUnificationItems(TagPrefix.rock, GregitasMaterials.Shale, TFCBlocks.ROCK_BLOCKS.get(Rock.SHALE).values().stream().map(Supplier::get).toArray(ItemLike[]::new));
+        ChemicalHelper.registerUnificationItems(TagPrefix.rock, GregitasMaterials.Claystone, TFCBlocks.ROCK_BLOCKS.get(Rock.CLAYSTONE).values().stream().map(Supplier::get).toArray(ItemLike[]::new));
+        ChemicalHelper.registerUnificationItems(TagPrefix.rock, GregitasMaterials.Limestone, TFCBlocks.ROCK_BLOCKS.get(Rock.LIMESTONE).values().stream().map(Supplier::get).toArray(ItemLike[]::new));
+        ChemicalHelper.registerUnificationItems(TagPrefix.rock, GregitasMaterials.Conglomerate, TFCBlocks.ROCK_BLOCKS.get(Rock.CONGLOMERATE).values().stream().map(Supplier::get).toArray(ItemLike[]::new));
+        ChemicalHelper.registerUnificationItems(TagPrefix.rock, GregitasMaterials.Dolomite, TFCBlocks.ROCK_BLOCKS.get(Rock.DOLOMITE).values().stream().map(Supplier::get).toArray(ItemLike[]::new));
+        ChemicalHelper.registerUnificationItems(TagPrefix.rock, GregitasMaterials.Chert, TFCBlocks.ROCK_BLOCKS.get(Rock.CHERT).values().stream().map(Supplier::get).toArray(ItemLike[]::new));
+        ChemicalHelper.registerUnificationItems(TagPrefix.rock, GregitasMaterials.Chalk, TFCBlocks.ROCK_BLOCKS.get(Rock.CHALK).values().stream().map(Supplier::get).toArray(ItemLike[]::new));
+        ChemicalHelper.registerUnificationItems(TagPrefix.rock, GregitasMaterials.Rhyolite, TFCBlocks.ROCK_BLOCKS.get(Rock.RHYOLITE).values().stream().map(Supplier::get).toArray(ItemLike[]::new));
+        ChemicalHelper.registerUnificationItems(TagPrefix.rock, GTMaterials.Basalt, TFCBlocks.ROCK_BLOCKS.get(Rock.BASALT).values().stream().map(Supplier::get).toArray(ItemLike[]::new));
+        ChemicalHelper.registerUnificationItems(TagPrefix.rock, GTMaterials.Andesite, TFCBlocks.ROCK_BLOCKS.get(Rock.ANDESITE).values().stream().map(Supplier::get).toArray(ItemLike[]::new));
+        ChemicalHelper.registerUnificationItems(TagPrefix.rock, GregitasMaterials.Dacite, TFCBlocks.ROCK_BLOCKS.get(Rock.DACITE).values().stream().map(Supplier::get).toArray(ItemLike[]::new));
+        ChemicalHelper.registerUnificationItems(TagPrefix.rock, GTMaterials.Quartzite, TFCBlocks.ROCK_BLOCKS.get(Rock.QUARTZITE).values().stream().map(Supplier::get).toArray(ItemLike[]::new));
+        ChemicalHelper.registerUnificationItems(TagPrefix.rock, GregitasMaterials.Slate, TFCBlocks.ROCK_BLOCKS.get(Rock.SLATE).values().stream().map(Supplier::get).toArray(ItemLike[]::new));
+        ChemicalHelper.registerUnificationItems(TagPrefix.rock, GregitasMaterials.Phyllite, TFCBlocks.ROCK_BLOCKS.get(Rock.PHYLLITE).values().stream().map(Supplier::get).toArray(ItemLike[]::new));
+        ChemicalHelper.registerUnificationItems(TagPrefix.rock, GregitasMaterials.Schist, TFCBlocks.ROCK_BLOCKS.get(Rock.SCHIST).values().stream().map(Supplier::get).toArray(ItemLike[]::new));
+        ChemicalHelper.registerUnificationItems(TagPrefix.rock, GregitasMaterials.Gneiss, TFCBlocks.ROCK_BLOCKS.get(Rock.GNEISS).values().stream().map(Supplier::get).toArray(ItemLike[]::new));
+        ChemicalHelper.registerUnificationItems(TagPrefix.rock, GTMaterials.Marble, TFCBlocks.ROCK_BLOCKS.get(Rock.MARBLE).values().stream().map(Supplier::get).toArray(ItemLike[]::new));
     }
 
     @SubscribeEvent
