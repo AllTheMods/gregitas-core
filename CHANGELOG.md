@@ -1,1 +1,2 @@
-- fix-a-mixin
+- fix-a-mixin 2: electric boogaloo
+- add some recipes for stone stuffs
