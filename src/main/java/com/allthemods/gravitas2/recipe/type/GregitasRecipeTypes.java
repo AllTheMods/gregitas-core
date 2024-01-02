@@ -16,11 +16,11 @@ public class GregitasRecipeTypes {
 
     public static final String GREGITAS = "gregitas";
 
-    public static GTRecipeType BURNER_REACTOR_RECIPES = register("burner_reactor", GREGITAS)
-            .setMaxIOSize(0, 3, 0, 2)
-            .setEUIO(IO.IN)
-            .setProgressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, LEFT_TO_RIGHT)
-            .setSound(GTSoundEntries.ARC);
+//    public static GTRecipeType BURNER_REACTOR_RECIPES = register("burner_reactor", GREGITAS)
+//            .setMaxIOSize(0, 3, 0, 2)
+//            .setEUIO(IO.IN)
+//            .setProgressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, LEFT_TO_RIGHT)
+//            .setSound(GTSoundEntries.ARC);
 
 
     public static GTRecipeType register(String name, String group, RecipeType<?>... proxyRecipes) {

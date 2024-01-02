@@ -63,7 +63,7 @@ public class GregitasMachines {
                     .overlayTieredHullRenderer("pressure_hatch")
                     .register(),
             0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
-
+/*
     public static final MultiblockMachineDefinition BURNER_REACTOR = GREGITAS_REGISTRATE.multiblock("burner_reactor", CoilWorkableElectricMultiblockMachine::new)
             .langValue("Burner Reactor")
             .rotationState(RotationState.NON_Y_AXIS)
@@ -91,7 +91,7 @@ public class GregitasMachines {
             .workableCasingRenderer(GTCEu.id("block/casings/solid/machine_casing_heatproof"),
                     GTCEu.id("block/multiblock/implosion_compressor"), false)
             .register();
-
+*/
 
     public static TraceabilityPredicate pressurePredicate() {
         return abilities(PRESSURE_CONTAINER).setMaxGlobalLimited(1).setPreviewCount(1);
