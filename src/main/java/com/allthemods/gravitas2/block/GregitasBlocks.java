@@ -60,7 +60,7 @@ public class GregitasBlocks {
                 .properties(properties -> properties.strength(2.0f, 8.0f).sound(SoundType.METAL).isValidSpawn((blockState, blockGetter, blockPos, entityType) -> false))
                 .addLayer(() -> RenderType::cutoutMipped)
                 .blockstate(NonNullBiConsumer.noop())
-                .tag(GTToolType.WRENCH.harvestTag, CustomTags.TOOL_TIERS[1])
+                .tag(GTToolType.WRENCH.harvestTags.get(0), CustomTags.TOOL_TIERS[1])
                 .item(RendererBlockItem::new)
                 .model(NonNullBiConsumer.noop())
                 .build()
