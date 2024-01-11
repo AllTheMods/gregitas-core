@@ -125,6 +125,12 @@ repositories {
             includeGroup "dev.ftb.mods"
         }
     }
+    maven {
+        url "https://maven.ithundxr.dev/releases"
+        content {
+            includeGroup "com.railwayteam.railways"
+        }
+    }
     flatDir {
         dir 'libs'
     }
@@ -154,9 +160,9 @@ dependencies {
     modImplementation("dev.ftb.mods:ftb-teams-forge:${project.ftb_teams_version}") { transitive = false }
 
     modRuntimeOnly("com.jozufozu.flywheel:flywheel-forge-1.20.1:0.6.10-7")
-    modRuntimeOnly("curse.maven:create-328085:4835191") { transitive = false }
+    modRuntimeOnly("com.simibubi.create:create-1.20.1:0.5.1.f-26:all") { transitive = false }
     modImplementation("blank:Steam_Rails-1.5.3+forge-mc1.20.1") // fixed Accessor
-    // modImplementation("curse.maven:create-steam-n-rails-688231:4836196") // Does not work, mixin parse bug
+    // modImplementation("com.railwayteam.railways:Steam_Rails-forge-1.20.1:1.5.3+forge-mc1.20.1")  { transitive = false } // Does not work, mixin parse bug
 
     modRuntimeOnly("vazkii.patchouli:Patchouli:${project.minecraft_version}-${project.patchouli_version}-FORGE")
     modRuntimeOnly("top.theillusivec4.curios:curios-forge:${project.curios_version}+${project.minecraft_version}")

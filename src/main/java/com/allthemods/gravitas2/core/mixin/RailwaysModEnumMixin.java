@@ -3,6 +3,7 @@ import com.allthemods.gravitas2.util.GregitasUtil;
 import com.railwayteam.railways.compat.Mods;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
@@ -13,6 +14,7 @@ public class RailwaysModEnumMixin
 {
     @Shadow(remap = false)
     @Final
+    @Mutable
     private static Mods[] $VALUES;
 
     @SuppressWarnings("SameParameterValue")
