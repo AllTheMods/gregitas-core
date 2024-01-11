@@ -4,6 +4,7 @@ import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
 import com.gregtechceu.gtceu.api.item.TagPrefixItem;
+import com.railwayteam.railways.compat.Mods;
 import net.dries007.tfc.common.capabilities.heat.HeatCapability;
 import net.dries007.tfc.common.capabilities.heat.IHeat;
 import net.minecraft.resources.ResourceLocation;
@@ -13,6 +14,7 @@ import net.minecraftforge.registries.MissingMappingsEvent;
 
 public class GregitasUtil {
 
+    public static Mods RailwaysTFC;
     public static <T> void remap(MissingMappingsEvent.Mapping<T> mapping) {
         ResourceLocation key = mapping.getKey();
         T newThing = remapId(key, mapping.getRegistry());
