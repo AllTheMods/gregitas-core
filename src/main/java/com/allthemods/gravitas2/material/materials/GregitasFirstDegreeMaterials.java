@@ -81,5 +81,14 @@ public class GregitasFirstDegreeMaterials {
                         .components(Certus, 1, Hydrogen, 4)
         );
 
+        WroughtIronMagnetic = GregitasMaterials.registerMaterial(
+                new Material.Builder("magnetic_wrought_iron")
+                        .ingot()
+                        .color(0xbcbcbc)
+                        .secondaryColor(0x521c0b)
+                        .iconSet(MaterialIconSet.MAGNETIC)
+                        .components(Iron, 1)
+                        .flags(MaterialFlags.GENERATE_ROD)
+        );
     }
 }

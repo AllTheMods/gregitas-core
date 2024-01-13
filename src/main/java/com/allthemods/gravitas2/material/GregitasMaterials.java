@@ -51,6 +51,7 @@ public class GregitasMaterials {
     public static Material Chlorocertane;
     public static Material CertusTetrachloride;
     public static Material Certane;
+    public static Material WroughtIronMagnetic;
     //endregion
 
     //region unknown composition
@@ -103,6 +104,7 @@ public class GregitasMaterials {
         GTMaterials.Nickel.addFlags(MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_ROD);
         GTMaterials.Astatine.setProperty(PropertyKey.DUST, new DustProperty());
         GTMaterials.Iodine.setProperty(PropertyKey.DUST, new DustProperty());
+        GTMaterials.WroughtIron.addFlags(MaterialFlags.GENERATE_ROTOR);
 
         GTMaterials.CertusQuartz.setFormula("CtO2", true);
 
@@ -135,6 +137,8 @@ public class GregitasMaterials {
                 Map.entry(new UnificationEntry(TagPrefix.block, Sculk), GTValues.M),
                 Map.entry(new UnificationEntry(TagPrefix.plate, Sculk), GTValues.M / 4)
         );
+
+        GTMaterials.WroughtIron.getProperty(PropertyKey.INGOT).setMagneticMaterial(WroughtIronMagnetic);
     }
 
     public static Material registerMaterial(Material.Builder builder) {

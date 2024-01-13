@@ -12,6 +12,7 @@ import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
 import com.gregtechceu.gtceu.api.registry.GTRegistries;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
+import com.gregtechceu.gtceu.data.recipe.VanillaRecipeHelper;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.blocks.rock.Rock;
@@ -229,5 +230,8 @@ public class GregitasRecipes {
                 .chancedOutput(dust, Gneiss, 1000, 380)
                 .duration(150).EUt(2)
                 .save(provider);
+
+        // misc
+        VanillaRecipeHelper.addShapelessRecipe(provider, "wrought_iron_magnetic_stick", ChemicalHelper.get(rod, WroughtIronMagnetic), new UnificationEntry(rod, WroughtIron), new UnificationEntry(dust, Redstone), new UnificationEntry(dust, Redstone), new UnificationEntry(dust, Redstone), new UnificationEntry(dust, Redstone));
     }
 }

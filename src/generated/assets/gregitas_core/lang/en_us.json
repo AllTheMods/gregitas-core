@@ -1,5 +1,4 @@
 {
-  "block.gregitas_core.burner_reactor": "Burner Reactor",
   "block.gregitas_core.close_space_vacuum_pipe": "Close Space Vacuum Pipe",
   "block.gregitas_core.csv_pressure_hatch": "Close-Space Vacuum Hatch",
   "block.gregitas_core.eap_pressure_hatch": "Earth Atmospheric Pressure Hatch",
@@ -70,6 +69,7 @@
   "material.kaolin_clay": "Kaolin Clay",
   "material.limestone": "Limestone",
   "material.low_grade_hypogen": "Low Grade Hypogen",
+  "material.magnetic_wrought_iron": "Magnetic Wrought Iron",
   "material.nitinol": "Nitinol",
   "material.phyllite": "Phyllite",
   "material.purified_hypogen_solution": "Purified Hypogen Solution",

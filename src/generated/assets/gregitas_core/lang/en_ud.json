@@ -1,5 +1,4 @@
 {
-  "block.gregitas_core.burner_reactor": "ɹoʇɔɐǝᴚ ɹǝuɹnᗺ",
   "block.gregitas_core.close_space_vacuum_pipe": "ǝdıԀ ɯnnɔɐΛ ǝɔɐdS ǝsoןƆ",
   "block.gregitas_core.csv_pressure_hatch": "ɥɔʇɐH ɯnnɔɐΛ ǝɔɐdS-ǝsoןƆ",
   "block.gregitas_core.eap_pressure_hatch": "ɥɔʇɐH ǝɹnssǝɹԀ ɔıɹǝɥdsoɯʇⱯ ɥʇɹɐƎ",
@@ -70,6 +69,7 @@
   "material.kaolin_clay": "ʎɐןƆ uıןoɐʞ",
   "material.limestone": "ǝuoʇsǝɯıꞀ",
   "material.low_grade_hypogen": "uǝbodʎH ǝpɐɹ⅁ ʍoꞀ",
+  "material.magnetic_wrought_iron": "uoɹI ʇɥbnoɹM ɔıʇǝubɐW",
   "material.nitinol": "ןouıʇıN",
   "material.phyllite": "ǝʇıןןʎɥԀ",
   "material.purified_hypogen_solution": "uoıʇnןoS uǝbodʎH pǝıɟıɹnԀ",
