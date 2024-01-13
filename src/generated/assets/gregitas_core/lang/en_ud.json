@@ -1,5 +1,4 @@
 {
-  "block.gregitas_core.burner_reactor": "ɹoʇɔɐǝᴚ ɹǝuɹnᗺ",
   "block.gregitas_core.close_space_vacuum_pipe": "ǝdıԀ ɯnnɔɐΛ ǝɔɐdS ǝsoןƆ",
   "block.gregitas_core.csv_pressure_hatch": "ɥɔʇɐH ɯnnɔɐΛ ǝɔɐdS-ǝsoןƆ",
   "block.gregitas_core.eap_pressure_hatch": "ɥɔʇɐH ǝɹnssǝɹԀ ɔıɹǝɥdsoɯʇⱯ ɥʇɹɐƎ",
@@ -94,6 +93,7 @@
   "material.weapons_grade_hypogen": "uǝbodʎH ǝpɐɹ⅁ suodɐǝM",
   "material.weapons_grade_hypogen_solution": "uoıʇnןoS uǝbodʎH ǝpɐɹ⅁ suodɐǝM",
   "material.weapons_grade_naquadah": "ɥɐpɐnbɐN ǝpɐɹ⅁ suodɐǝM",
+  "material.wrought_iron_magnetic": "ɔıʇǝubɐW uoɹI ʇɥbnoɹM",
   "tagprefix.chalk": "ǝɹO %s ʞןɐɥƆ",
   "tagprefix.chert": "ǝɹO %s ʇɹǝɥƆ",
   "tagprefix.claystone": "ǝɹO %s ǝuoʇsʎɐןƆ",

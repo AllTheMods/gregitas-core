@@ -1,5 +1,4 @@
 {
-  "block.gregitas_core.burner_reactor": "Burner Reactor",
   "block.gregitas_core.close_space_vacuum_pipe": "Close Space Vacuum Pipe",
   "block.gregitas_core.csv_pressure_hatch": "Close-Space Vacuum Hatch",
   "block.gregitas_core.eap_pressure_hatch": "Earth Atmospheric Pressure Hatch",
@@ -94,6 +93,7 @@
   "material.weapons_grade_hypogen": "Weapons Grade Hypogen",
   "material.weapons_grade_hypogen_solution": "Weapons Grade Hypogen Solution",
   "material.weapons_grade_naquadah": "Weapons Grade Naquadah",
+  "material.wrought_iron_magnetic": "Wrought Iron Magnetic",
   "tagprefix.chalk": "Chalk %s Ore",
   "tagprefix.chert": "Chert %s Ore",
   "tagprefix.claystone": "Claystone %s Ore",
