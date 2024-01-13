@@ -82,7 +82,7 @@ public class GregitasFirstDegreeMaterials {
         );
 
         WroughtIronMagnetic = GregitasMaterials.registerMaterial(
-                new Material.Builder("wrought_iron_magnetic")
+                new Material.Builder("magnetic_wrought_iron")
                         .ingot()
                         .color(0xbcbcbc)
                         .secondaryColor(0x521c0b)
