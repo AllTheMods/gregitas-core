@@ -12,7 +12,8 @@
     "PlaceBlockSpecialPacketMixin",
     "PlacedItemBlockEntityMixin",
     "TagPrefixMixin",
-    "TagPrefixOreTypeAccessor"
+    "TagPrefixOreTypeAccessor",
+    "FluiDuct"
   ],
   "client": [
   ],
