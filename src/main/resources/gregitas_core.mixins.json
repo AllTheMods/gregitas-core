@@ -11,6 +11,8 @@
     "MixinHelpersMixin",
     "PlaceBlockSpecialPacketMixin",
     "PlacedItemBlockEntityMixin",
+    "RailwaysModEnumMixin",
+    "RailwaysModSetupMixin",
     "TagPrefixMixin",
     "TagPrefixOreTypeAccessor"
   ],

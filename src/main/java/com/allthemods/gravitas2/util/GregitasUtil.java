@@ -1,18 +1,14 @@
 package com.allthemods.gravitas2.util;
 
 import com.gregtechceu.gtceu.GTCEu;
-import com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper;
-import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
-import com.gregtechceu.gtceu.api.item.TagPrefixItem;
-import net.dries007.tfc.common.capabilities.heat.HeatCapability;
-import net.dries007.tfc.common.capabilities.heat.IHeat;
+import com.railwayteam.railways.compat.Mods;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.MissingMappingsEvent;
 
 public class GregitasUtil {
 
+    public static Mods RailwaysTFC;
     public static <T> void remap(MissingMappingsEvent.Mapping<T> mapping) {
         ResourceLocation key = mapping.getKey();
         T newThing = remapId(key, mapping.getRegistry());

@@ -125,6 +125,15 @@ repositories {
             includeGroup "dev.ftb.mods"
         }
     }
+    maven {
+        url "https://maven.ithundxr.dev/releases"
+        content {
+            includeGroup "com.railwayteam.railways"
+        }
+    }
+    flatDir {
+        dir 'libs'
+    }
 }
 
 dependencies {
@@ -149,6 +158,11 @@ dependencies {
     modImplementation("dev.ftb.mods:ftb-chunks-forge:${project.ftb_chunks_version}") { transitive = false }
     modImplementation("dev.ftb.mods:ftb-library-forge:${project.ftb_library_version}") { transitive = false }
     modImplementation("dev.ftb.mods:ftb-teams-forge:${project.ftb_teams_version}") { transitive = false }
+
+    modRuntimeOnly("com.jozufozu.flywheel:flywheel-forge-1.20.1:0.6.10-7")
+    modRuntimeOnly("com.simibubi.create:create-1.20.1:0.5.1.f-26:all") { transitive = false }
+    modImplementation("blank:Steam_Rails-1.5.3+forge-mc1.20.1") // fixed Accessor
+    // modImplementation("com.railwayteam.railways:Steam_Rails-forge-1.20.1:1.5.3+forge-mc1.20.1")  { transitive = false } // Does not work, mixin parse bug
 
     modRuntimeOnly("vazkii.patchouli:Patchouli:${project.minecraft_version}-${project.patchouli_version}-FORGE")
     modRuntimeOnly("top.theillusivec4.curios:curios-forge:${project.curios_version}+${project.minecraft_version}")
