@@ -14,7 +14,8 @@
     "RailwaysModEnumMixin",
     "RailwaysModSetupMixin",
     "TagPrefixMixin",
-    "TagPrefixOreTypeAccessor"
+    "TagPrefixOreTypeAccessor",
+    "FluiDuct"
   ],
   "client": [
   ],
