@@ -1,6 +1,7 @@
 package com.allthemods.gravitas2.core.mixin;
 
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.dries007.tfc.common.blocks.TFCBlockStateProperties;
 import net.dries007.tfc.common.blocks.rock.AqueductBlock;
 import net.dries007.tfc.common.fluids.FluidProperty;
@@ -11,28 +12,27 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = AqueductBlock.class, remap = false)
-public abstract class FluiDuct extends HorizontalDirectionalBlock implements IFluidLoggable {
+public abstract class AqueductBlockMixin extends HorizontalDirectionalBlock implements IFluidLoggable {
 
-    @Shadow
-    @Final
-    public static final FluidProperty FLUID = TFCBlockStateProperties.WATER_AND_LAVA;
-
-
-    protected FluiDuct(Properties properties) {
+    protected AqueductBlockMixin(Properties properties) {
         super(properties);
     }
-    @Inject(method = "pickupBlock(Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/item/ItemStack;", cancellable = true, at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/LevelAccessor;scheduleTick(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/Block;I)V"))
+
+    @Inject(method = "pickupBlock", cancellable = true, at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/LevelAccessor;scheduleTick(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/Block;I)V"))
     private void gregitas$cancelLavaPickup(LevelAccessor level, BlockPos pos, BlockState state, CallbackInfoReturnable<ItemStack> cir) {
-        if (state.getValue(getFluidProperty()).getFluid().isSame(Fluids.LAVA)){
+        if (state.getValue(getFluidProperty()).getFluid().isSame(Fluids.LAVA)) {
             cir.setReturnValue(ItemStack.EMPTY);
         }
+    }
+
+    @ModifyReturnValue(method = "getFluidProperty", at = @At("TAIL"))
+    private FluidProperty gregitas$changeProperty(FluidProperty original) {
+        return TFCBlockStateProperties.WATER_AND_LAVA;
     }
 }
