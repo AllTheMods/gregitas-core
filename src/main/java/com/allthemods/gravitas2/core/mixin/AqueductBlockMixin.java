@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = AqueductBlock.class, remap = false)
+@Mixin(value = AqueductBlock.class)
 public abstract class AqueductBlockMixin extends HorizontalDirectionalBlock implements IFluidLoggable {
 
     protected AqueductBlockMixin(Properties properties) {
@@ -31,7 +31,7 @@ public abstract class AqueductBlockMixin extends HorizontalDirectionalBlock impl
         }
     }
 
-    @ModifyReturnValue(method = "getFluidProperty", at = @At("TAIL"))
+    @ModifyReturnValue(method = "getFluidProperty", at = @At("TAIL"), remap = false)
     private FluidProperty gregitas$changeProperty(FluidProperty original) {
         return TFCBlockStateProperties.WATER_AND_LAVA;
     }
