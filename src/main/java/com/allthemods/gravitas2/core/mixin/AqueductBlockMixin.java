@@ -6,6 +6,7 @@ import net.dries007.tfc.common.blocks.TFCBlockStateProperties;
 import net.dries007.tfc.common.blocks.rock.AqueductBlock;
 import net.dries007.tfc.common.fluids.FluidProperty;
 import net.dries007.tfc.common.fluids.IFluidLoggable;
+import net.dries007.tfc.common.fluids.TFCFluids;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LevelAccessor;
@@ -17,9 +18,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.stream.Stream;
+
 @Mixin(value = AqueductBlock.class)
 public abstract class AqueductBlockMixin extends HorizontalDirectionalBlock implements IFluidLoggable {
-
+    private static final FluidProperty ALL_WATER_AND_LAVA = FluidProperty.create("fluid", Stream.of(Fluids.EMPTY, Fluids.WATER, TFCFluids.SALT_WATER, TFCFluids.SPRING_WATER, Fluids.LAVA));
     protected AqueductBlockMixin(Properties properties) {
         super(properties);
     }
@@ -33,6 +36,6 @@ public abstract class AqueductBlockMixin extends HorizontalDirectionalBlock impl
 
     @ModifyReturnValue(method = "getFluidProperty", at = @At("TAIL"), remap = false)
     private FluidProperty gregitas$changeProperty(FluidProperty original) {
-        return TFCBlockStateProperties.WATER_AND_LAVA;
+        return ALL_WATER_AND_LAVA;
     }
 }
