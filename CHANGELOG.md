@@ -1,1 +1,1 @@
-- allow aqueducts to carry lava
+- allow aqueducts to carry all waters as well
