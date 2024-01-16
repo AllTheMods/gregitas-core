@@ -7,8 +7,8 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.MissingMappingsEvent;
 
 public class GregitasUtil {
-
     public static Mods RailwaysTFC;
+
     public static <T> void remap(MissingMappingsEvent.Mapping<T> mapping) {
         ResourceLocation key = mapping.getKey();
         T newThing = remapId(key, mapping.getRegistry());

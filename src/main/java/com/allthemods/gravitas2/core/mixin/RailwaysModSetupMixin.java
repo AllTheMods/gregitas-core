@@ -7,10 +7,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ModSetup.class)
+@Mixin(value = ModSetup.class, remap = false)
 public class RailwaysModSetupMixin {
 
-    @Inject(method = "register()V", at = @At("TAIL"), remap = false)
+    @Inject(method = "register()V", at = @At("TAIL"))
     private static void gregitas$registerTFC(CallbackInfo ci) {
         TFCTrackCompat.register();
     }

@@ -19,18 +19,15 @@ public class RailwaysModEnumMixin
 
     @SuppressWarnings("SameParameterValue")
     @Invoker(value="<init>")
-    private static Mods create(String name, int ordinal, String fabricId)
-    {
+    private static Mods create(String name, int ordinal, String fabricId) {
         throw new IllegalStateException("Unreachable");
     }
 
-    static
-    {
+    static {
         var entry = create("TFC", $VALUES.length, "tfc");
 
         GregitasUtil.RailwaysTFC = entry;
 
-        //noinspection ShadowFinalModification
         $VALUES = Arrays.copyOf($VALUES, $VALUES.length + 1);
         $VALUES[$VALUES.length-1] = entry;
     }
