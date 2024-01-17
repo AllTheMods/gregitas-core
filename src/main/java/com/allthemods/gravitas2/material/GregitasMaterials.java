@@ -24,8 +24,6 @@ public class GregitasMaterials {
 
     public static final Set<Material> GREGITAS_MATERIALS = new HashSet<>();
 
-    public static Map<UnificationEntry, Long> MATERIAL_AMOUNT_MAP;
-
     //region element
     public static Material WeaponsGradeNaquadah;
     public static Material LowGradeHypogen;
@@ -100,6 +98,10 @@ public class GregitasMaterials {
     //endregion
 
     public static void init() {
+
+    }
+
+    public static void modify() {
         GTMaterials.Bismuth.addFlags(MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_ROD);
         GTMaterials.Nickel.addFlags(MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_ROD);
         GTMaterials.Astatine.setProperty(PropertyKey.DUST, new DustProperty());
@@ -133,17 +135,14 @@ public class GregitasMaterials {
         TagPrefix.block.setIgnored(Sculk, Blocks.SCULK);
         TagPrefix.plate.setIgnored(Sculk, Blocks.SCULK_VEIN);
 
-        MATERIAL_AMOUNT_MAP = ImmutableMap.ofEntries(
-                Map.entry(new UnificationEntry(TagPrefix.block, Sculk), GTValues.M),
-                Map.entry(new UnificationEntry(TagPrefix.plate, Sculk), GTValues.M / 4)
-        );
+        TagPrefix.block.modifyMaterialAmount(Sculk, 1);
+        TagPrefix.plate.modifyMaterialAmount(Sculk, 1 / 4f);
 
         GTMaterials.WroughtIron.getProperty(PropertyKey.INGOT).setMagneticMaterial(WroughtIronMagnetic);
+
     }
 
     public static Material registerMaterial(Material.Builder builder) {
-        Material material = builder.buildAndRegister();
-        GREGITAS_MATERIALS.add(material);
-        return material;
+        return builder.buildAndRegister();
     }
 }

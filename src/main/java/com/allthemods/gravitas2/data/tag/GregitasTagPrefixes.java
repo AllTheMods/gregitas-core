@@ -1,144 +1,81 @@
 package com.allthemods.gravitas2.data.tag;
 
 import com.allthemods.gravitas2.core.mixin.TagPrefixOreTypeAccessor;
-import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconType;
+import com.allthemods.gravitas2.material.GregitasMaterials;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
+import com.gregtechceu.gtceu.common.data.GTMaterials;
 import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.blocks.rock.Rock;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
-
-import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.Conditions.hasOreProperty;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.MapColor;
 
 public class GregitasTagPrefixes {
 
-    public static final TagPrefix oreGabbro = TagPrefix.oreTagPrefix("gabbro")
-            .langValue("Gabbro %s Ore")
-            .materialIconType(MaterialIconType.ore)
-            .miningToolTag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .unificationEnabled(true)
-            .generationCondition(hasOreProperty)
-            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.GABBRO).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), false, Rock.GABBRO.color());
+    public static final TagPrefix oreGabbro = TagPrefix.oreTagPrefix("gabbro", BlockTags.MINEABLE_WITH_PICKAXE)
+            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.GABBRO).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), () -> GregitasMaterials.Gabbro, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).sound(SoundType.STONE).strength(6.5F, 10.0F).requiresCorrectToolForDrops(), new ResourceLocation("tfc", "block/rock/raw/gabbro"));
 
-    public static final TagPrefix oreShale = TagPrefix.oreTagPrefix("shale")
-            .langValue("Shale %s Ore")
-            .materialIconType(MaterialIconType.ore)
-            .miningToolTag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .unificationEnabled(true)
-            .generationCondition(hasOreProperty)
-            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.SHALE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), false, Rock.SHALE.color());
+    public static final TagPrefix oreShale = TagPrefix.oreTagPrefix("shale", BlockTags.MINEABLE_WITH_PICKAXE)
+            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.SHALE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), () -> GregitasMaterials.Shale, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).sound(SoundType.STONE).strength(6.5F, 10.0F).requiresCorrectToolForDrops(), new ResourceLocation("tfc", "block/rock/raw/shale"));
 
-    public static final TagPrefix oreClaystone = TagPrefix.oreTagPrefix("claystone")
+    public static final TagPrefix oreClaystone = TagPrefix.oreTagPrefix("claystone", BlockTags.MINEABLE_WITH_PICKAXE)
             .langValue("Claystone %s Ore")
-            .materialIconType(MaterialIconType.ore)
-            .miningToolTag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .unificationEnabled(true)
-            .generationCondition(hasOreProperty)
-            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.CLAYSTONE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), false, Rock.CLAYSTONE.color());
+            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.CLAYSTONE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), () -> GregitasMaterials.Claystone, BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW).sound(SoundType.STONE).strength(6.5F, 10.0F).requiresCorrectToolForDrops(), new ResourceLocation("tfc", "block/rock/raw/claystone"));
 
-    public static final TagPrefix oreLimestone = TagPrefix.oreTagPrefix("limestone")
+    public static final TagPrefix oreLimestone = TagPrefix.oreTagPrefix("limestone", BlockTags.MINEABLE_WITH_PICKAXE)
             .langValue("Limestone %s Ore")
-            .materialIconType(MaterialIconType.ore)
-            .miningToolTag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .unificationEnabled(true)
-            .generationCondition(hasOreProperty)
-            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.LIMESTONE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), false, Rock.LIMESTONE.color());
+            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.LIMESTONE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), () -> GregitasMaterials.Limestone, BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_WHITE).sound(SoundType.STONE).strength(6.5F, 10.0F).requiresCorrectToolForDrops(), new ResourceLocation("tfc", "block/rock/raw/limestone"));
 
-    public static final TagPrefix oreConglomerate = TagPrefix.oreTagPrefix("conglomerate")
+    public static final TagPrefix oreConglomerate = TagPrefix.oreTagPrefix("conglomerate", BlockTags.MINEABLE_WITH_PICKAXE)
             .langValue("Conglomerate %s Ore")
-            .materialIconType(MaterialIconType.ore)
-            .miningToolTag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .unificationEnabled(true)
-            .generationCondition(hasOreProperty)
-            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.CONGLOMERATE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), false, Rock.CONGLOMERATE.color());
+            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.CONGLOMERATE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), () -> GregitasMaterials.Conglomerate, BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_LIGHT_GRAY).sound(SoundType.STONE).strength(6.5F, 10.0F).requiresCorrectToolForDrops(), new ResourceLocation("tfc", "block/rock/raw/conglomerate"));
 
-    public static final TagPrefix oreDolomite = TagPrefix.oreTagPrefix("dolomite")
+    public static final TagPrefix oreDolomite = TagPrefix.oreTagPrefix("dolomite", BlockTags.MINEABLE_WITH_PICKAXE)
             .langValue("Dolomite %s Ore")
-            .materialIconType(MaterialIconType.ore)
-            .miningToolTag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .unificationEnabled(true)
-            .generationCondition(hasOreProperty)
-            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.DOLOMITE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), false, Rock.DOLOMITE.color());
+            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.DOLOMITE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), () -> GregitasMaterials.Dolomite, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).sound(SoundType.STONE).strength(6.5F, 10.0F).requiresCorrectToolForDrops(), new ResourceLocation("tfc", "block/rock/raw/dolomite"));
 
-    public static final TagPrefix oreChert = TagPrefix.oreTagPrefix("chert")
+    public static final TagPrefix oreChert = TagPrefix.oreTagPrefix("chert", BlockTags.MINEABLE_WITH_PICKAXE)
             .langValue("Chert %s Ore")
-            .materialIconType(MaterialIconType.ore)
-            .miningToolTag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .unificationEnabled(true)
-            .generationCondition(hasOreProperty)
-            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.CHERT).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), false, Rock.CHERT.color());
+            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.CHERT).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), () -> GregitasMaterials.Chert, BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).sound(SoundType.STONE).strength(6.5F, 10.0F).requiresCorrectToolForDrops(), new ResourceLocation("tfc", "block/rock/raw/chert"));
 
-    public static final TagPrefix oreChalk = TagPrefix.oreTagPrefix("chalk")
+    public static final TagPrefix oreChalk = TagPrefix.oreTagPrefix("chalk", BlockTags.MINEABLE_WITH_PICKAXE)
             .langValue("Chalk %s Ore")
-            .materialIconType(MaterialIconType.ore)
-            .miningToolTag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .unificationEnabled(true)
-            .generationCondition(hasOreProperty)
-            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.CHALK).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), false, Rock.CHALK.color());
+            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.CHALK).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), () -> GregitasMaterials.Chalk, BlockBehaviour.Properties.of().mapColor(MapColor.QUARTZ).sound(SoundType.STONE).strength(6.5F, 10.0F).requiresCorrectToolForDrops(), new ResourceLocation("tfc", "block/rock/raw/chalk"));
 
-    public static final TagPrefix oreRhyolite = TagPrefix.oreTagPrefix("rhyolite")
+    public static final TagPrefix oreRhyolite = TagPrefix.oreTagPrefix("rhyolite", BlockTags.MINEABLE_WITH_PICKAXE)
             .langValue("Rhyolite %s Ore")
-            .materialIconType(MaterialIconType.ore)
-            .miningToolTag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .unificationEnabled(true)
-            .generationCondition(hasOreProperty)
-            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.RHYOLITE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), false, Rock.RHYOLITE.color());
+            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.RHYOLITE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), () -> GregitasMaterials.Rhyolite, BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_LIGHT_GRAY).sound(SoundType.STONE).strength(6.5F, 10.0F).requiresCorrectToolForDrops(), new ResourceLocation("tfc", "block/rock/raw/rhyolite"));
 
-    public static final TagPrefix oreDacite = TagPrefix.oreTagPrefix("dacite")
+    public static final TagPrefix oreDacite = TagPrefix.oreTagPrefix("dacite", BlockTags.MINEABLE_WITH_PICKAXE)
             .langValue("Dacite %s Ore")
-            .materialIconType(MaterialIconType.ore)
-            .miningToolTag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .unificationEnabled(true)
-            .generationCondition(hasOreProperty)
-            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.DACITE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), false, Rock.DACITE.color());
+            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.DACITE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), () -> GregitasMaterials.Dacite, BlockBehaviour.Properties.of().mapColor(MapColor.STONE).sound(SoundType.STONE).strength(6.5F, 10.0F).requiresCorrectToolForDrops(), new ResourceLocation("tfc", "block/rock/raw/dacite"));
 
-    public static final TagPrefix oreQuartzite = TagPrefix.oreTagPrefix("quartzite")
+    public static final TagPrefix oreQuartzite = TagPrefix.oreTagPrefix("quartzite", BlockTags.MINEABLE_WITH_PICKAXE)
             .langValue("Quartzite %s Ore")
-            .materialIconType(MaterialIconType.ore)
-            .miningToolTag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .unificationEnabled(true)
-            .generationCondition(hasOreProperty)
-            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.QUARTZITE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), false, Rock.QUARTZITE.color());
+            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.QUARTZITE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), () -> GTMaterials.Quartzite, BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_WHITE).sound(SoundType.STONE).strength(6.5F, 10.0F).requiresCorrectToolForDrops(), new ResourceLocation("tfc", "block/rock/raw/quartzite"));
 
-    public static final TagPrefix oreSlate = TagPrefix.oreTagPrefix("slate")
+    public static final TagPrefix oreSlate = TagPrefix.oreTagPrefix("slate", BlockTags.MINEABLE_WITH_PICKAXE)
             .langValue("Slate %s Ore")
-            .materialIconType(MaterialIconType.ore)
-            .miningToolTag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .unificationEnabled(true)
-            .generationCondition(hasOreProperty)
-            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.SLATE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), false, Rock.SLATE.color());
+            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.SLATE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), () -> GregitasMaterials.Slate, BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.STONE).strength(6.5F, 10.0F).requiresCorrectToolForDrops(), new ResourceLocation("tfc", "block/rock/raw/slate"));
 
-    public static final TagPrefix orePhyllite = TagPrefix.oreTagPrefix("phyllite")
+    public static final TagPrefix orePhyllite = TagPrefix.oreTagPrefix("phyllite", BlockTags.MINEABLE_WITH_PICKAXE)
             .langValue("Phyllite %s Ore")
-            .materialIconType(MaterialIconType.ore)
-            .miningToolTag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .unificationEnabled(true)
-            .generationCondition(hasOreProperty)
-            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.PHYLLITE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), false, Rock.PHYLLITE.color());
+            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.PHYLLITE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), () -> GregitasMaterials.Phyllite, BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_LIGHT_BLUE).sound(SoundType.STONE).strength(6.5F, 10.0F).requiresCorrectToolForDrops(), new ResourceLocation("tfc", "block/rock/raw/phyllite"));
 
-    public static final TagPrefix oreSchist = TagPrefix.oreTagPrefix("schist")
+    public static final TagPrefix oreSchist = TagPrefix.oreTagPrefix("schist", BlockTags.MINEABLE_WITH_PICKAXE)
             .langValue("Schist %s Ore")
-            .materialIconType(MaterialIconType.ore)
-            .miningToolTag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .unificationEnabled(true)
-            .generationCondition(hasOreProperty)
-            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.SCHIST).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), false, Rock.SCHIST.color());
+            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.SCHIST).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), () -> GregitasMaterials.Schist, BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_LIGHT_GREEN).sound(SoundType.STONE).strength(6.5F, 10.0F).requiresCorrectToolForDrops(), new ResourceLocation("tfc", "block/rock/raw/schist"));
 
-    public static final TagPrefix oreGneiss = TagPrefix.oreTagPrefix("gneiss")
+    public static final TagPrefix oreGneiss = TagPrefix.oreTagPrefix("gneiss", BlockTags.MINEABLE_WITH_PICKAXE)
             .langValue("Gneiss %s Ore")
-            .materialIconType(MaterialIconType.ore)
-            .miningToolTag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .unificationEnabled(true)
-            .generationCondition(hasOreProperty)
-            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.GNEISS).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), false, Rock.GNEISS.color());
+            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.GNEISS).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), () -> GregitasMaterials.Gneiss, BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_LIGHT_GRAY).sound(SoundType.STONE).strength(6.5F, 10.0F).requiresCorrectToolForDrops(), new ResourceLocation("tfc", "block/rock/raw/gneiss"));
 
-    public static final TagPrefix oreMarble = TagPrefix.oreTagPrefix("marble")
+    public static final TagPrefix oreMarble = TagPrefix.oreTagPrefix("marble", BlockTags.MINEABLE_WITH_PICKAXE)
             .langValue("Marble %s Ore")
-            .materialIconType(MaterialIconType.ore)
-            .miningToolTag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .unificationEnabled(true)
-            .generationCondition(hasOreProperty)
-            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.MARBLE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), false, Rock.MARBLE.color());
+            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.MARBLE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), () -> GTMaterials.Marble, BlockBehaviour.Properties.of().mapColor(MapColor.WOOL).sound(SoundType.STONE).strength(6.5F, 10.0F).requiresCorrectToolForDrops(), new ResourceLocation("tfc", "block/rock/raw/marble"));
 
     // nope, it works. IntelliJ doesn't know what it's talking about.
     @SuppressWarnings("DataFlowIssue")

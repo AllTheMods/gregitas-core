@@ -38,9 +38,6 @@ public class LangHandler extends com.gregtechceu.gtceu.data.lang.LangHandler {
         provider.add(GregitasTagPrefixes.oreMarble.getUnlocalizedName(), GregitasTagPrefixes.oreMarble.langValue());
 
         // Materials
-        for (Material material : GregitasMaterials.GREGITAS_MATERIALS) {
-            provider.add(material.getUnlocalizedName(), FormattingUtil.toEnglishName(material.getName()));
-        }
         replace(provider, GregitasMaterials.AllTheModium.getUnlocalizedName(), "AllTheModium");
         replace(provider, GregitasMaterials.AllthemodiumNaquadahMixture.getUnlocalizedName(), "AllTheModium-Naquadah Mixture");
     }

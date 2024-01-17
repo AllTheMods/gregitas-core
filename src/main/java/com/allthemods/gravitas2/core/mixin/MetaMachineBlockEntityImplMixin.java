@@ -3,12 +3,13 @@ package com.allthemods.gravitas2.core.mixin;
 import com.allthemods.gravitas2.capability.GregitasCapabilities;
 import com.allthemods.gravitas2.capability.IPressureContainer;
 import com.gregtechceu.gtceu.api.blockentity.MetaMachineBlockEntity;
-import com.gregtechceu.gtceu.api.blockentity.forge.MetaMachineBlockEntityImpl;
+import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
 import net.dries007.tfc.common.capabilities.heat.HeatCapability;
 import net.dries007.tfc.common.capabilities.heat.IHeatBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
@@ -20,8 +21,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = MetaMachineBlockEntityImpl.class, remap = false)
-public abstract class MetaMachineBlockEntityImplMixin extends MetaMachineBlockEntity {
+@Mixin(value = MetaMachineBlockEntity.class, remap = false)
+public abstract class MetaMachineBlockEntityImplMixin extends BlockEntity implements IMachineBlockEntity {
     protected MetaMachineBlockEntityImplMixin(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
         super(type, pos, blockState);
     }

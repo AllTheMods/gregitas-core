@@ -1,5 +1,6 @@
 package com.allthemods.gravitas2.material.materials;
 
+import com.allthemods.gravitas2.GregitasCore;
 import com.allthemods.gravitas2.material.GregitasMaterials;
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags;
@@ -15,7 +16,7 @@ public class GregitasHigherDegreeMaterials {
 
     public static void init() {
         Spacetime = GregitasMaterials.registerMaterial(
-                new Material.Builder("spacetime")
+                new Material.Builder(GregitasCore.id("spacetime"))
                         .dust().fluid()
                         .color(0x5be3de).iconSet(MaterialIconSet.ROUGH)
                         .components(Space, 1, Time, 1)
@@ -23,7 +24,7 @@ public class GregitasHigherDegreeMaterials {
 
 
         UltraHighGradeHypogenSeparationAgent = GregitasMaterials.registerMaterial(
-                new Material.Builder("ultra_high_grade_hypogen_separation_agent")
+                new Material.Builder(GregitasCore.id("ultra_high_grade_hypogen_separation_agent"))
                         .fluid()
                         .colorAverage()
                         .flags(MaterialFlags.DISABLE_DECOMPOSITION)
@@ -31,7 +32,7 @@ public class GregitasHigherDegreeMaterials {
         );
 
         HypogenSolderCatalyst = GregitasMaterials.registerMaterial(
-                new Material.Builder("hypogen_solder_catalyst")
+                new Material.Builder(GregitasCore.id("hypogen_solder_catalyst"))
                         .dust().fluid()
                         .colorAverage()
                         .flags(MaterialFlags.DISABLE_DECOMPOSITION)
@@ -39,7 +40,7 @@ public class GregitasHigherDegreeMaterials {
         );
 
         SpacetimeReactionCatalyst = GregitasMaterials.registerMaterial(
-                new Material.Builder("spacetime_reaction_catalyst")
+                new Material.Builder(GregitasCore.id("spacetime_reaction_catalyst"))
                         .dust()
                         .color(0xf2b988)
                         .flags(MaterialFlags.DISABLE_DECOMPOSITION)
@@ -47,7 +48,7 @@ public class GregitasHigherDegreeMaterials {
         );
 
         InfinityHypogenAlloy = GregitasMaterials.registerMaterial(
-                new Material.Builder("infinity_hypogen_alloy")
+                new Material.Builder(GregitasCore.id("infinity_hypogen_alloy"))
                         .fluid().plasma()
                         .color(0xf2b988)
                         .flags(MaterialFlags.DISABLE_DECOMPOSITION)
@@ -56,7 +57,7 @@ public class GregitasHigherDegreeMaterials {
 
 
         IgneousAlloy = GregitasMaterials.registerMaterial(
-                new Material.Builder("igneous_alloy")
+                new Material.Builder(GregitasCore.id("igneous_alloy"))
                         .fluid().dust()
                         .iconSet(MaterialIconSet.ROUGH)
                         .color(0x839689)
@@ -64,7 +65,7 @@ public class GregitasHigherDegreeMaterials {
         );
 
         Slate = GregitasMaterials.registerMaterial(
-                new Material.Builder("slate")
+                new Material.Builder(GregitasCore.id("slate"))
                         .dust()
                         .color(0x8F7748).secondaryColor(0x707159).iconSet(ROUGH)
                         .flags(NO_SMASHING, DECOMPOSITION_BY_CENTRIFUGING)

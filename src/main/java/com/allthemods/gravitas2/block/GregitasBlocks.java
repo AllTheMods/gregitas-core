@@ -4,10 +4,10 @@ import com.allthemods.gravitas2.GregitasCore;
 import com.allthemods.gravitas2.item.PressurePipeBlockItem;
 import com.allthemods.gravitas2.pipelike.pressure.PressurePipeType;
 import com.allthemods.gravitas2.registry.GregitasCreativeModeTabs;
+import com.allthemods.gravitas2.util.GregitasUtil;
 import com.gregtechceu.gtceu.api.block.IFilterType;
 import com.gregtechceu.gtceu.api.block.RendererBlock;
 import com.gregtechceu.gtceu.api.item.RendererBlockItem;
-import com.gregtechceu.gtceu.api.item.tool.GTToolType;
 import com.gregtechceu.gtceu.client.renderer.block.TextureOverrideRenderer;
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
 import com.lowdragmc.lowdraglib.Platform;
@@ -60,7 +60,7 @@ public class GregitasBlocks {
                 .properties(properties -> properties.strength(2.0f, 8.0f).sound(SoundType.METAL).isValidSpawn((blockState, blockGetter, blockPos, entityType) -> false))
                 .addLayer(() -> RenderType::cutoutMipped)
                 .blockstate(NonNullBiConsumer.noop())
-                .tag(GTToolType.WRENCH.harvestTags.get(0), CustomTags.TOOL_TIERS[1])
+                .tag(GregitasUtil.MINEABLE_WITH_WRENCH, CustomTags.TOOL_TIERS[1])
                 .item(RendererBlockItem::new)
                 .model(NonNullBiConsumer.noop())
                 .build()
