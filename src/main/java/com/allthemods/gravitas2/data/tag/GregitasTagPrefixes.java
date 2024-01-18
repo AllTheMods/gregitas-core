@@ -16,9 +16,11 @@ import net.minecraft.world.level.material.MapColor;
 public class GregitasTagPrefixes {
 
     public static final TagPrefix oreGabbro = TagPrefix.oreTagPrefix("gabbro", BlockTags.MINEABLE_WITH_PICKAXE)
+            .langValue("Gabbro %s Ore")
             .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.GABBRO).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), () -> GregitasMaterials.Gabbro, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).sound(SoundType.STONE).strength(6.5F, 10.0F).requiresCorrectToolForDrops(), new ResourceLocation("tfc", "block/rock/raw/gabbro"));
 
     public static final TagPrefix oreShale = TagPrefix.oreTagPrefix("shale", BlockTags.MINEABLE_WITH_PICKAXE)
+            .langValue("Shale %s Ore")
             .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.SHALE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), () -> GregitasMaterials.Shale, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).sound(SoundType.STONE).strength(6.5F, 10.0F).requiresCorrectToolForDrops(), new ResourceLocation("tfc", "block/rock/raw/shale"));
 
     public static final TagPrefix oreClaystone = TagPrefix.oreTagPrefix("claystone", BlockTags.MINEABLE_WITH_PICKAXE)

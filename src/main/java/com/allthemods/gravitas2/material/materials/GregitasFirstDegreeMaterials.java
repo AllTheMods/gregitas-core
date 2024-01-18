@@ -14,80 +14,71 @@ import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 public class GregitasFirstDegreeMaterials {
 
     public static void init() {
-        KaolinClay = GregitasMaterials.registerMaterial(
-                new Material.Builder(GregitasCore.id("kaolin_clay"))
-                        .dust()
-                        .color(0xba997b).secondaryColor(0x876a50).iconSet(MaterialIconSet.FINE)
-                        .components(Aluminium, 2, Silicon, 2, Oxygen, 9, Hydrogen, 4)
-        ).setFormula("Al2Si2O5(OH)4", true);
+        KaolinClay = new Material.Builder(GregitasCore.id("kaolin_clay"))
+                .dust()
+                .color(0xba997b).secondaryColor(0x876a50).iconSet(MaterialIconSet.FINE)
+                .components(Aluminium, 2, Silicon, 2, Oxygen, 9, Hydrogen, 4)
+                .buildAndRegister()
+                .setFormula("Al2Si2O5(OH)4", true);
 
-        AllthemodiumNaquadahMixture = GregitasMaterials.registerMaterial(
-                new Material.Builder(GregitasCore.id("allthemodium_naquadah_mixture"))
-                        .dust()
-                        .color(0x5be3de).iconSet(MaterialIconSet.ROUGH)
-                        .components(AllTheModium, 1, Naquadah, 4)
-        );
+        AllthemodiumNaquadahMixture = new Material.Builder(GregitasCore.id("allthemodium_naquadah_mixture"))
+                .dust()
+                .color(0x5be3de).iconSet(MaterialIconSet.ROUGH)
+                .components(AllTheModium, 1, Naquadah, 4)
+                .buildAndRegister();
 
-        InfinityMatterSulfate = GregitasMaterials.registerMaterial(
-                new Material.Builder(GregitasCore.id("infinity_matter_sulfate"))
-                        .fluid()
-                        .color(0xf2b988)
-                        .components(InfinityMatter, 1, Sulfur, 1, Oxygen, 4)
-        );
+        InfinityMatterSulfate = new Material.Builder(GregitasCore.id("infinity_matter_sulfate"))
+                .fluid()
+                .color(0xf2b988)
+                .components(InfinityMatter, 1, Sulfur, 1, Oxygen, 4)
+                .buildAndRegister();
 
 
-        Nitinol = GregitasMaterials.registerMaterial(
-                new Material.Builder(GregitasCore.id("nitinol"))
-                        .ingot().fluid()
-                        .iconSet(MaterialIconSet.METALLIC)
-                        .colorAverage()
-                        .flags(MaterialFlags.GENERATE_PLATE)
-                        .components(Nickel, 4, Titanium, 6)
-                        .blastTemp(1583, BlastProperty.GasTier.HIGH, GTValues.VA[GTValues.IV], 1200)
-        );
+        Nitinol = new Material.Builder(GregitasCore.id("nitinol"))
+                .ingot().fluid()
+                .iconSet(MaterialIconSet.METALLIC)
+                .colorAverage()
+                .flags(MaterialFlags.GENERATE_PLATE)
+                .components(Nickel, 4, Titanium, 6)
+                .blastTemp(1583, BlastProperty.GasTier.HIGH, GTValues.VA[GTValues.IV], 1200)
+                .buildAndRegister();
 
 
-        Trichlorocertane = GregitasMaterials.registerMaterial(
-                new Material.Builder(GregitasCore.id("trichlorocertane"))
-                        .fluid()
-                        .color(0xb1d9f0)
-                        .components(Certus, 1, Hydrogen, 1, Chlorine, 3)
-        );
+        Trichlorocertane = new Material.Builder(GregitasCore.id("trichlorocertane"))
+                .fluid()
+                .color(0xb1d9f0)
+                .components(Certus, 1, Hydrogen, 1, Chlorine, 3)
+                .buildAndRegister();
 
-        Dichlorocertane = GregitasMaterials.registerMaterial(
-                new Material.Builder(GregitasCore.id("dichlorocertane"))
-                        .fluid()
-                        .color(0x90cfd1)
-                        .components(Hydrogen, 2, Certus, 1, Chlorine, 2)
-        );
+        Dichlorocertane = new Material.Builder(GregitasCore.id("dichlorocertane"))
+                .fluid()
+                .color(0x90cfd1)
+                .components(Hydrogen, 2, Certus, 1, Chlorine, 2)
+                .buildAndRegister();
 
-        Chlorocertane = GregitasMaterials.registerMaterial(
-                new Material.Builder(GregitasCore.id("chlorocertane"))
-                        .fluid()
-                        .color(0xccede3)
-                        .components(Hydrogen, 3, Certus, 1, Chlorine, 1)
-        );
+        Chlorocertane = new Material.Builder(GregitasCore.id("chlorocertane"))
+                .fluid()
+                .color(0xccede3)
+                .components(Hydrogen, 3, Certus, 1, Chlorine, 1)
+                .buildAndRegister();
 
-        CertusTetrachloride = GregitasMaterials.registerMaterial(
-                new Material.Builder(GregitasCore.id("certus_tetrachloride"))
-                        .fluid()
-                        .color(0xccede3)
-                        .components(Certus, 1, Chlorine, 4)
-        );
+        CertusTetrachloride = new Material.Builder(GregitasCore.id("certus_tetrachloride"))
+                .fluid()
+                .color(0xccede3)
+                .components(Certus, 1, Chlorine, 4)
+                .buildAndRegister();
 
-        Certane = GregitasMaterials.registerMaterial(
-                new Material.Builder(GregitasCore.id("certane"))
-                        .fluid()
-                        .color(0xccede3)
-                        .components(Certus, 1, Hydrogen, 4)
-        );
+        Certane = new Material.Builder(GregitasCore.id("certane"))
+                .fluid()
+                .color(0xccede3)
+                .components(Certus, 1, Hydrogen, 4)
+                .buildAndRegister();
 
-        WroughtIronMagnetic = GregitasMaterials.registerMaterial(
-                new Material.Builder(GregitasCore.id("magnetic_wrought_iron"))
-                        .ingot()
-                        .color(0xbcbcbc).secondaryColor(0x521c0b).iconSet(MaterialIconSet.MAGNETIC)
-                        .components(Iron, 1)
-                        .flags(MaterialFlags.GENERATE_ROD)
-        );
+        WroughtIronMagnetic = new Material.Builder(GregitasCore.id("magnetic_wrought_iron"))
+                .ingot()
+                .color(0xbcbcbc).secondaryColor(0x521c0b).iconSet(MaterialIconSet.MAGNETIC)
+                .components(Iron, 1)
+                .flags(MaterialFlags.GENERATE_ROD)
+                .buildAndRegister();
     }
 }
