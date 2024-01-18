@@ -13,7 +13,6 @@
     "PlacedItemBlockEntityMixin",
     "RailwaysModEnumMixin",
     "RailwaysModSetupMixin",
-    "TagPrefixMixin",
     "TagPrefixOreTypeAccessor",
     "AqueductBlockMixin"
   ],

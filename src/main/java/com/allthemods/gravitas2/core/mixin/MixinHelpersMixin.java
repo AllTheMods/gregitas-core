@@ -22,13 +22,15 @@ import java.util.Map;
 @Mixin(value = MixinHelpers.class, remap = false)
 public class MixinHelpersMixin {
 
-    @Inject(method = "lambda$addMaterialBlockTags$6", at = @At("HEAD"))
-    private static void gregitas$addFallingTag(TagPrefix prefix, Map<ResourceLocation, List<TagLoader.EntryWithSource>> tagMap, Material material, BlockEntry<? extends Block> block, CallbackInfo ci) {
-        tagMap.computeIfAbsent(TFCTags.Blocks.CAN_COLLAPSE.location(), $ -> new ArrayList<>())
-                .add(new TagLoader.EntryWithSource(TagEntry.element(block.getId()), GTValues.CUSTOM_TAG_SOURCE));
-        tagMap.computeIfAbsent(TFCTags.Blocks.CAN_START_COLLAPSE.location(), $ -> new ArrayList<>())
-                .add(new TagLoader.EntryWithSource(TagEntry.element(block.getId()), GTValues.CUSTOM_TAG_SOURCE));
-        tagMap.computeIfAbsent(TFCTags.Blocks.CAN_TRIGGER_COLLAPSE.location(), $ -> new ArrayList<>())
-                .add(new TagLoader.EntryWithSource(TagEntry.element(block.getId()), GTValues.CUSTOM_TAG_SOURCE));
+    @Inject(method = "lambda$addMaterialBlockTags$20", at = @At("HEAD"))
+    private static void gregitas$addFallingTag(Map<ResourceLocation, List<TagLoader.EntryWithSource>> tagMap, TagPrefix prefix, Material material, BlockEntry<? extends Block> block, CallbackInfo ci) {
+        if (TagPrefix.ORES.containsKey(prefix)) {
+            tagMap.computeIfAbsent(TFCTags.Blocks.CAN_COLLAPSE.location(), $ -> new ArrayList<>())
+                    .add(new TagLoader.EntryWithSource(TagEntry.element(block.getId()), GTValues.CUSTOM_TAG_SOURCE));
+            tagMap.computeIfAbsent(TFCTags.Blocks.CAN_START_COLLAPSE.location(), $ -> new ArrayList<>())
+                    .add(new TagLoader.EntryWithSource(TagEntry.element(block.getId()), GTValues.CUSTOM_TAG_SOURCE));
+            tagMap.computeIfAbsent(TFCTags.Blocks.CAN_TRIGGER_COLLAPSE.location(), $ -> new ArrayList<>())
+                    .add(new TagLoader.EntryWithSource(TagEntry.element(block.getId()), GTValues.CUSTOM_TAG_SOURCE));
+        }
     }
 }

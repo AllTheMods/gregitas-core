@@ -5,24 +5,37 @@ import com.allthemods.gravitas2.block.entity.GregitasBlockEntities;
 import com.allthemods.gravitas2.capability.GregitasCapabilities;
 import com.allthemods.gravitas2.data.lang.LangHandler;
 import com.allthemods.gravitas2.machine.GregitasMachines;
+import com.allthemods.gravitas2.material.GregitasElements;
+import com.allthemods.gravitas2.material.GregitasMaterials;
 import com.allthemods.gravitas2.recipe.capability.GregitasRecipeCapabilities;
 import com.allthemods.gravitas2.recipe.type.GregitasRecipeTypes;
 import com.allthemods.gravitas2.registry.GregitasRegistry;
 import com.allthemods.gravitas2.util.GregitasUtil;
 import com.gregtechceu.gtceu.GTCEu;
+import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.block.ActiveBlock;
-import com.gregtechceu.gtceu.api.blockentity.MetaMachineBlockEntity;
+import com.gregtechceu.gtceu.api.capability.recipe.RecipeCapability;
+import com.gregtechceu.gtceu.api.data.chemical.Element;
+import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialEvent;
+import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialRegistryEvent;
+import com.gregtechceu.gtceu.api.data.chemical.material.event.PostMaterialEvent;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
+import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.machine.feature.IRecipeLogicMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.CleanroomType;
+import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
+import com.gregtechceu.gtceu.common.CommonProxy;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
+import com.gregtechceu.gtceu.common.data.GTMaterials;
+import com.gregtechceu.gtceu.common.unification.material.MaterialRegistryManager;
 import com.gregtechceu.gtceu.config.ConfigHolder;
+import com.gregtechceu.gtceu.data.lang.MaterialLangGenerator;
+import com.lowdragmc.lowdraglib.Platform;
 import com.lumintorious.tfcambiental.api.AmbientalRegistry;
 import com.lumintorious.tfcambiental.modifier.TempModifier;
 import com.tterrag.registrate.providers.ProviderType;
 import dev.ftb.mods.ftbchunks.api.FTBChunksAPI;
 import dev.ftb.mods.ftblibrary.math.ChunkDimPos;
-import net.dries007.tfc.common.capabilities.heat.IHeatBlock;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -54,16 +67,21 @@ public class GregitasCore {
         ConfigHolder.init();
 
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+        modBus.addListener(this::addMaterialRegistries);
+        modBus.addListener(this::addMaterials);
+        modBus.addListener(this::modifyMaterials);
+        modBus.addGenericListener(RecipeCapability.class, this::registerRecipeCaps);
+        modBus.addGenericListener(GTRecipeType.class, this::registerRecipeTypes);
+        modBus.addGenericListener(MachineDefinition.class, this::registerMachines);
+        modBus.addGenericListener(Element.class, this::registerElements);
+
         modBus.addListener(this::registerCapabilities);
 
         MinecraftForge.EVENT_BUS.register(this);
 
         // Initialize GT stuffs
-        GregitasRecipeCapabilities.init();
         GregitasBlocks.init();
         GregitasBlockEntities.init();
-        GregitasRecipeTypes.init();
-        GregitasMachines.init();
 
         GregitasRegistry.GREGITAS_REGISTRATE.addDataGenerator(ProviderType.LANG, LangHandler::init);
 
@@ -134,5 +152,33 @@ public class GregitasCore {
         } else if (newTeam == null && oldTeam != null) {
             player.displayClientMessage(Component.translatable("gregitas_core.message.leave_area").append(oldTeam.getColoredName()).withStyle(ChatFormatting.GREEN), true);
         }
+    }
+
+    public void addMaterialRegistries(MaterialRegistryEvent event) {
+        GTCEuAPI.materialManager.createRegistry(GregitasCore.MOD_ID);
+    }
+
+    public void addMaterials(MaterialEvent event) {
+        GregitasMaterials.init();
+    }
+
+    public void modifyMaterials(PostMaterialEvent event) {
+        GregitasMaterials.modify();
+    }
+
+    public void registerRecipeCaps(GTCEuAPI.RegisterEvent<String, RecipeCapability<?>> event) {
+        GregitasRecipeCapabilities.init();
+    }
+
+    public void registerRecipeTypes(GTCEuAPI.RegisterEvent<ResourceLocation, GTRecipeType> event) {
+        GregitasRecipeTypes.init();
+    }
+
+    public void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event) {
+        GregitasMachines.init();
+    }
+
+    public void registerElements(GTCEuAPI.RegisterEvent<String, Element> event) {
+        GregitasElements.init();
     }
 }

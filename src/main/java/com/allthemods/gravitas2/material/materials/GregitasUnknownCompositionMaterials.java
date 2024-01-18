@@ -1,6 +1,6 @@
 package com.allthemods.gravitas2.material.materials;
 
-import com.allthemods.gravitas2.material.GregitasMaterials;
+import com.allthemods.gravitas2.GregitasCore;
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet;
 import com.gregtechceu.gtceu.api.fluids.FluidBuilder;
@@ -8,219 +8,183 @@ import com.gregtechceu.gtceu.api.fluids.FluidState;
 import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
 
 import static com.allthemods.gravitas2.material.GregitasMaterials.*;
-import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
-import static com.gregtechceu.gtceu.common.data.GTMaterials.Saltpeter;
 
 public class GregitasUnknownCompositionMaterials {
 
     public static void init() {
-        Gabbro = GregitasMaterials.registerMaterial(
-                new Material.Builder("gabbro")
-                        .dust()
-                        .color(0x4C4C4C).secondaryColor(0x707159).iconSet(MaterialIconSet.ROUGH)
-        );
+        Gabbro = new Material.Builder(GregitasCore.id("gabbro"))
+                .dust()
+                .color(0x4C4C4C).secondaryColor(0x707159).iconSet(MaterialIconSet.ROUGH)
+                .buildAndRegister();
 
-        Shale = GregitasMaterials.registerMaterial(
-                new Material.Builder("shale")
-                        .dust()
-                        .color(0x383838).secondaryColor(0x4C4C4C).iconSet(MaterialIconSet.ROUGH)
-        );
+        Shale = new Material.Builder(GregitasCore.id("shale"))
+                .dust()
+                .color(0x383838).secondaryColor(0x4C4C4C).iconSet(MaterialIconSet.ROUGH)
+                .buildAndRegister();
 
-        Claystone = GregitasMaterials.registerMaterial(
-                new Material.Builder("claystone")
-                        .dust()
-                        .color(0xBA8524).secondaryColor(0x707159).iconSet(MaterialIconSet.FINE)
-        );
+        Claystone = new Material.Builder(GregitasCore.id("claystone"))
+                .dust()
+                .color(0xBA8524).secondaryColor(0x707159).iconSet(MaterialIconSet.FINE)
+                .buildAndRegister();
 
-        Limestone = GregitasMaterials.registerMaterial(
-                new Material.Builder("limestone")
-                        .dust()
-                        .color(0xcacac9).secondaryColor(0xD1B1A1).iconSet(MaterialIconSet.FINE)
-        );
+        Limestone = new Material.Builder(GregitasCore.id("limestone"))
+                .dust()
+                .color(0xcacac9).secondaryColor(0xD1B1A1).iconSet(MaterialIconSet.FINE)
+                .buildAndRegister();
 
-        Conglomerate = GregitasMaterials.registerMaterial(
-                new Material.Builder("conglomerate")
-                        .dust()
-                        .color(0x876B62).secondaryColor(0x6a7451)
-        );
+        Conglomerate = new Material.Builder(GregitasCore.id("conglomerate"))
+                .dust()
+                .color(0x876B62).secondaryColor(0x6a7451)
+                .buildAndRegister();
 
-        Dolomite = GregitasMaterials.registerMaterial(
-                new Material.Builder("dolomite")
-                        .dust()
-                        .color(0x4C4C4C).secondaryColor(0x383838)
-        );
+        Dolomite = new Material.Builder(GregitasCore.id("dolomite"))
+                .dust()
+                .color(0x4C4C4C).secondaryColor(0x383838)
+                .buildAndRegister();
 
-        Chert = GregitasMaterials.registerMaterial(
-                new Material.Builder("chert")
-                        .dust()
-                        .color(0x9F5224).secondaryColor(0xd7c48c)
-        );
+        Chert = new Material.Builder(GregitasCore.id("chert"))
+                .dust()
+                .color(0x9F5224).secondaryColor(0xd7c48c)
+                .buildAndRegister();
 
-        Chalk = GregitasMaterials.registerMaterial(
-                new Material.Builder("chalk")
-                        .dust()
-                        .color(0xFFFCF5).secondaryColor(0xcacac9)
-        );
+        Chalk = new Material.Builder(GregitasCore.id("chalk"))
+                .dust()
+                .color(0xFFFCF5).secondaryColor(0xcacac9)
+                .buildAndRegister();
 
-        Rhyolite = GregitasMaterials.registerMaterial(
-                new Material.Builder("rhyolite")
-                        .dust()
-                        .color(0x876B62).secondaryColor(0x7d6354)
-        );
+        Rhyolite = new Material.Builder(GregitasCore.id("rhyolite"))
+                .dust()
+                .color(0x876B62).secondaryColor(0x7d6354)
+                .buildAndRegister();
 
-        Dacite = GregitasMaterials.registerMaterial(
-                new Material.Builder("dacite")
-                        .dust()
-                        .color(0x707070).secondaryColor(0x7d6354)
-        );
+        Dacite = new Material.Builder(GregitasCore.id("dacite"))
+                .dust()
+                .color(0x707070).secondaryColor(0x7d6354)
+                .buildAndRegister();
 
-        Phyllite = GregitasMaterials.registerMaterial(
-                new Material.Builder("phyllite")
-                        .dust()
-                        .color(0x706C8A).secondaryColor(0x707159).iconSet(MaterialIconSet.ROUGH)
-        );
+        Phyllite = new Material.Builder(GregitasCore.id("phyllite"))
+                .dust()
+                .color(0x706C8A).secondaryColor(0x707159).iconSet(MaterialIconSet.ROUGH)
+                .buildAndRegister();
 
-        Schist = GregitasMaterials.registerMaterial(
-                new Material.Builder("schist")
-                        .dust()
-                        .color(0x677535).secondaryColor(0x6a7451)
-        );
+        Schist = new Material.Builder(GregitasCore.id("schist"))
+                .dust()
+                .color(0x677535).secondaryColor(0x6a7451)
+                .buildAndRegister();
 
-        Gneiss = GregitasMaterials.registerMaterial(
-                new Material.Builder("gneiss")
-                        .dust()
-                        .color(0x876B62).secondaryColor(0x6a7451)
-        );
+        Gneiss = new Material.Builder(GregitasCore.id("gneiss"))
+                .dust()
+                .color(0x876B62).secondaryColor(0x6a7451)
+                .buildAndRegister();
 
 
-        Space = GregitasMaterials.registerMaterial(
-                new Material.Builder("space")
-                        .dust()
-                        .color(0x2e213b).iconSet(MaterialIconSet.SHINY)
-        );
+        Space = new Material.Builder(GregitasCore.id("space"))
+                .dust()
+                .color(0x2e213b).iconSet(MaterialIconSet.SHINY)
+                .buildAndRegister();
 
-        TraceMinerals = GregitasMaterials.registerMaterial(
-                new Material.Builder("trace_minerals")
-                        .dust()
-                        .color(0x537854).iconSet(MaterialIconSet.ROUGH)
-        );
+        TraceMinerals = new Material.Builder(GregitasCore.id("trace_minerals"))
+                .dust()
+                .color(0x537854).iconSet(MaterialIconSet.ROUGH)
+                .buildAndRegister();
 
-        ExtraterrestialMaterials = GregitasMaterials.registerMaterial(
-                new Material.Builder("extraterrestial_materials")
-                        .dust()
-                        .color(0x5be3de).iconSet(MaterialIconSet.ROUGH)
-        );
+        ExtraterrestialMaterials = new Material.Builder(GregitasCore.id("extraterrestial_materials"))
+                .dust()
+                .color(0x5be3de).iconSet(MaterialIconSet.ROUGH)
+                .buildAndRegister();
 
-        StarMatter = GregitasMaterials.registerMaterial(
-                new Material.Builder("star_matter")
-                        .fluid()
-                        .fluid(FluidStorageKeys.PLASMA, new FluidBuilder().state(FluidState.PLASMA).customStill())
-                        .color(0xb219d1)
-        );
+        StarMatter = new Material.Builder(GregitasCore.id("star_matter"))
+                .fluid()
+                .fluid(FluidStorageKeys.PLASMA, new FluidBuilder().state(FluidState.PLASMA).customStill())
+                .color(0xb219d1)
+                .buildAndRegister();
 
-        RawHypogen = GregitasMaterials.registerMaterial(
-                new Material.Builder("raw_hypogen")
-                        .fluid()
-                        .color(0xab6527)
-        );
+        RawHypogen = new Material.Builder(GregitasCore.id("raw_hypogen"))
+                .fluid()
+                .color(0xab6527)
+                .buildAndRegister();
 
-        DirtyHypogen = GregitasMaterials.registerMaterial(
-                new Material.Builder("dirty_hypogen")
-                        .fluid()
-                        .color(0xc9893a)
-        );
+        DirtyHypogen = new Material.Builder(GregitasCore.id("dirty_hypogen"))
+                .fluid()
+                .color(0xc9893a)
+                .buildAndRegister();
 
-        DirtyHypogenSolution = GregitasMaterials.registerMaterial(
-                new Material.Builder("dirty_hypogen_solution")
-                        .fluid()
-                        .color(0xc9b63a)
-        );
+        DirtyHypogenSolution = new Material.Builder(GregitasCore.id("dirty_hypogen_solution"))
+                .fluid()
+                .color(0xc9b63a)
+                .buildAndRegister();
 
-        PurifiedHypogenSolution = GregitasMaterials.registerMaterial(
-                new Material.Builder("purified_hypogen_solution")
-                        .fluid()
-                        .color(0xe39714)
-        );
+        PurifiedHypogenSolution = new Material.Builder(GregitasCore.id("purified_hypogen_solution"))
+                .fluid()
+                .color(0xe39714)
+                .buildAndRegister();
 
-        ImpureHypogenSolution = GregitasMaterials.registerMaterial(
-                new Material.Builder("impure_hypogen_solution")
-                        .fluid()
-                        .color(0xe69e10)
-        );
+        ImpureHypogenSolution = new Material.Builder(GregitasCore.id("impure_hypogen_solution"))
+                .fluid()
+                .color(0xe69e10)
+                .buildAndRegister();
 
-        AcidicPurifiedHypogenSolution = GregitasMaterials.registerMaterial(
-                new Material.Builder("acidic_purified_hypogen_solution")
-                        .fluid()
-                        .color(0xed7e1c)
-        );
+        AcidicPurifiedHypogenSolution = new Material.Builder(GregitasCore.id("acidic_purified_hypogen_solution"))
+                .fluid()
+                .color(0xed7e1c)
+                .buildAndRegister();
 
-        AcidicImpureHypogenSolution = GregitasMaterials.registerMaterial(
-                new Material.Builder("acidic_impure_hypogen_solution")
-                        .fluid()
-                        .color(0xeda71c)
-        );
+        AcidicImpureHypogenSolution = new Material.Builder(GregitasCore.id("acidic_impure_hypogen_solution"))
+                .fluid()
+                .color(0xeda71c)
+                .buildAndRegister();
 
-        WeaponsGradeHypogenSolution = GregitasMaterials.registerMaterial(
-                new Material.Builder("weapons_grade_hypogen_solution")
-                        .fluid()
-                        .color(0xe33714)
-        );
+        WeaponsGradeHypogenSolution = new Material.Builder(GregitasCore.id("weapons_grade_hypogen_solution"))
+                .fluid()
+                .color(0xe33714)
+                .buildAndRegister();
 
-        PurifiedHypogenWaste = GregitasMaterials.registerMaterial(
-                new Material.Builder("purified_hypogen_waste")
-                        .fluid()
-                        .color(0xede20c)
-        );
+        PurifiedHypogenWaste = new Material.Builder(GregitasCore.id("purified_hypogen_waste"))
+                .fluid()
+                .color(0xede20c)
+                .buildAndRegister();
 
-        ImpureHypogenWaste = GregitasMaterials.registerMaterial(
-                new Material.Builder("impure_hypogen_waste")
-                        .fluid()
-                        .color(0xd8ed1c)
-        );
+        ImpureHypogenWaste = new Material.Builder(GregitasCore.id("impure_hypogen_waste"))
+                .fluid()
+                .color(0xd8ed1c)
+                .buildAndRegister();
 
 
-        InfinityMatterPrecursor = GregitasMaterials.registerMaterial(
-                new Material.Builder("infinity_matter_precursor")
-                        .fluid()
-                        .color(0xe39e14)
-        );
+        InfinityMatterPrecursor = new Material.Builder(GregitasCore.id("infinity_matter_precursor"))
+                .fluid()
+                .color(0xe39e14)
+                .buildAndRegister();
 
-        ImpureInfinityMatter = GregitasMaterials.registerMaterial(
-                new Material.Builder("impure_infinity_matter")
-                        .plasma()
-                        .color(0xdcebbe)
-        );
+        ImpureInfinityMatter = new Material.Builder(GregitasCore.id("impure_infinity_matter"))
+                .plasma()
+                .color(0xdcebbe)
+                .buildAndRegister();
 
-        ReactiveInfinityMatter = GregitasMaterials.registerMaterial(
-                new Material.Builder("reactive_infinity_matter")
-                        .fluid()
-                        .color(0xbeebe0)
-        );
+        ReactiveInfinityMatter = new Material.Builder(GregitasCore.id("reactive_infinity_matter"))
+                .fluid()
+                .color(0xbeebe0)
+                .buildAndRegister();
 
-        SpacetimeJunk = GregitasMaterials.registerMaterial(
-                new Material.Builder("spacetime_junk")
-                        .dust()
-                        .color(0x734b6c)
-        );
+        SpacetimeJunk = new Material.Builder(GregitasCore.id("spacetime_junk"))
+                .dust()
+                .color(0x734b6c)
+                .buildAndRegister();
 
-        Igneous = GregitasMaterials.registerMaterial(
-                new Material.Builder("igneous")
-                        .dust()
-                        .color(0xbebebe)
-        );
+        Igneous = new Material.Builder(GregitasCore.id("igneous"))
+                .dust()
+                .color(0xbebebe)
+                .buildAndRegister();
 
-        BioMedium = GregitasMaterials.registerMaterial(
-                new Material.Builder("bio_medium")
-                        .fluid()
-                        .color(0xb5ba54)
-        );
+        BioMedium = new Material.Builder(GregitasCore.id("bio_medium"))
+                .fluid()
+                .color(0xb5ba54)
+                .buildAndRegister();
 
-        Sculk = GregitasMaterials.registerMaterial(
-                new Material.Builder("sculk")
-                        .fluid().dust()
-                        .color(0x111b21).secondaryColor(0x009295)
-                        .iconSet(MaterialIconSet.SHINY)
-        );
+        Sculk = new Material.Builder(GregitasCore.id("sculk"))
+                .fluid().dust()
+                .color(0x111b21).secondaryColor(0x009295)
+                .iconSet(MaterialIconSet.SHINY)
+                .buildAndRegister();
 
     }
 }

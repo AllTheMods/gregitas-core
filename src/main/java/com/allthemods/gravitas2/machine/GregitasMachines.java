@@ -4,6 +4,7 @@ import com.allthemods.gravitas2.machine.multiblock.part.PressureHatchPartMachine
 import com.allthemods.gravitas2.recipe.type.GregitasRecipeTypes;
 import com.allthemods.gravitas2.util.GregitasConstants;
 import com.gregtechceu.gtceu.GTCEu;
+import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability;
 import com.gregtechceu.gtceu.api.data.RotationState;
@@ -39,10 +40,10 @@ import static com.gregtechceu.gtceu.utils.FormattingUtil.toEnglishName;
 public class GregitasMachines {
     public static final PartAbility PRESSURE_CONTAINER = new PartAbility("pressure_container");
 
-    public final static int[] ELECTRIC_TIERS = GTCEu.isHighTier() ?
+    public final static int[] ELECTRIC_TIERS = GTCEuAPI.isHighTier() ?
             new int[] {GTValues.LV, GTValues.MV, GTValues.HV, GTValues.EV, GTValues.IV, GTValues.LuV, GTValues.ZPM, GTValues.UV, GTValues.UHV, GTValues.UEV, GTValues.UIV, GTValues.UXV, GTValues.OpV} :
             new int[] {GTValues.LV, GTValues.MV, GTValues.HV, GTValues.EV, GTValues.IV, GTValues.LuV, GTValues.ZPM, GTValues.UV};
-    public final static int[] HIGH_TIERS = GTCEu.isHighTier() ?
+    public final static int[] HIGH_TIERS = GTCEuAPI.isHighTier() ?
             new int[] {GTValues.IV, GTValues.LuV, GTValues.ZPM, GTValues.UV, GTValues.UHV, GTValues.UEV, GTValues.UIV, GTValues.UXV, GTValues.OpV} :
             new int[] {GTValues.IV, GTValues.LuV, GTValues.ZPM, GTValues.UV, GTValues.UHV};
     public static final Int2LongFunction defaultTankSizeFunction = tier -> (tier <= GTValues.LV ? 8 : tier == GTValues.MV ? 12 : tier == GTValues.HV ? 16 : tier == GTValues.EV ? 32 : 64) * FluidHelper.getBucket();
