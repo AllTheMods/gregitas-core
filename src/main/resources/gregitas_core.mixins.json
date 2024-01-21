@@ -14,7 +14,10 @@
     "RailwaysModEnumMixin",
     "RailwaysModSetupMixin",
     "TagPrefixOreTypeAccessor",
-    "AqueductBlockMixin"
+    "AqueductBlockMixin",
+    "WorldGenCyclopsCaveMixin",
+    "WorldGenDragonRoostsMixin",
+    "WorldGenDragonCaveMixin"
   ],
   "client": [
   ],

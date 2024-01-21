@@ -162,7 +162,8 @@ dependencies {
     modRuntimeOnly("com.jozufozu.flywheel:flywheel-forge-1.20.1:0.6.10-7")
     modRuntimeOnly("com.simibubi.create:create-1.20.1:0.5.1.f-26:all") { transitive = false }
     modImplementation("blank:Steam_Rails-1.5.3+forge-mc1.20.1") // fixed Accessor
-    // modImplementation("com.railwayteam.railways:Steam_Rails-forge-1.20.1:1.5.3+forge-mc1.20.1")  { transitive = false } // Does not work, mixin parse bug
+    modImplementation("curse.maven:ice-and-fire-dragons-264231:5037783")
+    modImplementation("curse.maven:citadel-331936:4848887")
 
     modRuntimeOnly("vazkii.patchouli:Patchouli:${project.minecraft_version}-${project.patchouli_version}-FORGE")
     modRuntimeOnly("top.theillusivec4.curios:curios-forge:${project.curios_version}+${project.minecraft_version}")
