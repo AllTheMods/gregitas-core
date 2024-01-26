@@ -11,6 +11,7 @@ import com.allthemods.gravitas2.recipe.capability.GregitasRecipeCapabilities;
 import com.allthemods.gravitas2.recipe.type.GregitasRecipeTypes;
 import com.allthemods.gravitas2.registry.GregitasRegistry;
 import com.allthemods.gravitas2.util.GregitasUtil;
+import com.allthemods.gravitas2.util.IAFEntityMap;
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.block.ActiveBlock;
@@ -36,17 +37,31 @@ import com.lumintorious.tfcambiental.modifier.TempModifier;
 import com.tterrag.registrate.providers.ProviderType;
 import dev.ftb.mods.ftbchunks.api.FTBChunksAPI;
 import dev.ftb.mods.ftblibrary.math.ChunkDimPos;
+import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.KoppenClimateClassification;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.TickTask;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.animal.Sheep;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
+import net.minecraftforge.common.util.LogicalSidedProvider;
 import net.minecraftforge.event.entity.EntityEvent.EnteringSection;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.living.MobSpawnEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -181,4 +196,38 @@ public class GregitasCore {
     public void registerElements(GTCEuAPI.RegisterEvent<String, Element> event) {
         GregitasElements.init();
     }
-}
+
+
+    @SubscribeEvent
+    public void initSpawnData(ServerStartingEvent event){
+        IAFEntityMap.init();
+    }
+    @SubscribeEvent
+    public void spawnCheck(EntityJoinLevelEvent event) {
+        if(event.loadedFromDisk()) { return; }
+        if(event.getEntity() instanceof Sheep){ event.getEntity().kill(); event.getEntity().remove(Entity.RemovalReason.KILLED); }
+        if(!IAFEntityMap.spawnList.containsKey(event.getEntity().getType())) { return; }
+            var executor = LogicalSidedProvider.WORKQUEUE.get(LogicalSide.SERVER);
+            executor.tell(new TickTask(0, () -> {
+                LOGGER.info("Entering ENTITY CHECK *************************************************");
+                Entity entity = event.getEntity();
+                EntityType<?> entityType = entity.getType();
+                BlockPos pos = event.getEntity().getOnPos();
+                float avgTemp = Climate.getAverageTemperature(event.getLevel(), pos);
+                float rainfall = Climate.getRainfall(event.getLevel(), pos);
+
+                KoppenClimateClassification climate = IAFEntityMap.spawnList.get(entityType);
+                KoppenClimateClassification local = KoppenClimateClassification.classify(avgTemp, rainfall);
+                LOGGER.info("Entity " + entityType.getDescriptionId() + " " + climate.name() + " " + local.name());
+                if (climate != local) {
+                    entity.discard();
+                    entity.remove(Entity.RemovalReason.DISCARDED);
+                    LOGGER.info(" Entity " + entityType.getDescriptionId() + " blocked");
+                    event.setCanceled(true);
+                }
+            }));
+        }
+
+    }
+
+
