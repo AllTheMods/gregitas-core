@@ -33,7 +33,9 @@ import com.tterrag.registrate.providers.ProviderType;
 import dev.ftb.mods.ftbchunks.api.FTBChunksAPI;
 import dev.ftb.mods.ftblibrary.math.ChunkDimPos;
 import net.dries007.tfc.world.TFCChunkGenerator;
+import net.dries007.tfc.world.chunkdata.ChunkData;
 import net.dries007.tfc.world.chunkdata.ChunkDataGenerator;
+import net.dries007.tfc.world.chunkdata.ChunkDataProvider;
 import net.dries007.tfc.world.chunkdata.LerpFloatLayer;
 import net.dries007.tfc.world.region.Region;
 import net.dries007.tfc.world.region.RegionGenerator;
@@ -49,6 +51,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.XoroshiroRandomSource;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
@@ -201,51 +205,32 @@ public class GregitasCore {
     @SubscribeEvent
     public void spawnCheck(MobSpawnEvent.FinalizeSpawn event) {
         if (!IAFEntityMap.spawnList.containsKey(event.getEntity().getType())) return;
+        if (!(event.getLevel().getLevel().dimension() == Level.OVERWORLD)) return;
         LOGGER.info("Entering ENTITY CHECK *************************************************");
         var start = Util.getNanos();
-        if (event.getLevel().getChunkSource() instanceof ServerChunkCache scc){
-            if (scc.getGenerator() instanceof TFCChunkGenerator chunkGenerator){
-                var regionGenerator = new RegionGenerator(chunkGenerator.settings(), new XoroshiroRandomSource(event.getLevel().getLevel().getSeed()));
-                BlockPos pos = new BlockPos((int) event.getX(), (int) event.getY(), (int) event.getZ());
-                var tempAndRainfall = getTempAndRainfall(regionGenerator, pos);
-                LOGGER.info("Got climate values *************************************************");
-                EntityType<?> entityType = event.getEntity().getType();
-                var climateTest = IAFEntityMap.spawnList.get(entityType);
-                if (!climateTest.test(tempAndRainfall)) {
-                    event.setSpawnCancelled(true);
-                    event.setCanceled(true);
-                    LOGGER.info(" Entity " + entityType.getDescriptionId() + " blocked! " + Arrays.toString(tempAndRainfall));
-                    LOGGER.info("This process took " + Math.floor((double) (Util.getNanos() - start) /1000) + " µs.");
-                } else {
-                    LOGGER.info("Entity " + entityType.getDescriptionId() + " allowed! " + Arrays.toString(tempAndRainfall));
-                    LOGGER.info("This process took " + Math.floor((double) (Util.getNanos() - start) /1000) + " µs.");
-                    MutableComponent component = ComponentUtils.wrapInSquareBrackets(Component.translatable("chat.coordinates", pos.getX(), pos.getY(), pos.getZ())).withStyle(text -> text.withColor(ChatFormatting.GREEN).withClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/tp @s " + pos.getX() + " " + pos.getY() + " " + pos.getZ())).withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.translatable("chat.coordinates.tooltip"))));
-                    event.getLevel().getLevel().players().forEach(player -> player.sendSystemMessage(Component.translatable("Located entity %s at coordinate %s", event.getEntity().getDisplayName(), component)));
-                }
+        if (event.getLevel() instanceof WorldGenLevel wgl){
+            BlockPos pos = new BlockPos((int) event.getX(), (int) event.getY(), (int) event.getZ());
+            ChunkDataProvider provider = ChunkDataProvider.get(wgl);
+            ChunkData data = provider.get(wgl, pos);
+            float rainfall = data.getRainfall(pos);
+            float avgAnnualTemperature = data.getAverageTemp(pos);
+            LOGGER.info("Got climate values *************************************************");
+            EntityType<?> entityType = event.getEntity().getType();
+            var climateTest = IAFEntityMap.spawnList.get(entityType);
+            var tempAndRainfall = new float[]{avgAnnualTemperature, rainfall};
+            if (!climateTest.test(tempAndRainfall)) {
+                event.setSpawnCancelled(true);
+                event.setCanceled(true);
+                LOGGER.info(" Entity " + entityType.getDescriptionId() + " blocked! " + Arrays.toString(tempAndRainfall));
+                LOGGER.info("This process took " + Math.floor((double) (Util.getNanos() - start) /1000) + " µs.");
+            } else {
+                LOGGER.info("Entity " + entityType.getDescriptionId() + " allowed! " + Arrays.toString(tempAndRainfall));
+                LOGGER.info("This process took " + Math.floor((double) (Util.getNanos() - start) /1000) + " µs.");
+                MutableComponent component = ComponentUtils.wrapInSquareBrackets(Component.translatable("chat.coordinates", pos.getX(), pos.getY(), pos.getZ())).withStyle(text -> text.withColor(ChatFormatting.GREEN).withClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/tp @s " + pos.getX() + " " + pos.getY() + " " + pos.getZ())).withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.translatable("chat.coordinates.tooltip"))));
+                wgl.getLevel().players().forEach(player -> player.sendSystemMessage(Component.translatable("Located entity %s at coordinate %s", event.getEntity().getDisplayName(), component)));
             }
+
         }
-    }
-
-    private float[] getTempAndRainfall(RegionGenerator regionGenerator, BlockPos pos){
-        final ChunkPos chunkPos = new ChunkPos(pos);
-        final int blockX = chunkPos.getMinBlockX(), blockZ = chunkPos.getMinBlockZ();
-
-        final int gridX = Units.blockToGrid(blockX);
-        final int gridZ = Units.blockToGrid(blockZ);
-
-        final Region.Point point00 = regionGenerator.getOrCreateRegionPoint(gridX, gridZ);
-        final Region.Point point01 = regionGenerator.getOrCreateRegionPoint(gridX, gridZ + 1);
-        final Region.Point point10 = regionGenerator.getOrCreateRegionPoint(gridX + 1, gridZ);
-        final Region.Point point11 = regionGenerator.getOrCreateRegionPoint(gridX + 1, gridZ + 1);
-
-        final double deltaX = Units.blockToGridExact(blockX) - gridX;
-        final double deltaZ = Units.blockToGridExact(blockZ) - gridZ;
-
-        final LerpFloatLayer rainfallLayer = ChunkDataGenerator.sampleInterpolatedGridLayer(point00.rainfall, point01.rainfall, point10.rainfall, point11.rainfall, deltaX, deltaZ);
-        final LerpFloatLayer temperatureLayer = ChunkDataGenerator.sampleInterpolatedGridLayer(point00.temperature, point01.temperature, point10.temperature, point11.temperature, deltaX, deltaZ);
-        final float temp = temperatureLayer.getValue((pos.getZ() & 15) / 16f, (pos.getX() & 15) / 16f);
-        final float rainfall = rainfallLayer.getValue((pos.getX() & 15) / 16f, (pos.getZ() & 15) / 16f);
-        return new float[]{temp, rainfall};
     }
 }
 
