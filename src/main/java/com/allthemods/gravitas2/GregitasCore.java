@@ -25,43 +25,38 @@ import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.machine.feature.IRecipeLogicMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.CleanroomType;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
-import com.gregtechceu.gtceu.common.CommonProxy;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
-import com.gregtechceu.gtceu.common.data.GTMaterials;
-import com.gregtechceu.gtceu.common.unification.material.MaterialRegistryManager;
 import com.gregtechceu.gtceu.config.ConfigHolder;
-import com.gregtechceu.gtceu.data.lang.MaterialLangGenerator;
-import com.lowdragmc.lowdraglib.Platform;
 import com.lumintorious.tfcambiental.api.AmbientalRegistry;
 import com.lumintorious.tfcambiental.modifier.TempModifier;
 import com.tterrag.registrate.providers.ProviderType;
 import dev.ftb.mods.ftbchunks.api.FTBChunksAPI;
 import dev.ftb.mods.ftblibrary.math.ChunkDimPos;
-import net.dries007.tfc.util.climate.Climate;
-import net.dries007.tfc.util.climate.KoppenClimateClassification;
+import net.dries007.tfc.world.TFCChunkGenerator;
+import net.dries007.tfc.world.chunkdata.ChunkDataGenerator;
+import net.dries007.tfc.world.chunkdata.LerpFloatLayer;
+import net.dries007.tfc.world.region.Region;
+import net.dries007.tfc.world.region.RegionGenerator;
+import net.dries007.tfc.world.region.Units;
 import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.TickTask;
+import net.minecraft.server.level.ServerChunkCache;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.levelgen.XoroshiroRandomSource;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
-import net.minecraftforge.common.util.LogicalSidedProvider;
 import net.minecraftforge.event.entity.EntityEvent.EnteringSection;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -69,6 +64,7 @@ import net.minecraftforge.registries.MissingMappingsEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 @Mod(GregitasCore.MOD_ID)
@@ -203,31 +199,54 @@ public class GregitasCore {
         IAFEntityMap.init();
     }
     @SubscribeEvent
-    public void spawnCheck(EntityJoinLevelEvent event) {
-        if(event.loadedFromDisk()) { return; }
-        if(event.getEntity() instanceof Sheep){ event.getEntity().kill(); event.getEntity().remove(Entity.RemovalReason.KILLED); }
-        if(!IAFEntityMap.spawnList.containsKey(event.getEntity().getType())) { return; }
-            var executor = LogicalSidedProvider.WORKQUEUE.get(LogicalSide.SERVER);
-            executor.tell(new TickTask(0, () -> {
-                LOGGER.info("Entering ENTITY CHECK *************************************************");
-                Entity entity = event.getEntity();
-                EntityType<?> entityType = entity.getType();
-                BlockPos pos = event.getEntity().getOnPos();
-                float avgTemp = Climate.getAverageTemperature(event.getLevel(), pos);
-                float rainfall = Climate.getRainfall(event.getLevel(), pos);
-
-                KoppenClimateClassification climate = IAFEntityMap.spawnList.get(entityType);
-                KoppenClimateClassification local = KoppenClimateClassification.classify(avgTemp, rainfall);
-                LOGGER.info("Entity " + entityType.getDescriptionId() + " " + climate.name() + " " + local.name());
-                if (climate != local) {
-                    entity.discard();
-                    entity.remove(Entity.RemovalReason.DISCARDED);
-                    LOGGER.info(" Entity " + entityType.getDescriptionId() + " blocked");
+    public void spawnCheck(MobSpawnEvent.FinalizeSpawn event) {
+        if (!IAFEntityMap.spawnList.containsKey(event.getEntity().getType())) return;
+        LOGGER.info("Entering ENTITY CHECK *************************************************");
+        var start = Util.getNanos();
+        if (event.getLevel().getChunkSource() instanceof ServerChunkCache scc){
+            if (scc.getGenerator() instanceof TFCChunkGenerator chunkGenerator){
+                var regionGenerator = new RegionGenerator(chunkGenerator.settings(), new XoroshiroRandomSource(event.getLevel().getLevel().getSeed()));
+                BlockPos pos = new BlockPos((int) event.getX(), (int) event.getY(), (int) event.getZ());
+                var tempAndRainfall = getTempAndRainfall(regionGenerator, pos);
+                LOGGER.info("Got climate values *************************************************");
+                EntityType<?> entityType = event.getEntity().getType();
+                var climateTest = IAFEntityMap.spawnList.get(entityType);
+                if (!climateTest.test(tempAndRainfall)) {
+                    event.setSpawnCancelled(true);
                     event.setCanceled(true);
+                    LOGGER.info(" Entity " + entityType.getDescriptionId() + " blocked! " + Arrays.toString(tempAndRainfall));
+                    LOGGER.info("This process took " + Math.floor((double) (Util.getNanos() - start) /1000) + " µs.");
+                } else {
+                    LOGGER.info("Entity " + entityType.getDescriptionId() + " allowed! " + Arrays.toString(tempAndRainfall));
+                    LOGGER.info("This process took " + Math.floor((double) (Util.getNanos() - start) /1000) + " µs.");
+                    MutableComponent component = ComponentUtils.wrapInSquareBrackets(Component.translatable("chat.coordinates", pos.getX(), pos.getY(), pos.getZ())).withStyle(text -> text.withColor(ChatFormatting.GREEN).withClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/tp @s " + pos.getX() + " " + pos.getY() + " " + pos.getZ())).withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.translatable("chat.coordinates.tooltip"))));
+                    event.getLevel().getLevel().players().forEach(player -> player.sendSystemMessage(Component.translatable("Located entity %s at coordinate %s", event.getEntity().getDisplayName(), component)));
                 }
-            }));
+            }
         }
-
     }
+
+    private float[] getTempAndRainfall(RegionGenerator regionGenerator, BlockPos pos){
+        final ChunkPos chunkPos = new ChunkPos(pos);
+        final int blockX = chunkPos.getMinBlockX(), blockZ = chunkPos.getMinBlockZ();
+
+        final int gridX = Units.blockToGrid(blockX);
+        final int gridZ = Units.blockToGrid(blockZ);
+
+        final Region.Point point00 = regionGenerator.getOrCreateRegionPoint(gridX, gridZ);
+        final Region.Point point01 = regionGenerator.getOrCreateRegionPoint(gridX, gridZ + 1);
+        final Region.Point point10 = regionGenerator.getOrCreateRegionPoint(gridX + 1, gridZ);
+        final Region.Point point11 = regionGenerator.getOrCreateRegionPoint(gridX + 1, gridZ + 1);
+
+        final double deltaX = Units.blockToGridExact(blockX) - gridX;
+        final double deltaZ = Units.blockToGridExact(blockZ) - gridZ;
+
+        final LerpFloatLayer rainfallLayer = ChunkDataGenerator.sampleInterpolatedGridLayer(point00.rainfall, point01.rainfall, point10.rainfall, point11.rainfall, deltaX, deltaZ);
+        final LerpFloatLayer temperatureLayer = ChunkDataGenerator.sampleInterpolatedGridLayer(point00.temperature, point01.temperature, point10.temperature, point11.temperature, deltaX, deltaZ);
+        final float temp = temperatureLayer.getValue((pos.getZ() & 15) / 16f, (pos.getX() & 15) / 16f);
+        final float rainfall = rainfallLayer.getValue((pos.getX() & 15) / 16f, (pos.getZ() & 15) / 16f);
+        return new float[]{temp, rainfall};
+    }
+}
 
 
