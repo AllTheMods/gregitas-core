@@ -77,14 +77,12 @@ public abstract class WorldGenDragonCaveMixin extends Feature<NoneFeatureConfigu
         var climateTest = IAFEntityMap.dragonList.get(DRAGONTYPE);
         var tempAndRainfall = new float[]{avgAnnualTemperature, rainfall};
         if (!climateTest.test(tempAndRainfall)) {
-            GregitasCore.LOGGER.info("Blocked :" + DRAGONTYPE.getDescription() + " at: " + pos);
             return false;
         }
         if (rand.nextInt(IafConfig.generateDragonDenChance) == 0 && IafWorldRegistry.isFarEnoughFromSpawn(worldIn, context.origin()) && IafWorldRegistry.isFarEnoughFromDangerousGen(worldIn, pos, this.getId(), this.getFeatureType())) {
             this.isMale = rand.nextBoolean();
             ChunkPos chunkPos = worldIn.getChunk(context.origin()).getPos();
             int j = 40;
-
             int dragonAge;
             int radius;
             for (dragonAge = 0; dragonAge < 20; ++dragonAge) {
@@ -92,17 +90,15 @@ public abstract class WorldGenDragonCaveMixin extends Feature<NoneFeatureConfigu
                     j = Math.min(j, worldIn.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, context.origin().getX() + dragonAge, context.origin().getZ() + radius));
                 }
             }
-
             j -= 20;
             j -= rand.nextInt(30);
-
             pos = new BlockPos((chunkPos.x << 4) + 8, j, (chunkPos.z << 4) + 8);
             dragonAge = 75 + rand.nextInt(50);
             radius = (int) ((float) dragonAge * 0.2F) + rand.nextInt(4);
             this.generateCave(worldIn, radius, 3, pos, rand);
             var dragon = this.createDragon(worldIn, rand, pos, dragonAge);
             worldIn.addFreshEntity(dragon);
-            GregitasCore.LOGGER.info("DRAGON CAVE GENERATED" + context.origin() + " " + DRAGONTYPE.toString());
+            
         }
         return true;
     }

@@ -201,7 +201,6 @@ public class GregitasCore {
         if (!IAFEntityMap.spawnList.containsKey(event.getEntity().getType())) return;
         if(event.getEntity() instanceof Sheep){ event.getEntity().discard(); event.getEntity().remove(Entity.RemovalReason.DISCARDED); }
         if (!(event.getLevel().getLevel().dimension() == Level.OVERWORLD)) return;
-        LOGGER.info("Entering ENTITY CHECK *************************************************");
         var start = Util.getNanos();
         if (event.getLevel() instanceof WorldGenLevel wgl){
             BlockPos pos = new BlockPos((int) event.getX(), (int) event.getY(), (int) event.getZ());
@@ -209,20 +208,14 @@ public class GregitasCore {
             ChunkData data = provider.get(wgl, pos);
             float rainfall = data.getRainfall(pos);
             float avgAnnualTemperature = data.getAverageTemp(pos);
-            LOGGER.info("Got climate values *************************************************");
             EntityType<?> entityType = event.getEntity().getType();
             var climateTest = IAFEntityMap.spawnList.get(entityType);
             var tempAndRainfall = new float[]{avgAnnualTemperature, rainfall};
             if (!climateTest.test(tempAndRainfall)) {
                 event.setSpawnCancelled(true);
                 event.setCanceled(true);
-                LOGGER.info(" Entity " + entityType.getDescriptionId() + " blocked! " + Arrays.toString(tempAndRainfall));
-                LOGGER.info("This process took " + Math.floor((double) (Util.getNanos() - start) /1000) + " µs.");
+
             } else {
-                LOGGER.info("Entity " + entityType.getDescriptionId() + " allowed! " + Arrays.toString(tempAndRainfall));
-                LOGGER.info("This process took " + Math.floor((double) (Util.getNanos() - start) /1000) + " µs.");
-                //MutableComponent component = ComponentUtils.wrapInSquareBrackets(Component.translatable("chat.coordinates", pos.getX(), pos.getY(), pos.getZ())).withStyle(text -> text.withColor(ChatFormatting.GREEN).withClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/tp @s " + pos.getX() + " " + pos.getY() + " " + pos.getZ())).withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.translatable("chat.coordinates.tooltip"))));
-               // wgl.getLevel().players().forEach(player -> player.sendSystemMessage(Component.translatable("Located entity %s at coordinate %s", event.getEntity().getDisplayName(), component)));
             }
 
         }
