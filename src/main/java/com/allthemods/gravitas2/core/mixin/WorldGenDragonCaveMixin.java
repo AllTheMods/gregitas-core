@@ -1,6 +1,7 @@
 package com.allthemods.gravitas2.core.mixin;
 
 import com.allthemods.gravitas2.GregitasCore;
+import com.allthemods.gravitas2.util.IAFEntityMap;
 import com.github.alexthe666.iceandfire.IafConfig;
 import com.github.alexthe666.iceandfire.entity.*;
 import com.github.alexthe666.iceandfire.world.IafWorldRegistry;
@@ -12,6 +13,8 @@ import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.blocks.rock.Rock;
 import net.dries007.tfc.util.climate.Climate;
 import net.dries007.tfc.util.climate.KoppenClimateClassification;
+import net.dries007.tfc.world.chunkdata.ChunkData;
+import net.dries007.tfc.world.chunkdata.ChunkDataProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.TickTask;
 import net.minecraft.util.RandomSource;
@@ -61,55 +64,51 @@ public abstract class WorldGenDragonCaveMixin extends Feature<NoneFeatureConfigu
      * @author thevortex
      * @reason
      */
-   /* @Overwrite
+    @Overwrite
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
         EntityType<? extends EntityDragonBase> DRAGONTYPE = this.getDragonType();
         WorldGenLevel worldIn = context.level();
         RandomSource rand = context.random();
-        BlockPos position = context.origin();
-        float avgTemp = Climate.getAverageTemperature(worldIn.getLevel(), position);
-        float rainfall = Climate.getRainfall(worldIn.getLevel(), position);
-        var executor = LogicalSidedProvider.WORKQUEUE.get(LogicalSide.SERVER);
-        executor.executeIfPossible(new TickTask(0, () -> {
-
-
-        if ((DRAGONTYPE == FIREDRAGON) && (KoppenClimateClassification.classify(avgTemp, rainfall) != KoppenClimateClassification.TROPICAL_RAINFOREST)) {
-            return;
+        BlockPos pos = context.origin();
+        ChunkDataProvider provider = ChunkDataProvider.get(worldIn);
+        ChunkData data = provider.get(worldIn, pos);
+        float rainfall = data.getRainfall(pos);
+        float avgAnnualTemperature = data.getAverageTemp(pos);
+        var climateTest = IAFEntityMap.dragonList.get(DRAGONTYPE);
+        var tempAndRainfall = new float[]{avgAnnualTemperature, rainfall};
+        if (!climateTest.test(tempAndRainfall)) {
+            GregitasCore.LOGGER.info("Blocked :" + DRAGONTYPE.getDescription() + " at: " + pos);
+            return false;
         }
-        if ((DRAGONTYPE == ICEDRAGON) && (KoppenClimateClassification.classify(avgTemp, rainfall) != KoppenClimateClassification.ARCTIC)) {
-            return;
-        }
-        if ((DRAGONTYPE == LIGHTNINGDRAGON) && (KoppenClimateClassification.classify(avgTemp, rainfall) != KoppenClimateClassification.HOT_DESERT)) {
-            return;
-        }
+        if (rand.nextInt(IafConfig.generateDragonDenChance) == 0 && IafWorldRegistry.isFarEnoughFromSpawn(worldIn, context.origin()) && IafWorldRegistry.isFarEnoughFromDangerousGen(worldIn, pos, this.getId(), this.getFeatureType())) {
+            this.isMale = rand.nextBoolean();
+            ChunkPos chunkPos = worldIn.getChunk(context.origin()).getPos();
+            int j = 40;
 
-            if (rand.nextInt(IafConfig.generateDragonDenChance) == 0 && IafWorldRegistry.isFarEnoughFromSpawn(worldIn, context.origin()) && IafWorldRegistry.isFarEnoughFromDangerousGen(worldIn, position, this.getId(), this.getFeatureType())) {
-                this.isMale = rand.nextBoolean();
-                ChunkPos chunkPos = worldIn.getChunk(context.origin()).getPos();
-                int j = 40;
-
-                int dragonAge;
-                int radius;
-                for (dragonAge = 0; dragonAge < 20; ++dragonAge) {
-                    for (radius = 0; radius < 20; ++radius) {
-                        j = Math.min(j, worldIn.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, context.origin().getX() + dragonAge, context.origin().getZ() + radius));
-                    }
+            int dragonAge;
+            int radius;
+            for (dragonAge = 0; dragonAge < 20; ++dragonAge) {
+                for (radius = 0; radius < 20; ++radius) {
+                    j = Math.min(j, worldIn.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, context.origin().getX() + dragonAge, context.origin().getZ() + radius));
                 }
-
-                j -= 20;
-                j -= rand.nextInt(30);
-
-                BlockPos pos = new BlockPos((chunkPos.x << 4) + 8, j, (chunkPos.z << 4) + 8);
-                dragonAge = 75 + rand.nextInt(50);
-                radius = (int) ((float) dragonAge * 0.2F) + rand.nextInt(4);
-                this.generateCave(worldIn, radius, 3, pos, rand);
-                EntityDragonBase dragon = this.createDragon(worldIn, rand, pos, dragonAge);
-                worldIn.addFreshEntity(dragon);
-                GregitasCore.LOGGER.info("DRAGON CAVE GENERATED" + context.origin() + " " + DRAGONTYPE.toString());
             }
-        }));
+
+            j -= 20;
+            j -= rand.nextInt(30);
+
+            pos = new BlockPos((chunkPos.x << 4) + 8, j, (chunkPos.z << 4) + 8);
+            dragonAge = 75 + rand.nextInt(50);
+            radius = (int) ((float) dragonAge * 0.2F) + rand.nextInt(4);
+            this.generateCave(worldIn, radius, 3, pos, rand);
+            var dragon = this.createDragon(worldIn, rand, pos, dragonAge);
+            worldIn.addFreshEntity(dragon);
+            GregitasCore.LOGGER.info("DRAGON CAVE GENERATED" + context.origin() + " " + DRAGONTYPE.toString());
+        }
         return true;
     }
+
+
+
     /**
      * @author thevortex
      * @reason

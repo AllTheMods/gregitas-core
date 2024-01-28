@@ -42,13 +42,16 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityEvent.EnteringSection;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
+import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -190,12 +193,13 @@ public class GregitasCore {
 
 
     @SubscribeEvent
-    public void initSpawnData(ServerStartingEvent event){
+    public void initSpawnData(ServerAboutToStartEvent event){
         IAFEntityMap.init();
     }
     @SubscribeEvent
     public void spawnCheck(MobSpawnEvent.FinalizeSpawn event) {
         if (!IAFEntityMap.spawnList.containsKey(event.getEntity().getType())) return;
+        if(event.getEntity() instanceof Sheep){ event.getEntity().discard(); event.getEntity().remove(Entity.RemovalReason.DISCARDED); }
         if (!(event.getLevel().getLevel().dimension() == Level.OVERWORLD)) return;
         LOGGER.info("Entering ENTITY CHECK *************************************************");
         var start = Util.getNanos();
@@ -217,8 +221,8 @@ public class GregitasCore {
             } else {
                 LOGGER.info("Entity " + entityType.getDescriptionId() + " allowed! " + Arrays.toString(tempAndRainfall));
                 LOGGER.info("This process took " + Math.floor((double) (Util.getNanos() - start) /1000) + " µs.");
-                MutableComponent component = ComponentUtils.wrapInSquareBrackets(Component.translatable("chat.coordinates", pos.getX(), pos.getY(), pos.getZ())).withStyle(text -> text.withColor(ChatFormatting.GREEN).withClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/tp @s " + pos.getX() + " " + pos.getY() + " " + pos.getZ())).withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.translatable("chat.coordinates.tooltip"))));
-                wgl.getLevel().players().forEach(player -> player.sendSystemMessage(Component.translatable("Located entity %s at coordinate %s", event.getEntity().getDisplayName(), component)));
+                //MutableComponent component = ComponentUtils.wrapInSquareBrackets(Component.translatable("chat.coordinates", pos.getX(), pos.getY(), pos.getZ())).withStyle(text -> text.withColor(ChatFormatting.GREEN).withClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/tp @s " + pos.getX() + " " + pos.getY() + " " + pos.getZ())).withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.translatable("chat.coordinates.tooltip"))));
+               // wgl.getLevel().players().forEach(player -> player.sendSystemMessage(Component.translatable("Located entity %s at coordinate %s", event.getEntity().getDisplayName(), component)));
             }
 
         }
