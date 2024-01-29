@@ -23,7 +23,7 @@ public class IAFEntityMap {
         spawnList.put(IafEntityRegistry.AMPHITHERE.get(), tempAndRainfall -> tempAndRainfall[0] >= 4 && tempAndRainfall[1] < 150); // HOT DESERT+
 
         dragonList.put(IafEntityRegistry.ICE_DRAGON.get(),tempAndRainfall -> tempAndRainfall[0] <= 4 && tempAndRainfall[1] < 400);
-        dragonList.put(IafEntityRegistry.FIRE_DRAGON.get(),tempAndRainfall -> tempAndRainfall[0] >= 25 && tempAndRainfall[1] > 175);
-        dragonList.put(IafEntityRegistry.LIGHTNING_DRAGON.get(),tempAndRainfall -> tempAndRainfall[0] >= 20 && tempAndRainfall[1] < 150);
+        dragonList.put(IafEntityRegistry.FIRE_DRAGON.get(),tempAndRainfall -> tempAndRainfall[0] >= 15 && tempAndRainfall[1] > 300);
+        dragonList.put(IafEntityRegistry.LIGHTNING_DRAGON.get(),tempAndRainfall -> tempAndRainfall[0] >= 15 && tempAndRainfall[1] < 200);
     }
 }

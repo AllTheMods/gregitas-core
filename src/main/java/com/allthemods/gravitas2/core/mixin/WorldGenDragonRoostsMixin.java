@@ -53,10 +53,11 @@ public abstract class WorldGenDragonRoostsMixin extends Feature<NoneFeatureConfi
         ChunkData data = provider.get(worldIn, pos);
         float rainfall = data.getRainfall(pos);
         float avgAnnualTemperature = data.getAverageTemp(pos);
+
         var climateTest = IAFEntityMap.dragonList.get(DRAGONTYPE);
         var tempAndRainfall = new float[]{avgAnnualTemperature, rainfall};
         if (!climateTest.test(tempAndRainfall)) {
-            GregitasCore.LOGGER.info("Blocked :" + DRAGONTYPE.getDescription() + " at: " + pos);
+            //GregitasCore.LOGGER.info("Blocked :" + DRAGONTYPE.getDescription() + " at: " + pos);
             return false;
         }
         if (!WorldUtil.canGenerate(IafConfig.generateDragonRoostChance, context.level(), context.random(), context.origin(), this.getId(), true)) {

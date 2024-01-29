@@ -198,8 +198,8 @@ public class GregitasCore {
     }
     @SubscribeEvent
     public void spawnCheck(MobSpawnEvent.FinalizeSpawn event) {
+        if(event.getEntity() instanceof Sheep){ event.setSpawnCancelled(true); event.setCanceled(true); }
         if (!IAFEntityMap.spawnList.containsKey(event.getEntity().getType())) return;
-        if(event.getEntity() instanceof Sheep){ event.getEntity().discard(); event.getEntity().remove(Entity.RemovalReason.DISCARDED); }
         if (!(event.getLevel().getLevel().dimension() == Level.OVERWORLD)) return;
         var start = Util.getNanos();
         if (event.getLevel() instanceof WorldGenLevel wgl){
