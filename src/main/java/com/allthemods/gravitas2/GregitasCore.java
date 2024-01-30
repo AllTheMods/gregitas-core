@@ -43,6 +43,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.level.Level;
@@ -200,7 +201,7 @@ public class GregitasCore {
     }
     @SubscribeEvent
     public void spawnCheck(MobSpawnEvent.FinalizeSpawn event) {
-        if(event.getEntity() instanceof Sheep){ event.getEntity().discard(); event.setSpawnCancelled(true); event.setCanceled(true); }
+        if(event.getEntity() instanceof Sheep){ event.getEntity().discard(); event.getEntity().remove(Entity.RemovalReason.DISCARDED); event.setSpawnCancelled(true); event.setCanceled(true); }
         if (!IAFEntityMap.spawnList.containsKey(event.getEntity().getType())) return;
         if (!(event.getLevel().getLevel().dimension() == Level.OVERWORLD)) return;
         var start = Util.getNanos();
