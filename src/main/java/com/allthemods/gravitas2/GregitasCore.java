@@ -11,6 +11,7 @@ import com.allthemods.gravitas2.recipe.capability.GregitasRecipeCapabilities;
 import com.allthemods.gravitas2.recipe.type.GregitasRecipeTypes;
 import com.allthemods.gravitas2.registry.GregitasRegistry;
 import com.allthemods.gravitas2.util.GregitasUtil;
+import com.allthemods.gravitas2.util.IAFEntityMap;
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.block.ActiveBlock;
@@ -24,27 +25,34 @@ import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.machine.feature.IRecipeLogicMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.CleanroomType;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
-import com.gregtechceu.gtceu.common.CommonProxy;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
-import com.gregtechceu.gtceu.common.data.GTMaterials;
-import com.gregtechceu.gtceu.common.unification.material.MaterialRegistryManager;
 import com.gregtechceu.gtceu.config.ConfigHolder;
-import com.gregtechceu.gtceu.data.lang.MaterialLangGenerator;
-import com.lowdragmc.lowdraglib.Platform;
 import com.lumintorious.tfcambiental.api.AmbientalRegistry;
 import com.lumintorious.tfcambiental.modifier.TempModifier;
 import com.tterrag.registrate.providers.ProviderType;
 import dev.ftb.mods.ftbchunks.api.FTBChunksAPI;
 import dev.ftb.mods.ftblibrary.math.ChunkDimPos;
+import net.dries007.tfc.common.blocks.rock.AqueductBlock;
+import net.dries007.tfc.world.chunkdata.ChunkData;
+import net.dries007.tfc.world.chunkdata.ChunkDataProvider;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
+import net.minecraft.Util;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityEvent.EnteringSection;
+import net.minecraftforge.event.entity.living.MobSpawnEvent;
+import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -54,6 +62,7 @@ import net.minecraftforge.registries.MissingMappingsEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 @Mod(GregitasCore.MOD_ID)
@@ -104,6 +113,8 @@ public class GregitasCore {
         AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("naquadah_coil", 72.0F, 3.0F)).filter((mod) -> state.getBlock() == GTBlocks.COIL_NAQUADAH.get() && state.getValue(ActiveBlock.ACTIVE)));
         AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("trinium_coil", 90.0F, 3.0F)).filter((mod) -> state.getBlock() == GTBlocks.COIL_TRINIUM.get() && state.getValue(ActiveBlock.ACTIVE)));
         AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("tritanium_coil", 108.0F, 3.0F)).filter((mod) -> state.getBlock() == GTBlocks.COIL_TRITANIUM.get() && state.getValue(ActiveBlock.ACTIVE)));
+
+        AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("aqueduct_lava", 6.0F, 1.0F)).filter((mod) -> state.getBlock() instanceof AqueductBlock && state.getValue(AqueductBlock.FLUID).getFluid() == Fluids.LAVA));
 
         AmbientalRegistry.BLOCK_ENTITIES.register((player, blockEntity) -> {
             if (blockEntity instanceof IMachineBlockEntity machineBlockEntity && machineBlockEntity.getMetaMachine() instanceof IRecipeLogicMachine rlMachine) {
@@ -181,4 +192,36 @@ public class GregitasCore {
     public void registerElements(GTCEuAPI.RegisterEvent<String, Element> event) {
         GregitasElements.init();
     }
+
+
+    @SubscribeEvent
+    public void initSpawnData(ServerAboutToStartEvent event){
+        IAFEntityMap.init();
+    }
+    @SubscribeEvent
+    public void spawnCheck(MobSpawnEvent.FinalizeSpawn event) {
+        if(event.getEntity() instanceof Sheep){ event.getEntity().discard(); event.setSpawnCancelled(true); event.setCanceled(true); }
+        if (!IAFEntityMap.spawnList.containsKey(event.getEntity().getType())) return;
+        if (!(event.getLevel().getLevel().dimension() == Level.OVERWORLD)) return;
+        var start = Util.getNanos();
+        if (event.getLevel() instanceof WorldGenLevel wgl){
+            BlockPos pos = new BlockPos((int) event.getX(), (int) event.getY(), (int) event.getZ());
+            ChunkDataProvider provider = ChunkDataProvider.get(wgl);
+            ChunkData data = provider.get(wgl, pos);
+            float rainfall = data.getRainfall(pos);
+            float avgAnnualTemperature = data.getAverageTemp(pos);
+            EntityType<?> entityType = event.getEntity().getType();
+            var climateTest = IAFEntityMap.spawnList.get(entityType);
+            var tempAndRainfall = new float[]{avgAnnualTemperature, rainfall};
+            if (!climateTest.test(tempAndRainfall)) {
+                event.setSpawnCancelled(true);
+                event.setCanceled(true);
+
+            } else {
+            }
+
+        }
+    }
 }
+
+
