@@ -1,1 +1,2 @@
-- update to GTCEu 1.1.0
+- dragon deez nuts lmao
+- also structure tweaks
