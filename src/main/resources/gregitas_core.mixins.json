@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "mixins": [
+    "AqueductBlockMixin",
     "CoilWorkableElectricMultiblockMachineMixin",
     "GTMachinesMixin",
     "GTRecipeModifiersMixin",
@@ -14,10 +15,12 @@
     "RailwaysModEnumMixin",
     "RailwaysModSetupMixin",
     "TagPrefixOreTypeAccessor",
-    "AqueductBlockMixin",
     "WorldGenCyclopsCaveMixin",
+    "WorldGenDragonCaveMixin",
     "WorldGenDragonRoostsMixin",
-    "WorldGenDragonCaveMixin"
+    "WorldGenFireDragonRoostMixin",
+    "WorldGenIceDragonRoostMixin",
+    "WorldGenLightningDragonRoostMixin"
   ],
   "client": [
   ],

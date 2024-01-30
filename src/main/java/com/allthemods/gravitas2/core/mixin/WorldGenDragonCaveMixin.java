@@ -1,22 +1,16 @@
 package com.allthemods.gravitas2.core.mixin;
 
-import com.allthemods.gravitas2.GregitasCore;
 import com.allthemods.gravitas2.util.IAFEntityMap;
 import com.github.alexthe666.iceandfire.IafConfig;
 import com.github.alexthe666.iceandfire.entity.*;
 import com.github.alexthe666.iceandfire.world.IafWorldRegistry;
 import com.github.alexthe666.iceandfire.world.gen.TypedFeature;
 import com.github.alexthe666.iceandfire.world.gen.WorldGenDragonCave;
-import com.github.alexthe666.iceandfire.world.gen.WorldGenFireDragonCave;
 import com.mojang.serialization.Codec;
-import net.dries007.tfc.common.blocks.TFCBlocks;
-import net.dries007.tfc.common.blocks.rock.Rock;
-import net.dries007.tfc.util.climate.Climate;
-import net.dries007.tfc.util.climate.KoppenClimateClassification;
 import net.dries007.tfc.world.chunkdata.ChunkData;
 import net.dries007.tfc.world.chunkdata.ChunkDataProvider;
+import net.dries007.tfc.world.settings.RockSettings;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.TickTask;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.ChunkPos;
@@ -29,15 +23,9 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.minecraftforge.common.util.LogicalSidedProvider;
-import net.minecraftforge.fml.LogicalSide;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Set;
 
@@ -74,6 +62,8 @@ public abstract class WorldGenDragonCaveMixin extends Feature<NoneFeatureConfigu
         ChunkData data = provider.get(worldIn, pos);
         float rainfall = data.getRainfall(pos);
         float avgAnnualTemperature = data.getAverageTemp(pos);
+        RockSettings rocks = data.getRockData().getRock(pos);
+        PALETTE_BLOCK1 = rocks.hardened().defaultBlockState();
         var climateTest = IAFEntityMap.dragonList.get(DRAGONTYPE);
         var tempAndRainfall = new float[]{avgAnnualTemperature, rainfall};
         if (!climateTest.test(tempAndRainfall)) {
@@ -112,13 +102,6 @@ public abstract class WorldGenDragonCaveMixin extends Feature<NoneFeatureConfigu
     @Overwrite
     public void createShell(LevelAccessor worldIn, RandomSource rand, Set<BlockPos> positions) {
        EntityType<? extends EntityDragonBase> dragon = getDragonType();
-
-
-       if(dragon == FIREDRAGON) { PALETTE_BLOCK1 = TFCBlocks.ROCK_BLOCKS.get(Rock.BASALT).get(Rock.BlockType.HARDENED).get().defaultBlockState(); }
-       if(dragon == ICEDRAGON) { PALETTE_BLOCK1 = TFCBlocks.ROCK_BLOCKS.get(Rock.GRANITE).get(Rock.BlockType.HARDENED).get().defaultBlockState(); }
-       if(dragon == LIGHTNINGDRAGON) { PALETTE_BLOCK1 = TFCBlocks.ROCK_BLOCKS.get(Rock.RHYOLITE).get(Rock.BlockType.HARDENED).get().defaultBlockState(); }
-
-
         positions.forEach(blockPos -> {
            if (!(worldIn.getBlockState(blockPos).getBlock() instanceof BaseEntityBlock) && worldIn.getBlockState(blockPos).getDestroySpeed(worldIn, blockPos) >= 0) {
                worldIn.setBlock(blockPos, PALETTE_BLOCK1 , Block.UPDATE_CLIENTS);

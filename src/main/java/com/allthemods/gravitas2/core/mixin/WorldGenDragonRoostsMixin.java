@@ -11,13 +11,13 @@ import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.blocks.rock.Rock;
 import net.dries007.tfc.world.chunkdata.ChunkData;
 import net.dries007.tfc.world.chunkdata.ChunkDataProvider;
+import net.dries007.tfc.world.settings.RockSettings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
@@ -31,9 +31,8 @@ import java.util.Random;
 
 @Mixin(value = WorldGenDragonRoosts.class, remap = false)
 public abstract class WorldGenDragonRoostsMixin extends Feature<NoneFeatureConfiguration> implements TypedFeature {
-
     private static Block TFCRock = TFCBlocks.ROCK_BLOCKS.get(Rock.BASALT).get(Rock.BlockType.HARDENED).get();
-    private static Block TFCCobble = TFCBlocks.ROCK_BLOCKS.get(Rock.BASALT).get(Rock.BlockType.COBBLE).get();
+    private static Block TFCRock2 = TFCBlocks.ROCK_BLOCKS.get(Rock.BASALT).get(Rock.BlockType.HARDENED).get();
 
     public WorldGenDragonRoostsMixin(Codec<NoneFeatureConfiguration> codec) {
         super(codec);
@@ -53,7 +52,9 @@ public abstract class WorldGenDragonRoostsMixin extends Feature<NoneFeatureConfi
         ChunkData data = provider.get(worldIn, pos);
         float rainfall = data.getRainfall(pos);
         float avgAnnualTemperature = data.getAverageTemp(pos);
-
+        RockSettings rocks = data.getRockData().getRock(pos);
+        TFCRock = rocks.hardened();
+        TFCRock2 = rocks.hardened();
         var climateTest = IAFEntityMap.dragonList.get(DRAGONTYPE);
         var tempAndRainfall = new float[]{avgAnnualTemperature, rainfall};
         if (!climateTest.test(tempAndRainfall)) {
@@ -72,6 +73,7 @@ public abstract class WorldGenDragonRoostsMixin extends Feature<NoneFeatureConfi
             this.hollowOut(context, radius);
             radius += 15;
             this.generateDecoration(context, radius, isMale);
+            GregitasCore.LOGGER.debug("Spawned at " + context.origin());
             return true;
         }
     }
@@ -86,7 +88,7 @@ public abstract class WorldGenDragonRoostsMixin extends Feature<NoneFeatureConfi
         double circularArea = this.getCircularArea(radius, height);
         BlockPos.betweenClosedStream(context.origin().offset(-radius, -height, -radius), context.origin().offset(radius, 1, radius)).map(BlockPos::immutable).forEach((position) -> {
             if (position.distSqr(context.origin()) < circularArea) {
-                context.level().setBlock(position, context.random().nextBoolean() ? TFCRock.defaultBlockState() : TFCCobble.defaultBlockState(), 2);
+                context.level().setBlock(position, context.random().nextBoolean() ? TFCRock.defaultBlockState() : TFCRock2.defaultBlockState(), 2);
             } else if (position.distSqr(context.origin()) == circularArea) {
                 context.level().setBlock(position, TFCRock.defaultBlockState(), 2);
             }
@@ -113,15 +115,18 @@ public abstract class WorldGenDragonRoostsMixin extends Feature<NoneFeatureConfi
                 if (context.level().isEmptyBlock(position.above())) {
                     context.level().setBlock(position, TFCRock.defaultBlockState(), 2);
                 } else {
-                    context.level().setBlock(position, TFCCobble.defaultBlockState(), 2);
+                    context.level().setBlock(position, TFCRock2.defaultBlockState(), 2);
                 }
             }
 
         });
     }
-    @Shadow
-    protected abstract void generateDecoration(@NotNull FeaturePlaceContext<NoneFeatureConfiguration> context, int radius, boolean isMale);
+
+
+
     @Shadow protected abstract void spawnDragon(@NotNull FeaturePlaceContext<NoneFeatureConfiguration> context, int ageOffset, boolean isMale);
     @Shadow protected abstract void hollowOut(@NotNull FeaturePlaceContext<NoneFeatureConfiguration> context, int radius);
     @Shadow protected abstract EntityType<? extends EntityDragonBase> getDragonType();
+
+    @Shadow protected abstract void generateDecoration(@NotNull FeaturePlaceContext<NoneFeatureConfiguration> context, int radius, boolean isMale);
 }

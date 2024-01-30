@@ -32,6 +32,7 @@ import com.lumintorious.tfcambiental.modifier.TempModifier;
 import com.tterrag.registrate.providers.ProviderType;
 import dev.ftb.mods.ftbchunks.api.FTBChunksAPI;
 import dev.ftb.mods.ftblibrary.math.ChunkDimPos;
+import net.dries007.tfc.common.blocks.rock.AqueductBlock;
 import net.dries007.tfc.world.chunkdata.ChunkData;
 import net.dries007.tfc.world.chunkdata.ChunkDataProvider;
 import net.minecraft.ChatFormatting;
@@ -42,17 +43,16 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityEvent.EnteringSection;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.server.ServerAboutToStartEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -113,6 +113,8 @@ public class GregitasCore {
         AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("naquadah_coil", 72.0F, 3.0F)).filter((mod) -> state.getBlock() == GTBlocks.COIL_NAQUADAH.get() && state.getValue(ActiveBlock.ACTIVE)));
         AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("trinium_coil", 90.0F, 3.0F)).filter((mod) -> state.getBlock() == GTBlocks.COIL_TRINIUM.get() && state.getValue(ActiveBlock.ACTIVE)));
         AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("tritanium_coil", 108.0F, 3.0F)).filter((mod) -> state.getBlock() == GTBlocks.COIL_TRITANIUM.get() && state.getValue(ActiveBlock.ACTIVE)));
+
+        AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("aqueduct_lava", 6.0F, 1.0F)).filter((mod) -> state.getBlock() instanceof AqueductBlock && state.getValue(AqueductBlock.FLUID).getFluid() == Fluids.LAVA));
 
         AmbientalRegistry.BLOCK_ENTITIES.register((player, blockEntity) -> {
             if (blockEntity instanceof IMachineBlockEntity machineBlockEntity && machineBlockEntity.getMetaMachine() instanceof IRecipeLogicMachine rlMachine) {
@@ -198,7 +200,7 @@ public class GregitasCore {
     }
     @SubscribeEvent
     public void spawnCheck(MobSpawnEvent.FinalizeSpawn event) {
-        if(event.getEntity() instanceof Sheep){ event.setSpawnCancelled(true); event.setCanceled(true); }
+        if(event.getEntity() instanceof Sheep){ event.getEntity().discard(); event.setSpawnCancelled(true); event.setCanceled(true); }
         if (!IAFEntityMap.spawnList.containsKey(event.getEntity().getType())) return;
         if (!(event.getLevel().getLevel().dimension() == Level.OVERWORLD)) return;
         var start = Util.getNanos();
