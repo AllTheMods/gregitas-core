@@ -12,6 +12,12 @@ import com.allthemods.gravitas2.recipe.type.GregitasRecipeTypes;
 import com.allthemods.gravitas2.registry.GregitasRegistry;
 import com.allthemods.gravitas2.util.GregitasUtil;
 import com.allthemods.gravitas2.util.IAFEntityMap;
+import com.eerussianguy.firmalife.FirmaLife;
+import com.eerussianguy.firmalife.common.blocks.AbstractOvenBlock;
+import com.eerussianguy.firmalife.common.blocks.FLBlocks;
+import com.eerussianguy.firmalife.common.blocks.OvenBottomBlock;
+import com.eerussianguy.firmalife.common.blocks.OvenTopBlock;
+import com.github.alexthe666.iceandfire.block.IafBlockRegistry;
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.block.ActiveBlock;
@@ -32,6 +38,7 @@ import com.lumintorious.tfcambiental.modifier.TempModifier;
 import com.tterrag.registrate.providers.ProviderType;
 import dev.ftb.mods.ftbchunks.api.FTBChunksAPI;
 import dev.ftb.mods.ftblibrary.math.ChunkDimPos;
+import net.dries007.tfc.common.blocks.SeaIceBlock;
 import net.dries007.tfc.common.blocks.rock.AqueductBlock;
 import net.dries007.tfc.world.chunkdata.ChunkData;
 import net.dries007.tfc.world.chunkdata.ChunkDataProvider;
@@ -47,6 +54,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.IceBlock;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
@@ -114,8 +122,13 @@ public class GregitasCore {
         AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("trinium_coil", 90.0F, 3.0F)).filter((mod) -> state.getBlock() == GTBlocks.COIL_TRINIUM.get() && state.getValue(ActiveBlock.ACTIVE)));
         AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("tritanium_coil", 108.0F, 3.0F)).filter((mod) -> state.getBlock() == GTBlocks.COIL_TRITANIUM.get() && state.getValue(ActiveBlock.ACTIVE)));
 
-        AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("aqueduct_lava", 6.0F, 1.0F)).filter((mod) -> state.getBlock() instanceof AqueductBlock && state.getValue(AqueductBlock.FLUID).getFluid() == Fluids.LAVA));
-
+        AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("aqueduct_lava", 3.0F, 1.0F)).filter((mod) -> state.getBlock() instanceof AqueductBlock && state.getValue(AqueductBlock.FLUID).getFluid() == Fluids.LAVA));
+        AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("aqueduct_water", -3.0F, 1.0F)).filter((mod) -> state.getBlock() instanceof AqueductBlock && state.getValue(AqueductBlock.FLUID).getFluid() == Fluids.WATER));
+        AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("firmalife_oven", 6.0F, 1.0F)).filter((mod) -> state.getBlock() instanceof OvenBottomBlock && state.getValue(OvenBottomBlock.LIT)));
+        AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("ice_block", -6.0F, 1.0F)).filter((mod) -> state.getBlock() instanceof IceBlock));
+        AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("cellar_blocks", -1.0F, 1.0F)).filter((mod) -> state.getBlock() == FLBlocks.SEALED_BRICKS.get()));
+        AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("sea_ice", -6.0F, 1.0F)).filter((mod) -> state.getBlock() instanceof SeaIceBlock));
+        AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("dragon_ice", -12.0F, 1.0F)).filter((mod) -> state.getBlock() == IafBlockRegistry.DRAGON_ICE.get()));
         AmbientalRegistry.BLOCK_ENTITIES.register((player, blockEntity) -> {
             if (blockEntity instanceof IMachineBlockEntity machineBlockEntity && machineBlockEntity.getMetaMachine() instanceof IRecipeLogicMachine rlMachine) {
                 if (rlMachine.isActive()) {

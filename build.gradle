@@ -164,7 +164,7 @@ dependencies {
     modImplementation("blank:Steam_Rails-1.5.3+forge-mc1.20.1") // fixed Accessor
     modImplementation("curse.maven:ice-and-fire-dragons-264231:5037783")
     modImplementation("curse.maven:citadel-331936:4848887")
-
+    modImplementation("curse.maven:firmalife-453394:5086231")
     modRuntimeOnly("vazkii.patchouli:Patchouli:${project.minecraft_version}-${project.patchouli_version}-FORGE")
     modRuntimeOnly("top.theillusivec4.curios:curios-forge:${project.curios_version}+${project.minecraft_version}")
     modRuntimeOnly("dev.toma.configuration:configuration-forge-${project.minecraft_version}:${project.configuration_version}")
