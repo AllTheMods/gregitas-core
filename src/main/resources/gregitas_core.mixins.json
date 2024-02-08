@@ -23,6 +23,7 @@
     "WorldGenLightningDragonRoostMixin"
   ],
   "client": [
+    "MixinWaterWheelRenderer"
   ],
   "injectors": {
     "defaultRequire": 1
