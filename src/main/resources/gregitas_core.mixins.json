@@ -20,7 +20,8 @@
     "WorldGenDragonRoostsMixin",
     "WorldGenFireDragonRoostMixin",
     "WorldGenIceDragonRoostMixin",
-    "WorldGenLightningDragonRoostMixin"
+    "WorldGenLightningDragonRoostMixin",
+    "TagPrefixItemMixin"
   ],
   "client": [
     "MixinWaterWheelRenderer"
