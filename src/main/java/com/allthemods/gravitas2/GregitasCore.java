@@ -3,6 +3,7 @@ package com.allthemods.gravitas2;
 import com.allthemods.gravitas2.block.GregitasBlocks;
 import com.allthemods.gravitas2.block.entity.GregitasBlockEntities;
 import com.allthemods.gravitas2.capability.GregitasCapabilities;
+import com.allthemods.gravitas2.compat.ArmCompat;
 import com.allthemods.gravitas2.data.lang.LangHandler;
 import com.allthemods.gravitas2.machine.GregitasMachines;
 import com.allthemods.gravitas2.material.GregitasElements;
@@ -106,6 +107,7 @@ public class GregitasCore {
 
         // Register Integration content
         registerTFCAmbientalBlocks();
+        ArmCompat.registerAll();
     }
 
     public static ResourceLocation id(String path) {
