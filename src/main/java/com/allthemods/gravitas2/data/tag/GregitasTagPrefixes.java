@@ -79,6 +79,22 @@ public class GregitasTagPrefixes {
             .langValue("Marble %s Ore")
             .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.MARBLE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), () -> GTMaterials.Marble, BlockBehaviour.Properties.of().mapColor(MapColor.WOOL).sound(SoundType.STONE).strength(6.5F, 10.0F).requiresCorrectToolForDrops(), new ResourceLocation("tfc", "block/rock/raw/marble"));
 
+    public static final TagPrefix oreBasalt = TagPrefix.oreTagPrefix("basalt", BlockTags.MINEABLE_WITH_PICKAXE)
+            .langValue("Basalt %s Ore")
+            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.BASALT).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), () -> GTMaterials.Basalt, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).sound(SoundType.STONE).strength(6.5F, 10.0F).requiresCorrectToolForDrops(), new ResourceLocation("tfc", "block/rock/raw/basalt"));
+
+    public static final TagPrefix oreAndesite = TagPrefix.oreTagPrefix("andesite", BlockTags.MINEABLE_WITH_PICKAXE)
+            .langValue("Andesite %s Ore")
+            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.ANDESITE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), () -> GTMaterials.Andesite, BlockBehaviour.Properties.of().mapColor(MapColor.WOOL).sound(SoundType.STONE).strength(6.5F, 10.0F).requiresCorrectToolForDrops(), new ResourceLocation("tfc", "block/rock/raw/andesite"));
+
+    public static final TagPrefix oreGranite = TagPrefix.oreTagPrefix("granite", BlockTags.MINEABLE_WITH_PICKAXE)
+            .langValue("Granite %s Ore")
+            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.GRANITE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), () -> GTMaterials.Granite, BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_PINK).sound(SoundType.STONE).strength(6.5F, 10.0F).requiresCorrectToolForDrops(), new ResourceLocation("tfc", "block/rock/raw/granite"));
+
+    public static final TagPrefix oreDiorite = TagPrefix.oreTagPrefix("diorite", BlockTags.MINEABLE_WITH_PICKAXE)
+            .langValue("Diorite %s Ore")
+            .registerOre(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.DIORITE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState(), () -> GTMaterials.Diorite, BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_PINK).sound(SoundType.STONE).strength(6.5F, 10.0F).requiresCorrectToolForDrops(), new ResourceLocation("tfc", "block/rock/raw/diorite"));
+
     // nope, it works. IntelliJ doesn't know what it's talking about.
     @SuppressWarnings("DataFlowIssue")
     public static void init() {
@@ -87,12 +103,11 @@ public class GregitasTagPrefixes {
         TagPrefix.ORES.remove(TagPrefix.oreSand);
         TagPrefix.ORES.remove(TagPrefix.oreRedSand);
         TagPrefix.ORES.remove(TagPrefix.oreGravel);
+        TagPrefix.ORES.remove(TagPrefix.oreBasalt);
+        TagPrefix.ORES.remove(TagPrefix.oreAndesite);
+        TagPrefix.ORES.remove(TagPrefix.oreDiorite);
+        TagPrefix.ORES.remove(TagPrefix.oreGranite);
 
-        // Replace some ore prefix values, to: 1: make basalt not a nether ore, 2: make the base stones be TFC stones instead of vanilla.
-        TagPrefixOreTypeAccessor oreBasaltAccessor = (TagPrefixOreTypeAccessor)(Object)TagPrefix.ORES.get(TagPrefix.oreBasalt);
-        oreBasaltAccessor.setIsNether(false);
 
-        TagPrefixOreTypeAccessor oreGraniteAccessor = (TagPrefixOreTypeAccessor)(Object)TagPrefix.ORES.get(TagPrefix.oreGranite);
-        oreGraniteAccessor.setStoneType(() -> TFCBlocks.ROCK_BLOCKS.get(Rock.GRANITE).get(Rock.BlockType.RAW).orElse(Blocks.DEEPSLATE).defaultBlockState());
     }
 }

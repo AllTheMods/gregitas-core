@@ -36,7 +36,10 @@ public class LangHandler extends com.gregtechceu.gtceu.data.lang.LangHandler {
         provider.add(GregitasTagPrefixes.oreSchist.getUnlocalizedName(), GregitasTagPrefixes.oreSchist.langValue());
         provider.add(GregitasTagPrefixes.oreGneiss.getUnlocalizedName(), GregitasTagPrefixes.oreGneiss.langValue());
         provider.add(GregitasTagPrefixes.oreMarble.getUnlocalizedName(), GregitasTagPrefixes.oreMarble.langValue());
-
+        provider.add(GregitasTagPrefixes.oreBasalt.getUnlocalizedName(), GregitasTagPrefixes.oreBasalt.langValue());
+        provider.add(GregitasTagPrefixes.oreAndesite.getUnlocalizedName(), GregitasTagPrefixes.oreAndesite.langValue());
+        provider.add(GregitasTagPrefixes.oreGranite.getUnlocalizedName(), GregitasTagPrefixes.oreGranite.langValue());
+        provider.add(GregitasTagPrefixes.oreDiorite.getUnlocalizedName(), GregitasTagPrefixes.oreDiorite.langValue());
         // Materials
         //replace(provider, GregitasMaterials.AllTheModium.getUnlocalizedName(), "AllTheModium");
         //replace(provider, GregitasMaterials.AllthemodiumNaquadahMixture.getUnlocalizedName(), "AllTheModium-Naquadah Mixture");
