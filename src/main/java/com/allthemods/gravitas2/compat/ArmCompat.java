@@ -1,6 +1,7 @@
 package com.allthemods.gravitas2.compat;
 
 import com.eerussianguy.firmalife.common.blocks.OvenBottomBlock;
+import com.eerussianguy.firmalife.common.blocks.OvenHopperBlock;
 import com.eerussianguy.firmalife.common.blocks.OvenTopBlock;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPoint;
@@ -15,6 +16,7 @@ import java.util.function.Function;
 public class ArmCompat {
     public static final BrickOvenTop BRICK_OVEN_TOP = register("brick_oven_top", BrickOvenTop::new);
     public static final BrickOvenBottom BRICK_OVEN_BOTTOM = register("brick_oven_bottom", BrickOvenBottom::new);
+    public static final OvenHopper OVEN_HOPPER = register("oven_hopper", OvenHopper::new);
 
     public ArmCompat() {
     }
@@ -49,6 +51,20 @@ public class ArmCompat {
 
         public boolean canCreatePoint(Level level, BlockPos pos, BlockState state) {
             return state.getBlock() instanceof OvenBottomBlock;
+        }
+
+        public ArmInteractionPoint createPoint(Level level, BlockPos pos, BlockState state) {
+            return new ArmInteractionPoint(this, level, pos, state);
+        }
+    }
+
+    public static class OvenHopper extends ArmInteractionPointType {
+        public OvenHopper(ResourceLocation id) {
+            super(id);
+        }
+
+        public boolean canCreatePoint(Level level, BlockPos pos, BlockState state) {
+            return state.getBlock() instanceof OvenHopperBlock;
         }
 
         public ArmInteractionPoint createPoint(Level level, BlockPos pos, BlockState state) {
