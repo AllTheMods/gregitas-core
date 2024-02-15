@@ -41,6 +41,7 @@ import dev.ftb.mods.ftbchunks.api.FTBChunksAPI;
 import dev.ftb.mods.ftblibrary.math.ChunkDimPos;
 import net.dries007.tfc.common.blocks.SeaIceBlock;
 import net.dries007.tfc.common.blocks.rock.AqueductBlock;
+import net.dries007.tfc.common.entities.TFCEntities;
 import net.dries007.tfc.world.chunkdata.ChunkData;
 import net.dries007.tfc.world.chunkdata.ChunkDataProvider;
 import net.minecraft.ChatFormatting;
@@ -52,6 +53,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.WorldGenLevel;
@@ -216,6 +219,7 @@ public class GregitasCore {
     @SubscribeEvent
     public void spawnCheck(MobSpawnEvent.FinalizeSpawn event) {
         if(event.getEntity() instanceof Sheep){ event.getEntity().discard(); event.setSpawnCancelled(true); event.setCanceled(true); }
+        if(event.getEntity() instanceof Cat){ catSwap(event); return;}
         if (!IAFEntityMap.spawnList.containsKey(event.getEntity().getType())) return;
         if (!(event.getLevel().getLevel().dimension() == Level.OVERWORLD)) return;
         var start = Util.getNanos();
@@ -236,6 +240,11 @@ public class GregitasCore {
             }
 
         }
+    }
+    private static void catSwap(MobSpawnEvent.FinalizeSpawn event) {
+        event.getEntity().discard();
+        event.setSpawnCancelled(true);
+        TFCEntities.CAT.get().spawn(event.getLevel().getLevel(),new BlockPos((int)event.getX(),(int)event.getY(),(int)event.getZ()), MobSpawnType.NATURAL);
     }
 }
 
