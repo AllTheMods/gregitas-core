@@ -12,8 +12,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -22,8 +21,9 @@ import java.util.stream.Stream;
 
 @Mixin(AqueductBlock.class)
 public abstract class AqueductBlockMixin extends HorizontalDirectionalBlock implements IFluidLoggable {
-    @Unique
-    private static final FluidProperty ALL_WATER_AND_LAVA = FluidProperty.create("fluid", Stream.of(Fluids.EMPTY, Fluids.WATER, TFCFluids.SALT_WATER, TFCFluids.SPRING_WATER, Fluids.LAVA));
+    @Final
+    @Shadow
+    private static final FluidProperty FLUID = FluidProperty.create("fluid", Stream.of(Fluids.EMPTY, Fluids.WATER, TFCFluids.SALT_WATER, TFCFluids.SPRING_WATER, Fluids.LAVA));
     protected AqueductBlockMixin(Properties properties) {
         super(properties);
     }
@@ -35,8 +35,12 @@ public abstract class AqueductBlockMixin extends HorizontalDirectionalBlock impl
         }
     }
 
-    @ModifyReturnValue(method = "getFluidProperty", at = @At("TAIL"), remap = false)
-    private FluidProperty gregitas$changeProperty(FluidProperty original) {
-        return ALL_WATER_AND_LAVA;
+    /**
+     * @author
+     * @reason
+     */
+    @Overwrite(remap = false)
+    public FluidProperty getFluidProperty() {
+        return FLUID;
     }
 }
