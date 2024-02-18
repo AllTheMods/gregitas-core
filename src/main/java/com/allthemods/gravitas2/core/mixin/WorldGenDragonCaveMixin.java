@@ -54,22 +54,22 @@ public abstract class WorldGenDragonCaveMixin extends Feature<NoneFeatureConfigu
      */
     @Overwrite
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
-        EntityType<? extends EntityDragonBase> DRAGONTYPE = this.getDragonType();
-        WorldGenLevel worldIn = context.level();
         RandomSource rand = context.random();
+        WorldGenLevel worldIn = context.level();
         BlockPos pos = context.origin();
-        ChunkDataProvider provider = ChunkDataProvider.get(worldIn);
-        ChunkData data = provider.get(worldIn, pos);
-        float rainfall = data.getRainfall(pos);
-        float avgAnnualTemperature = data.getAverageTemp(pos);
-        RockSettings rocks = data.getRockData().getRock(pos);
-        PALETTE_BLOCK1 = rocks.hardened().defaultBlockState();
-        var climateTest = IAFEntityMap.dragonList.get(DRAGONTYPE);
-        var tempAndRainfall = new float[]{avgAnnualTemperature, rainfall};
-        if (!climateTest.test(tempAndRainfall)) {
-            return false;
-        }
         if (rand.nextInt(IafConfig.generateDragonDenChance) == 0 && IafWorldRegistry.isFarEnoughFromSpawn(worldIn, context.origin()) && IafWorldRegistry.isFarEnoughFromDangerousGen(worldIn, pos, this.getId(), this.getFeatureType())) {
+            EntityType<? extends EntityDragonBase> DRAGONTYPE = this.getDragonType();
+            ChunkDataProvider provider = ChunkDataProvider.get(worldIn);
+            ChunkData data = provider.get(worldIn, pos);
+            float rainfall = data.getRainfall(pos);
+            float avgAnnualTemperature = data.getAverageTemp(pos);
+            var climateTest = IAFEntityMap.dragonList.get(DRAGONTYPE);
+            var tempAndRainfall = new float[]{avgAnnualTemperature, rainfall};
+            if (!climateTest.test(tempAndRainfall)) {
+                return false;
+            }
+            RockSettings rocks = data.getRockData().getRock(pos);
+            PALETTE_BLOCK1 = rocks.hardened().defaultBlockState();
             this.isMale = rand.nextBoolean();
             ChunkPos chunkPos = worldIn.getChunk(context.origin()).getPos();
             int j = 40;

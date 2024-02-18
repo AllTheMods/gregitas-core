@@ -26,9 +26,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
-import java.util.Random;
-
-
 @Mixin(value = WorldGenDragonRoosts.class, remap = false)
 public abstract class WorldGenDragonRoostsMixin extends Feature<NoneFeatureConfiguration> implements TypedFeature {
     private static Block TFCRock = TFCBlocks.ROCK_BLOCKS.get(Rock.BASALT).get(Rock.BlockType.HARDENED).get();
@@ -48,23 +45,23 @@ public abstract class WorldGenDragonRoostsMixin extends Feature<NoneFeatureConfi
         WorldGenLevel worldIn = context.level();
         RandomSource rand = context.random();
         BlockPos pos = context.origin();
-        ChunkDataProvider provider = ChunkDataProvider.get(worldIn);
-        ChunkData data = provider.get(worldIn, pos);
-        float rainfall = data.getRainfall(pos);
-        float avgAnnualTemperature = data.getAverageTemp(pos);
-        RockSettings rocks = data.getRockData().getRock(pos);
-        TFCRock = rocks.hardened();
-        TFCRock2 = rocks.hardened();
-        var climateTest = IAFEntityMap.dragonList.get(DRAGONTYPE);
-        var tempAndRainfall = new float[]{avgAnnualTemperature, rainfall};
-        if (!climateTest.test(tempAndRainfall)) {
-            //GregitasCore.LOGGER.info("Blocked :" + DRAGONTYPE.getDescription() + " at: " + pos);
-            return false;
-        }
-        if (!WorldUtil.canGenerate(IafConfig.generateDragonRoostChance, context.level(), context.random(), context.origin(), this.getId(), true)) {
+        if (!WorldUtil.canGenerate(IafConfig.generateDragonRoostChance, worldIn, rand, pos, this.getId(), true)) {
             return false;
         } else {
-            boolean isMale = (new Random()).nextBoolean();
+            ChunkDataProvider provider = ChunkDataProvider.get(worldIn);
+            ChunkData data = provider.get(worldIn, pos);
+            float rainfall = data.getRainfall(pos);
+            float avgAnnualTemperature = data.getAverageTemp(pos);
+            var climateTest = IAFEntityMap.dragonList.get(DRAGONTYPE);
+            var tempAndRainfall = new float[]{avgAnnualTemperature, rainfall};
+            if (!climateTest.test(tempAndRainfall)) {
+                //GregitasCore.LOGGER.info("Blocked :" + DRAGONTYPE.getDescription() + " at: " + pos);
+                return false;
+            }
+            RockSettings rocks = data.getRockData().getRock(pos);
+            TFCRock = rocks.hardened();
+            TFCRock2 = rocks.hardened();
+            boolean isMale = rand.nextBoolean();
             int radius = 12 + context.random().nextInt(8);
             this.spawnDragon(context, radius, isMale);
             this.generateSurface(context, radius);
