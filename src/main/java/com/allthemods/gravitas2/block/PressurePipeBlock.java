@@ -2,6 +2,8 @@ package com.allthemods.gravitas2.block;
 
 import com.allthemods.gravitas2.GregitasCore;
 import com.allthemods.gravitas2.block.entity.GregitasBlockEntities;
+import com.allthemods.gravitas2.block.entity.PressurePipeBlockEntity;
+import com.allthemods.gravitas2.capability.GregitasCapabilities;
 import com.allthemods.gravitas2.pipelike.pressure.LevelPressureNet;
 import com.allthemods.gravitas2.pipelike.pressure.PressurePipeData;
 import com.allthemods.gravitas2.pipelike.pressure.PressurePipeType;
@@ -53,7 +55,9 @@ public class PressurePipeBlock extends PipeBlock<PressurePipeType, PressurePipeD
 
     @Override
     public PressurePipeData createProperties(IPipeNode<PressurePipeType, PressurePipeData> pipeTile) {
-        return null;
+        var pipeType = pipeTile.getPipeType();
+        if (pipeType == null) return getFallbackType();
+        return this.pipeType.modifyProperties(PressurePipeData.EMPTY);
     }
 
     @Override
@@ -68,11 +72,11 @@ public class PressurePipeBlock extends PipeBlock<PressurePipeType, PressurePipeD
 
     @Override
     public boolean canPipesConnect(IPipeNode<PressurePipeType, PressurePipeData> selfTile, Direction side, IPipeNode<PressurePipeType, PressurePipeData> sideTile) {
-        return false;
+        return selfTile instanceof PressurePipeBlockEntity && sideTile instanceof PressurePipeBlockEntity;
     }
 
     @Override
     public boolean canPipeConnectToBlock(IPipeNode<PressurePipeType, PressurePipeData> selfTile, Direction side, @Nullable BlockEntity tile) {
-        return false;
+        return tile != null && tile.getCapability(GregitasCapabilities.CAPABILITY_PRESSURE_CONTAINER, side.getOpposite()).isPresent();
     }
 }
