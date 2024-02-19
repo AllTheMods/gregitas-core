@@ -15,8 +15,5 @@ public interface TagPrefixOreTypeAccessor {
     void setStoneType(Supplier<BlockState> state);
 
     @Accessor @Mutable
-    void setIsNether(boolean isNether);
-
-    @Accessor @Mutable
     void setIsSand(boolean isSand);
 }

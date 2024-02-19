@@ -12,6 +12,7 @@
     "MixinHelpersMixin",
     "PlaceBlockSpecialPacketMixin",
     "PlacedItemBlockEntityMixin",
+    "RailwaysMixin",
     "RailwaysModEnumMixin",
     "RailwaysModSetupMixin",
     "TagPrefixItemMixin",

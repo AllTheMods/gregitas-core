@@ -3,6 +3,7 @@ package com.allthemods.gravitas2.data.recipe;
 import com.allthemods.gravitas2.GregitasCore;
 import com.allthemods.gravitas2.data.recipe.builder.CollapseRecipeBuilder;
 import com.allthemods.gravitas2.material.GregitasMaterials;
+import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.block.MaterialBlock;
 import com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper;
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
@@ -57,7 +58,7 @@ public class GregitasRecipes {
         ChemicalHelper.registerUnificationItems(TagPrefix.rock, GregitasMaterials.Gneiss, TFCBlocks.ROCK_BLOCKS.get(Rock.GNEISS).values().stream().map(Supplier::get).toArray(ItemLike[]::new));
         ChemicalHelper.registerUnificationItems(TagPrefix.rock, GTMaterials.Marble, TFCBlocks.ROCK_BLOCKS.get(Rock.MARBLE).values().stream().map(Supplier::get).toArray(ItemLike[]::new));
 
-        for (Material material : GTRegistries.MATERIALS) {
+        for (Material material : GTCEuAPI.materialManager.getRegisteredMaterials()) {
             if (!material.hasProperty(PropertyKey.ORE)) continue;
 
             for (TagPrefix prefix : TagPrefix.ORES.keySet()) {

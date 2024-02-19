@@ -1,11 +1,14 @@
 package com.allthemods.gravitas2.pipelike.pressure;
 
-import com.lowdragmc.lowdraglib.pipelike.Node;
-import com.lowdragmc.lowdraglib.pipelike.PipeNetWalker;
+import com.allthemods.gravitas2.block.entity.PressurePipeBlockEntity;
+import com.gregtechceu.gtceu.api.pipenet.PipeNetWalker;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import org.jetbrains.annotations.NotNull;
 
-public class PressureNetWalker extends PipeNetWalker<PressurePipeData, PressurePipeNet> {
+import java.util.Objects;
+
+public class PressureNetWalker extends PipeNetWalker<PressurePipeBlockEntity,PressurePipeData, PressurePipeNet> {
 
     private double pressure = -1;
 
@@ -21,14 +24,19 @@ public class PressureNetWalker extends PipeNetWalker<PressurePipeData, PressureP
 
     @NotNull
     @Override
-    protected PipeNetWalker<PressurePipeData, PressurePipeNet> createSubWalker(PressurePipeNet pipeNet, BlockPos nextPos, int walkedBlocks) {
+    protected PipeNetWalker<PressurePipeBlockEntity,PressurePipeData, PressurePipeNet> createSubWalker(PressurePipeNet pipeNet, Direction facingToNextPos, BlockPos nextPos, int walkedBlocks) {
         PressureNetWalker walker = new PressureNetWalker(pipeNet, nextPos, walkedBlocks);
         walker.pressure = pressure;
         return walker;
     }
 
     @Override
-    protected boolean checkPipe(Node<PressurePipeData> pipeNode, BlockPos pos) {
-        return pipeNode.data.checkPressure(pressure, this.pipeNet, pos);
+    protected Class<PressurePipeBlockEntity> getBasePipeClass() {
+        return PressurePipeBlockEntity.class;
+    }
+
+    @Override
+    protected void checkPipe(PressurePipeBlockEntity pipeTile, BlockPos pos) {
+        Objects.requireNonNull(pipeTile.getNodeData()).checkPressure(pressure, this.pipeNet, pos);
     }
 }

@@ -2,8 +2,8 @@ package com.allthemods.gravitas2.pipelike.pressure;
 
 import com.allthemods.gravitas2.capability.IPressureContainer;
 import com.allthemods.gravitas2.util.GregitasConstants;
-import com.lowdragmc.lowdraglib.pipelike.LevelPipeNet;
-import com.lowdragmc.lowdraglib.pipelike.PipeNet;
+import com.gregtechceu.gtceu.api.pipenet.LevelPipeNet;
+import com.gregtechceu.gtceu.api.pipenet.PipeNet;
 import net.minecraft.nbt.CompoundTag;
 
 import javax.annotation.Nonnull;

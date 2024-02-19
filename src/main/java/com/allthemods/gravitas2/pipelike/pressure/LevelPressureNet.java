@@ -1,6 +1,6 @@
 package com.allthemods.gravitas2.pipelike.pressure;
 
-import com.lowdragmc.lowdraglib.pipelike.LevelPipeNet;
+import com.gregtechceu.gtceu.api.pipenet.LevelPipeNet;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 

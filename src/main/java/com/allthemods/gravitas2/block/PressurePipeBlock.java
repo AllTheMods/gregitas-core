@@ -7,12 +7,15 @@ import com.allthemods.gravitas2.pipelike.pressure.PressurePipeData;
 import com.allthemods.gravitas2.pipelike.pressure.PressurePipeType;
 import com.gregtechceu.gtceu.api.block.PipeBlock;
 import com.gregtechceu.gtceu.api.blockentity.PipeBlockEntity;
+import com.gregtechceu.gtceu.api.pipenet.IPipeNode;
 import com.gregtechceu.gtceu.client.model.PipeModel;
 import com.gregtechceu.gtceu.client.renderer.block.PipeBlockRenderer;
 import lombok.Getter;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
@@ -49,6 +52,11 @@ public class PressurePipeBlock extends PipeBlock<PressurePipeType, PressurePipeD
     }
 
     @Override
+    public PressurePipeData createProperties(IPipeNode<PressurePipeType, PressurePipeData> pipeTile) {
+        return null;
+    }
+
+    @Override
     public PressurePipeData getFallbackType() {
         return PressurePipeData.EMPTY;
     }
@@ -56,5 +64,15 @@ public class PressurePipeBlock extends PipeBlock<PressurePipeType, PressurePipeD
     @Override
     public @Nullable PipeBlockRenderer getRenderer(BlockState state) {
         return renderer;
+    }
+
+    @Override
+    public boolean canPipesConnect(IPipeNode<PressurePipeType, PressurePipeData> selfTile, Direction side, IPipeNode<PressurePipeType, PressurePipeData> sideTile) {
+        return false;
+    }
+
+    @Override
+    public boolean canPipeConnectToBlock(IPipeNode<PressurePipeType, PressurePipeData> selfTile, Direction side, @Nullable BlockEntity tile) {
+        return false;
     }
 }
