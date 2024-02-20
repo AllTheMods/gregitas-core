@@ -14,7 +14,7 @@ public class SteamMinerMachineMixin {
     @Inject(
             method = "createSteamTank",
             remap = false,
-            at = @At("RETURN"),
+            at = @At("HEAD"),
             cancellable = true)
     private void gregitas$fixSteamTank(Object[] args, CallbackInfoReturnable<NotifiableFluidTank> cir){
         cir.setReturnValue(new NotifiableFluidTank((SteamMinerMachine) ((Object) this), 1, 16 * FluidHelper.getBucket(), IO.BOTH));
