@@ -51,6 +51,11 @@ public class NotifiableHeatContainer extends NotifiableRecipeHandlerTrait<Float>
         return List.of(heat);
     }
 
+    @Override
+    public List<Object> getContents() {
+        return List.of(temperature);
+    }
+
     protected void tickHeat() {
         this.setTemperature(HeatCapability.adjustTempTowards(this.getTemperature(), Climate.getTemperature(machine.getLevel(), machine.getPos())));
     }
