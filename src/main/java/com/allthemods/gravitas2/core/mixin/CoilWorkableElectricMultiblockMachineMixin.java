@@ -51,7 +51,7 @@ public abstract class CoilWorkableElectricMultiblockMachineMixin extends Workabl
     @Override
     public void setTemperature(float temp) {
         gregitas$currentTemp = temp + 273;
-        this.onChanged();
+        // this.onChanged();
     }
 
     @Override
