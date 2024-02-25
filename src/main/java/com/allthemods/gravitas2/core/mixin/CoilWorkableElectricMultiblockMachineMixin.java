@@ -1,6 +1,5 @@
 package com.allthemods.gravitas2.core.mixin;
 
-import com.allthemods.gravitas2.recipe.type.GregitasRecipeCache;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.block.ICoilType;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
@@ -8,7 +7,6 @@ import com.gregtechceu.gtceu.api.machine.TickableSubscription;
 import com.gregtechceu.gtceu.api.machine.multiblock.CoilWorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
-import com.gregtechceu.gtceu.api.machine.trait.RecipeLogic;
 import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
@@ -16,7 +14,6 @@ import net.dries007.tfc.common.capabilities.heat.HeatCapability;
 import net.dries007.tfc.common.capabilities.heat.IHeatBlock;
 import net.dries007.tfc.util.climate.Climate;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.FullChunkStatus;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
@@ -108,15 +105,10 @@ public abstract class CoilWorkableElectricMultiblockMachineMixin extends Workabl
 
     @Unique
     private void gregitas$temperatureTick() {
-        if (this.getLevel() instanceof ServerLevel && this.getRecipeLogic() instanceof GregitasRecipeCache gc) {
-            if (gc.gregitas$getTicksSinceLastRecipe().getAndIncrement() >= 20) {
-                if (this.getRecipeLogic().isWaiting()) this.getRecipeLogic().setStatus(RecipeLogic.Status.IDLE);
+        if (this.getLevel() instanceof ServerLevel) {
+            if (!this.getRecipeLogic().isWorking()) {
                 if ((int) getTemperature() != (int) gregitas$blockTempCelcius) setTemperature(HeatCapability.adjustTempTowards(getTemperature(), gregitas$blockTempCelcius, 0.5f));
-            } else if (this.getRecipeLogic().isIdle() || this.getRecipeLogic().isWaiting()) {
-                if (this.getRecipeLogic().isIdle()) this.getRecipeLogic().setWaiting(Component.translatable("gregitas_core.coil_machine.warming_up"));
-                this.setTemperature(HeatCapability.adjustTempTowards(this.getTemperature(), this.getCoilType().getCoilTemperature() - 273, this.getCoilTier() + 1));
             }
-            if (this.getRecipeLogic().isWorking()) gc.gregitas$getTicksSinceLastRecipe().set(0);
         }
     }
 
