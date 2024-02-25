@@ -1,5 +1,6 @@
 package com.allthemods.gravitas2.core.mixin;
 
+import com.allthemods.gravitas2.recipe.type.GregitasRecipeCache;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.block.ICoilType;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
@@ -7,6 +8,7 @@ import com.gregtechceu.gtceu.api.machine.TickableSubscription;
 import com.gregtechceu.gtceu.api.machine.multiblock.CoilWorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
+import com.gregtechceu.gtceu.api.machine.trait.RecipeLogic;
 import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
@@ -14,7 +16,11 @@ import net.dries007.tfc.common.capabilities.heat.HeatCapability;
 import net.dries007.tfc.common.capabilities.heat.IHeatBlock;
 import net.dries007.tfc.util.climate.Climate;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.FullChunkStatus;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.chunk.LevelChunk;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -25,6 +31,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @Mixin(value = CoilWorkableElectricMultiblockMachine.class, remap = false)
 public abstract class CoilWorkableElectricMultiblockMachineMixin extends WorkableElectricMultiblockMachine implements IHeatBlock {
+    @Unique
     private static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(CoilWorkableElectricMultiblockMachine.class, WorkableMultiblockMachine.MANAGED_FIELD_HOLDER);
 
     @Shadow private ICoilType coilType;
@@ -32,12 +39,15 @@ public abstract class CoilWorkableElectricMultiblockMachineMixin extends Workabl
 
     @Shadow public abstract ICoilType getCoilType();
 
-    // Temperature, in Kelvin (because GT uses kelvin instead of celsius.)
+    // Temperature, in Kelvin (because GT uses kelvin instead of Celsius.)
     @Unique
     @Persisted(key = "currentTemp") @DescSynced
     private float gregitas$currentTemp = 273;
     @Unique
     private TickableSubscription gregitas$temperatureTick = null;
+
+    @Unique
+    private float gregitas$blockTempCelcius = 15;
 
     public CoilWorkableElectricMultiblockMachineMixin(IMachineBlockEntity holder, Object... args) {
         super(holder, args);
@@ -45,24 +55,46 @@ public abstract class CoilWorkableElectricMultiblockMachineMixin extends Workabl
 
     @Override
     public float getTemperature() {
+        if (gregitas$blockTempCelcius == 15) {
+            gregitas$blockTempCelcius = gregitas$getSafeTemperature();
+        }
         return gregitas$currentTemp - 273;
     }
 
     @Override
     public void setTemperature(float temp) {
         gregitas$currentTemp = temp + 273;
-        // this.onChanged();
+        if (gregitas$isChunkLoaded()) this.onChanged();
     }
 
     @Override
     public void onLoad() {
         super.onLoad();
-        if (getTemperature() == 0) {
-            setTemperature(Climate.getTemperature(this.getLevel(), this.getPos()));
+        if (gregitas$isChunkLoaded()){
+            gregitas$blockTempCelcius = Climate.getTemperature(this.getLevel(), this.getPos());
         }
+        if (getTemperature() == 0) setTemperature(gregitas$blockTempCelcius);
         if (gregitas$temperatureTick == null) {
             gregitas$temperatureTick = subscribeServerTick(this::gregitas$temperatureTick);
         }
+    }
+
+    @Unique
+    private boolean gregitas$isChunkLoaded(){
+        ChunkPos chunkPos = new ChunkPos(this.getPos());
+        LevelChunk levelChunk = this.getLevel().getChunkSource().getChunkNow(chunkPos.x, chunkPos.z);
+        if (levelChunk != null) {
+            return levelChunk.getFullStatus() == FullChunkStatus.ENTITY_TICKING && ((ServerLevel) this.getLevel()).areEntitiesLoaded(chunkPos.toLong());
+        }
+        return false;
+    }
+
+    @Unique
+    private float gregitas$getSafeTemperature(){
+        if (gregitas$isChunkLoaded()) {
+            return Climate.getTemperature(this.getLevel(), this.getPos());
+        }
+        return 15;
     }
 
     @Override
@@ -76,8 +108,15 @@ public abstract class CoilWorkableElectricMultiblockMachineMixin extends Workabl
 
     @Unique
     private void gregitas$temperatureTick() {
-        if (this.getLevel() instanceof ServerLevel level) {
-            setTemperature(HeatCapability.adjustTempTowards(getTemperature(), Climate.getTemperature(level, this.getPos()), 0.5f));
+        if (this.getLevel() instanceof ServerLevel && this.getRecipeLogic() instanceof GregitasRecipeCache gc) {
+            if (gc.gregitas$getTicksSinceLastRecipe().getAndIncrement() >= 20) {
+                if (this.getRecipeLogic().isWaiting()) this.getRecipeLogic().setStatus(RecipeLogic.Status.IDLE);
+                if ((int) getTemperature() != (int) gregitas$blockTempCelcius) setTemperature(HeatCapability.adjustTempTowards(getTemperature(), gregitas$blockTempCelcius, 0.5f));
+            } else if (this.getRecipeLogic().isIdle() || this.getRecipeLogic().isWaiting()) {
+                if (this.getRecipeLogic().isIdle()) this.getRecipeLogic().setWaiting(Component.translatable("gregitas_core.coil_machine.warming_up"));
+                this.setTemperature(HeatCapability.adjustTempTowards(this.getTemperature(), this.getCoilType().getCoilTemperature() - 273, this.getCoilTier() + 1));
+            }
+            if (this.getRecipeLogic().isWorking()) gc.gregitas$getTicksSinceLastRecipe().set(0);
         }
     }
 
@@ -85,16 +124,6 @@ public abstract class CoilWorkableElectricMultiblockMachineMixin extends Workabl
     public void onWorking() {
         super.onWorking();
         this.setTemperature(HeatCapability.adjustTempTowards(getTemperature(), (coilType.getCoilTemperature() + 100 * Math.max(0, this.getTier() - GTValues.MV)) - 273, (getCoilTier() + 1) / 1.5f));
-        /* nah too evil.
-        if (getTemperature() <= getCoilType().getCoilTemperature()) {
-            if (!this.getCapabilitiesProxy().contains(IO.IN, EURecipeCapability.CAP)) return;
-
-            if (getRecipeLogic().getLastRecipe() == null) return;
-            long EUt = RecipeHelper.getInputEUt(getRecipeLogic().getLastRecipe());
-            GTRecipe recipe = GTRecipeBuilder.ofRaw().EUt(EUt).buildRawRecipe();
-            getRecipeLogic().handleTickRecipe(recipe);
-        }
-        */
     }
 
     @Override

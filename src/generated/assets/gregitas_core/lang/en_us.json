@@ -28,6 +28,7 @@
   "block.gregitas_core.ultra_sterilizing_filter_casing": "Ultra Sterilizing Filter Casing",
   "block.gregitas_core.wdp_pressure_hatch": "White Dwarf Pressure Hatch",
   "block.gregitas_core.white_dwarf_pressure_pipe": "White Dwarf Pressure Pipe",
+  "gregitas_core.coil_machine.warming_up": "Warming up machine...",
   "gregitas_core.message.enter_ally_area": "You entered an allied area owned by ",
   "gregitas_core.message.enter_area": "You entered an area owned by ",
   "gregitas_core.message.leave_area": "You left an area owned by ",
