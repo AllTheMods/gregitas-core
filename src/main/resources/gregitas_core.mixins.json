@@ -15,6 +15,7 @@
     "RailwaysMixin",
     "RailwaysModEnumMixin",
     "RailwaysModSetupMixin",
+    "RecipeLogicMixin",
     "RecipeManagerMixin",
     "SteamMinerMachineMixin",
     "TagPrefixItemMixin",
