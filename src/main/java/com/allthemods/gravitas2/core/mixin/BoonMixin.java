@@ -5,8 +5,11 @@ import org.spongepowered.asm.mixin.Overwrite;
 
 import dev.shadowsoffire.apotheosis.Apoth.Tags;
 import dev.shadowsoffire.apotheosis.ench.enchantments.masterwork.EarthsBoonEnchant;
+import net.dries007.tfc.common.TFCTags;
+import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
@@ -39,7 +42,7 @@ public class BoonMixin extends Enchantment {
       ItemStack stack = player.getMainHandItem();
       int level = stack.getEnchantmentLevel(this);
       if (!Plevel.isClientSide) {
-         if (e.getState().is(Blocks.STONE) && level > 0 && random.nextFloat() <= 0.01F * (float)level) {
+         if (e.getState().is(TFCTags.Blocks.BREAKS_WHEN_ISOLATED) && level > 0 && random.nextFloat() <= 0.01F * (float)level) {
             ItemStack newDrop = new ItemStack((ItemLike)ForgeRegistries.ITEMS.tags().getTag(Tags.BOON_DROPS).getRandomElement(random).orElse(Items.AIR));
             Block.popResource(player.level(), e.getPos(), newDrop);
          }
