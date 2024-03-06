@@ -20,7 +20,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.level.BlockEvent;
-import net.minecraftforge.event.level.BlockEvent.BreakEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
 @Mixin(EarthsBoonEnchant.class)
@@ -32,7 +31,7 @@ public class BoonMixin extends Enchantment {
     }
 
     @Overwrite(remap = false)
-       private void provideBenefits(BlockEvent.BreakEvent e) {
+       public void provideBenefits(BlockEvent.BreakEvent e) {
       RandomSource random = e.getPlayer().getRandom();
       Level Plevel = e.getPlayer().level();
       Player player = e.getPlayer();
