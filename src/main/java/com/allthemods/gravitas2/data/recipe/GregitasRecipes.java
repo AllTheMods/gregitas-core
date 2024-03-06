@@ -58,16 +58,6 @@ public class GregitasRecipes {
         ChemicalHelper.registerUnificationItems(TagPrefix.rock, GregitasMaterials.Gneiss, TFCBlocks.ROCK_BLOCKS.get(Rock.GNEISS).values().stream().map(Supplier::get).toArray(ItemLike[]::new));
         ChemicalHelper.registerUnificationItems(TagPrefix.rock, GTMaterials.Marble, TFCBlocks.ROCK_BLOCKS.get(Rock.MARBLE).values().stream().map(Supplier::get).toArray(ItemLike[]::new));
 
-        for (Material material : GTCEuAPI.materialManager.getRegisteredMaterials()) {
-            if (!material.hasProperty(PropertyKey.ORE)) continue;
-
-            for (TagPrefix prefix : TagPrefix.ORES.keySet()) {
-                BlockEntry<? extends MaterialBlock> block = GTBlocks.MATERIAL_BLOCKS.get(prefix, material);
-                if (block != null && block.isPresent()) {
-                    new CollapseRecipeBuilder().ingredient(block.get()).result(block.get()).save(provider);
-                }
-            }
-        }
 
         // overrides
         ROCK_BREAKER_RECIPES.recipeBuilder("andesite")
