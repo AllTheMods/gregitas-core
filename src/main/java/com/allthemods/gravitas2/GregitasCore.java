@@ -55,10 +55,14 @@ import net.minecraft.server.TickTask;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.world.entity.monster.Drowned;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
@@ -239,6 +243,9 @@ public class GregitasCore {
             executor.tell(new TickTask(0, () -> {
             catSwap(event);
             }));
+        }
+        if(event.getEntity() instanceof Drowned) {
+            event.getEntity().addEffect(new MobEffectInstance(MobEffects.WATER_BREATHING, 1000000, 0, false, false, true));
         }
         if (!IAFEntityMap.spawnList.containsKey(event.getEntity().getType())) return;
         if (!(event.getLevel().getLevel().dimension() == Level.OVERWORLD)) return;
