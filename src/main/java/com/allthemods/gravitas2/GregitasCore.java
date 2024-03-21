@@ -41,7 +41,9 @@ import com.tterrag.registrate.providers.ProviderType;
 import dev.ftb.mods.ftbchunks.api.FTBChunksAPI;
 import dev.ftb.mods.ftblibrary.math.ChunkDimPos;
 import net.dries007.tfc.common.blocks.SeaIceBlock;
+import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.blocks.rock.AqueductBlock;
+import net.dries007.tfc.common.blocks.rock.Rock;
 import net.dries007.tfc.common.capabilities.heat.IHeatBlock;
 import net.dries007.tfc.common.entities.TFCEntities;
 import net.dries007.tfc.world.chunkdata.ChunkData;
@@ -139,7 +141,7 @@ public class GregitasCore {
         AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("tritanium_coil", 108.0F, 3.0F)).filter((mod) -> state.getBlock() == GTBlocks.COIL_TRITANIUM.get() && state.getValue(ActiveBlock.ACTIVE)));
         */
 
-        AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("aqueduct_lava", 3.0F, 1.0F)).filter((mod) -> state.getBlock() instanceof AqueductBlock && state.getValue(AqueductBlock.FLUID).getFluid() == Fluids.LAVA));
+        AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("aqueduct_lava", 4.0F, 1.0F)).filter((mod) -> state.getBlock() instanceof AqueductBlock && state.getValue(AqueductBlock.FLUID).getFluid() == Fluids.LAVA));
         AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("aqueduct_water", -3.0F, 1.0F)).filter((mod) -> state.getBlock() instanceof AqueductBlock && state.getValue(AqueductBlock.FLUID).getFluid() == Fluids.WATER));
         AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("firmalife_oven", 6.0F, 1.0F)).filter((mod) -> state.getBlock() instanceof OvenBottomBlock && state.getValue(OvenBottomBlock.LIT)));
         AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("packed_block", -9.0F, 1.0F)).filter((mod) -> state.getBlock() == Blocks.PACKED_ICE));
@@ -149,6 +151,15 @@ public class GregitasCore {
         AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("cellar_blocks", -1.0F, 1.0F)).filter((mod) -> state.getBlock() == FLBlocks.SEALED_BRICKS.get()));
         AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("sea_ice", -6.0F, 1.0F)).filter((mod) -> state.getBlock() instanceof SeaIceBlock));
         AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("dragon_ice", -12.0F, 1.0F)).filter((mod) -> state.getBlock() == IafBlockRegistry.DRAGON_ICE.get()));
+        
+        AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("magma_basalt", 3.0F, 1.0F)).filter((mod) -> state.getBlock() == TFCBlocks.MAGMA_BLOCKS.get(Rock.BASALT).get()));
+        AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("magma_andesite", 3.0F, 1.0F)).filter((mod) -> state.getBlock() == TFCBlocks.MAGMA_BLOCKS.get(Rock.ANDESITE).get()));
+        AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("magma_diorite", 3.0F, 1.0F)).filter((mod) -> state.getBlock() == TFCBlocks.MAGMA_BLOCKS.get(Rock.DIORITE).get()));
+        AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("magma_dacite", 3.0F, 1.0F)).filter((mod) -> state.getBlock() == TFCBlocks.MAGMA_BLOCKS.get(Rock.DACITE).get()));
+        AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("magma_rhyolite", 3.0F, 1.0F)).filter((mod) -> state.getBlock() == TFCBlocks.MAGMA_BLOCKS.get(Rock.RHYOLITE).get()));
+        AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("magma_gabbro", 3.0F, 1.0F)).filter((mod) -> state.getBlock() == TFCBlocks.MAGMA_BLOCKS.get(Rock.GABBRO).get()));
+        AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("magma_granite", 3.0F, 1.0F)).filter((mod) -> state.getBlock() == TFCBlocks.MAGMA_BLOCKS.get(Rock.GRANITE).get()));
+ 
         AmbientalRegistry.BLOCK_ENTITIES.register((player, blockEntity) -> {
             if (blockEntity instanceof IMachineBlockEntity machineBlockEntity && machineBlockEntity.getMetaMachine() instanceof IRecipeLogicMachine rlMachine) {
                 if (machineBlockEntity.getMetaMachine() instanceof IHeatBlock heatBlock) {
@@ -245,7 +256,10 @@ public class GregitasCore {
             }));
         }
         if(event.getEntity() instanceof Drowned) {
+            var executor = LogicalSidedProvider.WORKQUEUE.get(LogicalSide.SERVER);
+            executor.tell(new TickTask(0, () -> {
             event.getEntity().addEffect(new MobEffectInstance(MobEffects.WATER_BREATHING, 1000000, 0, false, false, true));
+        }));
         }
         if (!IAFEntityMap.spawnList.containsKey(event.getEntity().getType())) return;
         if (!(event.getLevel().getLevel().dimension() == Level.OVERWORLD)) return;
