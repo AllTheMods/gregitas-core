@@ -8,6 +8,7 @@ import net.dries007.tfc.common.fluids.IFluidLoggable;
 import net.dries007.tfc.common.fluids.TFCFluids;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -42,5 +43,11 @@ public abstract class AqueductBlockMixin extends HorizontalDirectionalBlock impl
     @Overwrite(remap = false)
     public FluidProperty getFluidProperty() {
         return FLUID;
+    }
+
+     @Override
+    public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos)
+    {
+        return state.getFluidState().getType().isSame(Fluids.LAVA) ? 15 : 0;
     }
 }
