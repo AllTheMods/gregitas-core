@@ -19,6 +19,7 @@
     "RailwaysModSetupMixin",
     "RecipeManagerMixin",
     "SteamMinerMachineMixin",
+    "SteamBoilerMachineMixin",
     "TagPrefixItemMixin",
     "TagPrefixOreTypeAccessor",
     "WorldGenCyclopsCaveMixin",
