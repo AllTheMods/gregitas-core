@@ -8,6 +8,7 @@
     "BoonMixin",
     "CoilWorkableElectricMultiblockMachineMixin",
     "FluidHelperMixin",
+    "FisherMachineMixin",
     "GTMachinesMixin",
     "GTRecipeModifiersMixin",
     "MetaMachineBlockEntityImplMixin",
