@@ -62,6 +62,6 @@ license = "LGPLv3" # Want to make your mod open source? Check out https://choose
     [[dependencies.gregitas_core]]
         modId = "railways"
         mandatory = true
-        versionRange = "1.5.3+forge-mc1.20.1"
+        versionRange = "[1.5.3+forge-mc1.20.1,)"
         ordering = "AFTER"
         side = "BOTH"
