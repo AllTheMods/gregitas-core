@@ -15,8 +15,9 @@ public class PressurePipeNet extends PipeNet<PressurePipeData> implements IPress
     private double minNetPressure = Double.MAX_VALUE;
     private double maxNetPressure = Double.MIN_VALUE;
 
+    @SuppressWarnings("unchecked")
     public PressurePipeNet(LevelPipeNet<PressurePipeData, ? extends PipeNet> world) {
-        super(world);
+        super((LevelPipeNet<PressurePipeData, ? extends PipeNet<PressurePipeData>>) world);
     }
 
     @Override

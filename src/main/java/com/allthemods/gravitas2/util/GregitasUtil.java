@@ -2,7 +2,6 @@ package com.allthemods.gravitas2.util;
 
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTCEuAPI;
-import com.railwayteam.railways.compat.Mods;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -11,7 +10,6 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.MissingMappingsEvent;
 
 public class GregitasUtil {
-    public static Mods RailwaysTFC;
 
     public static TagKey<Block> MINEABLE_WITH_WRENCH = TagKey.create(Registries.BLOCK, new ResourceLocation("forge", "mineable/wrench"));
 
