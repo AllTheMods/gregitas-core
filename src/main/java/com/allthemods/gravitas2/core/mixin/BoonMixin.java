@@ -6,10 +6,6 @@ import org.spongepowered.asm.mixin.Overwrite;
 import dev.shadowsoffire.apotheosis.Apoth.Tags;
 import dev.shadowsoffire.apotheosis.ench.enchantments.masterwork.EarthsBoonEnchant;
 import net.dries007.tfc.common.TFCTags;
-import net.dries007.tfc.common.blocks.TFCBlocks;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
@@ -20,7 +16,6 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -30,7 +25,6 @@ public class BoonMixin extends Enchantment {
 
     protected BoonMixin(Rarity rarity, EnchantmentCategory category, EquipmentSlot[] applicableSlots) {
         super(rarity, category, applicableSlots);
-        //TODO Auto-generated constructor stub
     }
 
     @Overwrite(remap = false)

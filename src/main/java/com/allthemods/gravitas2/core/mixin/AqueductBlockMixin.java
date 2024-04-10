@@ -1,7 +1,6 @@
 package com.allthemods.gravitas2.core.mixin;
 
 
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.dries007.tfc.common.blocks.rock.AqueductBlock;
 import net.dries007.tfc.common.fluids.FluidProperty;
 import net.dries007.tfc.common.fluids.IFluidLoggable;

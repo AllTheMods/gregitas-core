@@ -1,13 +1,7 @@
 package com.allthemods.gravitas2.util;
 
 import com.github.alexthe666.iceandfire.entity.IafEntityRegistry;
-import com.ibm.icu.impl.CollectionSet;
-import net.dries007.tfc.util.climate.KoppenClimateClassification;
 import net.minecraft.world.entity.EntityType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.nio.channels.AsynchronousByteChannel;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;

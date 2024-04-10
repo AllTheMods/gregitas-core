@@ -4,7 +4,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.At;
-import com.allthemods.gravitas2.GregitasCore;
 import com.simibubi.create.foundation.fluid.FluidHelper;
 
 import net.dries007.tfc.common.fluids.TFCFluids;

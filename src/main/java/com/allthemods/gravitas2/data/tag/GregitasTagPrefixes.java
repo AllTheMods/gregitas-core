@@ -1,6 +1,5 @@
 package com.allthemods.gravitas2.data.tag;
 
-import com.allthemods.gravitas2.core.mixin.TagPrefixOreTypeAccessor;
 import com.allthemods.gravitas2.material.GregitasMaterials;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
@@ -99,15 +98,15 @@ public class GregitasTagPrefixes {
     @SuppressWarnings("DataFlowIssue")
     public static void init() {
         //TagPrefix.ORES.remove(TagPrefix.oreDeepslate);
-        TagPrefix.ORES.remove(TagPrefix.oreTuff);
+       TagPrefix.ORES.remove(TagPrefix.oreTuff);
         TagPrefix.ORES.remove(TagPrefix.oreSand);
         TagPrefix.ORES.remove(TagPrefix.oreRedSand);
         TagPrefix.ORES.remove(TagPrefix.oreGravel);
-        TagPrefix.ORES.remove(TagPrefix.oreBasalt);
+      /*   TagPrefix.ORES.remove(TagPrefix.oreBasalt);
         TagPrefix.ORES.remove(TagPrefix.oreAndesite);
         TagPrefix.ORES.remove(TagPrefix.oreDiorite);
         TagPrefix.ORES.remove(TagPrefix.oreGranite);
 
-
+        */
     }
 }

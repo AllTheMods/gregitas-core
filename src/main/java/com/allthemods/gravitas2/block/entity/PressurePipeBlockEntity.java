@@ -7,8 +7,6 @@ import com.allthemods.gravitas2.pipelike.pressure.PressurePipeData;
 import com.allthemods.gravitas2.pipelike.pressure.PressurePipeNet;
 import com.allthemods.gravitas2.pipelike.pressure.PressurePipeType;
 import com.gregtechceu.gtceu.api.blockentity.PipeBlockEntity;
-import com.gregtechceu.gtceu.api.capability.IEnergyContainer;
-import com.gregtechceu.gtceu.common.pipelike.cable.EnergyNetHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;

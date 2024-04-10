@@ -1,6 +1,5 @@
 package com.allthemods.gravitas2.core.mixin;
 
-import com.allthemods.gravitas2.util.GregitasUtil;
 import com.allthemods.gravitas2.util.WrappingHeatHandler;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
