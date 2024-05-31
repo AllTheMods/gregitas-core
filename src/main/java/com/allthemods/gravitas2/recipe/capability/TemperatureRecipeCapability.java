@@ -3,13 +3,12 @@ package com.allthemods.gravitas2.recipe.capability;
 import com.gregtechceu.gtceu.api.capability.recipe.RecipeCapability;
 import com.gregtechceu.gtceu.api.recipe.content.ContentModifier;
 import com.gregtechceu.gtceu.api.recipe.content.SerializerFloat;
-import com.gregtechceu.gtceu.api.recipe.content.SerializerInteger;
 
 public class TemperatureRecipeCapability extends RecipeCapability<Float> {
     public static final TemperatureRecipeCapability CAP = new TemperatureRecipeCapability();
 
     protected TemperatureRecipeCapability() {
-        super("temp", 0xFFEE9933, SerializerFloat.INSTANCE);
+        super("temp", 0xFFEE9933, true,0, SerializerFloat.INSTANCE);
     }
 
     @Override

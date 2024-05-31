@@ -24,6 +24,7 @@ public abstract class AqueductBlockMixin extends HorizontalDirectionalBlock impl
     @Final
     @Shadow
     private static final FluidProperty FLUID = FluidProperty.create("fluid", Stream.of(Fluids.EMPTY, Fluids.WATER, TFCFluids.SALT_WATER, TFCFluids.SPRING_WATER, Fluids.LAVA));
+    
     protected AqueductBlockMixin(Properties properties) {
         super(properties);
     }

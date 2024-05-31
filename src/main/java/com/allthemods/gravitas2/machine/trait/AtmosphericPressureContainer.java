@@ -1,7 +1,6 @@
 package com.allthemods.gravitas2.machine.trait;
 
 import com.allthemods.gravitas2.util.GregitasConstants;
-import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
 
 public class AtmosphericPressureContainer extends NotifiablePressureContainer {

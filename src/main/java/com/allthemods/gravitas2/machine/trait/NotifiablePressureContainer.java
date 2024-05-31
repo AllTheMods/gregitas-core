@@ -95,4 +95,12 @@ public class NotifiablePressureContainer extends NotifiableRecipeHandlerTrait<Do
     public ManagedFieldHolder getFieldHolder() {
         return MANAGED_FIELD_HOLDER;
     }
+
+    @Override
+    public double getTotalContentAmount() {
+        return volume;
+    }
+
+
 }
+

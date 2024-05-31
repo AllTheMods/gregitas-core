@@ -79,4 +79,10 @@ public class NotifiableHeatContainer extends NotifiableRecipeHandlerTrait<Float>
     public void setTemperature(float temp) {
         this.temperature = temp + 273.15f;
     }
+
+    @Override
+    public double getTotalContentAmount() {
+        return temperature;
+    }
+
 }

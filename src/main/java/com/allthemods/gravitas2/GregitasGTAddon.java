@@ -7,6 +7,7 @@ import com.allthemods.gravitas2.data.tag.GregitasTagPrefixes;
 import com.allthemods.gravitas2.material.GregitasMaterials;
 import com.allthemods.gravitas2.recipe.capability.GregitasRecipeCapabilities;
 import com.allthemods.gravitas2.registry.GregitasRegistry;
+import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.addon.GTAddon;
 import com.gregtechceu.gtceu.api.addon.IGTAddon;
 import com.gregtechceu.gtceu.api.addon.events.KJSRecipeKeyEvent;
@@ -28,7 +29,7 @@ public class GregitasGTAddon implements IGTAddon {
 
     @Override
     public void initializeAddon() {
-        GTBlocks.ALL_FILTERS.put(CleanerroomFilterType.INSTANCE, GregitasBlocks.ULTRA_STERILIZING_FILTER_CASING);
+        GTCEuAPI.CLEANROOM_FILTERS.put(CleanerroomFilterType.INSTANCE, GregitasBlocks.ULTRA_STERILIZING_FILTER_CASING);
     }
 
     @Override

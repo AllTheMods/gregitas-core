@@ -113,9 +113,10 @@ public abstract class CoilWorkableElectricMultiblockMachineMixin extends Workabl
     }
 
     @Override
-    public void onWorking() {
+    public boolean onWorking() {
         super.onWorking();
         this.setTemperature(HeatCapability.adjustTempTowards(getTemperature(), (coilType.getCoilTemperature() + 100 * Math.max(0, this.getTier() - GTValues.MV)) - 273, (getCoilTier() + 1) / 1.5f));
+        return this.isActive();
     }
 
     @Override

@@ -9,7 +9,7 @@ public class PressureRecipeCapability extends RecipeCapability<Double> {
 
 
     protected PressureRecipeCapability() {
-        super("psi", 0xFFAA33AA, SerializerDouble.INSTANCE);
+        super("psi", 0xFFAA33AA, true, 0, SerializerDouble.INSTANCE);
     }
 
     @Override
