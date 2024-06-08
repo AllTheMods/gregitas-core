@@ -97,7 +97,7 @@ public class GregitasCore {
     public static final CleanroomType CLEANER_ROOM = new CleanroomType("cleanerroom", "gregitas_core.recipe.cleanerroom.display_name");
 
     public GregitasCore() {
-        ConfigHolder.init();
+        //ConfigHolder.init();
 
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         modBus.addListener(this::addMaterialRegistries);
