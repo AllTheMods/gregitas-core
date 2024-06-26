@@ -17,7 +17,7 @@ import java.util.List;
 @Mixin(value = GTMachines.class, remap = false)
 public abstract class GTMachinesMixin {
 
-    @Inject(method = "lambda$static$120", at = @At("TAIL"))
+    @Inject(method = "lambda$static$122", at = @At("TAIL"))
     private static void gregitas$addEbfText(IMultiController controller, List<Component> textList, CallbackInfo ci) {
         if (controller instanceof IHeatBlock heatBlock && controller.isFormed()) {
             Heat heat = Heat.getHeat(heatBlock.getTemperature());
