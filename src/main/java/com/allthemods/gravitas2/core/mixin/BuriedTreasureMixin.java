@@ -38,7 +38,7 @@ public abstract class BuriedTreasureMixin extends StructurePiece{
     }
 
     
-    @Inject(method = "postProcess", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "postProcess", at = @At("HEAD"), cancellable = true)
     public void postProcessing(WorldGenLevel level, StructureManager structureManager, ChunkGenerator generator, RandomSource random, BoundingBox box, ChunkPos chunkPos, BlockPos pos, CallbackInfo cir) {
       int i = level.getHeight(Types.OCEAN_FLOOR_WG, this.boundingBox.minX(), this.boundingBox.minZ());
       BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos(this.boundingBox.minX(), i-3, this.boundingBox.minZ());
