@@ -6,6 +6,7 @@
   "mixins": [
     "AqueductBlockMixin",
     "BoonMixin",
+    "BuriedTreasureMixin",
     "CoilWorkableElectricMultiblockMachineMixin",
     "FluidHelperMixin",
     "FisherMachineMixin",
