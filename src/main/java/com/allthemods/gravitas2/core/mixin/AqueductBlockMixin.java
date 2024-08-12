@@ -1,10 +1,10 @@
 package com.allthemods.gravitas2.core.mixin;
 
 
+import com.allthemods.gravitas2.fluid.FluidPropertyExtension;
 import net.dries007.tfc.common.blocks.rock.AqueductBlock;
 import net.dries007.tfc.common.fluids.FluidProperty;
 import net.dries007.tfc.common.fluids.IFluidLoggable;
-import net.dries007.tfc.common.fluids.TFCFluids;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -17,14 +17,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.stream.Stream;
+@Mixin(value = AqueductBlock.class)
+public abstract class AqueductBlockMixin extends HorizontalDirectionalBlock implements FluidPropertyExtension, IFluidLoggable {
 
-@Mixin(AqueductBlock.class)
-public abstract class AqueductBlockMixin extends HorizontalDirectionalBlock implements IFluidLoggable {
-    @Final
-    @Shadow
-    private static final FluidProperty FLUID = FluidProperty.create("fluid", Stream.of(Fluids.EMPTY, Fluids.WATER, TFCFluids.SALT_WATER, TFCFluids.SPRING_WATER, Fluids.LAVA));
-    
     protected AqueductBlockMixin(Properties properties) {
         super(properties);
     }
@@ -36,13 +31,9 @@ public abstract class AqueductBlockMixin extends HorizontalDirectionalBlock impl
         }
     }
 
-    /**
-     * @author
-     * @reason
-     */
-    @Overwrite(remap = false)
-    public FluidProperty getFluidProperty() {
-        return FLUID;
+    @Inject(method = "getFluidProperty", at = @At(value = "RETURN"), cancellable = true, remap = false)
+    private void gregitas$getFluidProperty(CallbackInfoReturnable<FluidProperty> cir) {
+        cir.setReturnValue(LAVA_AND_ALL_WATER);
     }
 
      @Override
