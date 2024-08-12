@@ -141,8 +141,8 @@ public class GregitasCore {
         AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("tritanium_coil", 108.0F, 3.0F)).filter((mod) -> state.getBlock() == GTBlocks.COIL_TRITANIUM.get() && state.getValue(ActiveBlock.ACTIVE)));
         */
 
-        AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("aqueduct_lava", 4.0F, 1.0F)).filter((mod) -> state.getBlock() instanceof AqueductBlock && state.getValue(AqueductBlock.FLUID).getFluid() == Fluids.LAVA));
-        AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("aqueduct_water", -3.0F, 1.0F)).filter((mod) -> state.getBlock() instanceof AqueductBlock && state.getValue(AqueductBlock.FLUID).getFluid() == Fluids.WATER));
+        AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("aqueduct_lava", 4.0F, 1.0F)).filter((mod) -> state.getBlock() instanceof AqueductBlock && state.getValue(((AqueductBlock) state.getBlock()).getFluidProperty()).getFluid() == Fluids.LAVA));
+        AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("aqueduct_water", -3.0F, 1.0F)).filter((mod) -> state.getBlock() instanceof AqueductBlock && state.getValue(((AqueductBlock) state.getBlock()).getFluidProperty()).getFluid() == Fluids.WATER));
         AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("firmalife_oven", 6.0F, 1.0F)).filter((mod) -> state.getBlock() instanceof OvenBottomBlock && state.getValue(OvenBottomBlock.LIT)));
         AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("packed_block", -9.0F, 1.0F)).filter((mod) -> state.getBlock() == Blocks.PACKED_ICE));
         AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("blue_ice", -8.0F, 1.0F)).filter((mod) -> state.getBlock() == Blocks.BLUE_ICE));
