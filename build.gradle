@@ -168,6 +168,7 @@ dependencies {
     modImplementation("curse.maven:firmalife-453394:5086231")
     modImplementation("curse.maven:apotheosis-313970:5145344")
     modImplementation("curse.maven:placebo-283644:5191171")
+    modImplementation("curse.maven:scorched-guns-802940:5741395")
     modRuntimeOnly("vazkii.patchouli:Patchouli:${project.minecraft_version}-${project.patchouli_version}-FORGE")
     modRuntimeOnly("top.theillusivec4.curios:curios-forge:${project.curios_version}+${project.minecraft_version}")
     modRuntimeOnly("dev.toma.configuration:configuration-forge-${project.minecraft_version}:${project.configuration_version}")

@@ -83,6 +83,17 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.MissingMappingsEvent;
+import top.ribs.scguns.entity.monster.BlundererEntity;
+import top.ribs.scguns.entity.monster.CogKnightEntity;
+import top.ribs.scguns.entity.monster.CogMinionEntity;
+import top.ribs.scguns.entity.monster.DissidentEntity;
+import top.ribs.scguns.entity.monster.HiveEntity;
+import top.ribs.scguns.entity.monster.HornlinEntity;
+import top.ribs.scguns.entity.monster.RedcoatEntity;
+import top.ribs.scguns.entity.monster.SkyCarrierEntity;
+import top.ribs.scguns.entity.monster.SupplyScampEntity;
+import top.ribs.scguns.entity.monster.SwarmEntity;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -248,6 +259,43 @@ public class GregitasCore {
     }
     @SubscribeEvent
     public void spawnCheck(MobSpawnEvent.FinalizeSpawn event) {
+        if((event.getEntity() instanceof BlundererEntity) && (event.getY() > 50) && event.getLevel().canSeeSky(new BlockPos((int)event.getX(),(int)event.getY(),(int)event.getZ()))) {
+            event.getEntity().discard();
+            event.setSpawnCancelled(true);
+        }
+        if((event.getEntity() instanceof CogKnightEntity) && (event.getY() > 50) && event.getLevel().canSeeSky(new BlockPos((int)event.getX(),(int)event.getY(),(int)event.getZ()))) {
+            event.getEntity().discard();
+            event.setSpawnCancelled(true);
+        }
+        if((event.getEntity() instanceof CogMinionEntity) && (event.getY() > 50) && event.getLevel().canSeeSky(new BlockPos((int)event.getX(),(int)event.getY(),(int)event.getZ()))) {
+            event.getEntity().discard();
+            event.setSpawnCancelled(true);
+        }
+        if((event.getEntity() instanceof DissidentEntity) && (event.getY() > 50) && event.getLevel().canSeeSky(new BlockPos((int)event.getX(),(int)event.getY(),(int)event.getZ()))) {
+            event.getEntity().discard();
+            event.setSpawnCancelled(true);
+        }
+        if((event.getEntity() instanceof HiveEntity) && (event.getY() > 50) && event.getLevel().canSeeSky(new BlockPos((int)event.getX(),(int)event.getY(),(int)event.getZ()))) {
+            event.getEntity().discard();
+            event.setSpawnCancelled(true);
+        }
+        if((event.getEntity() instanceof RedcoatEntity) && (event.getY() > 50) && event.getLevel().canSeeSky(new BlockPos((int)event.getX(),(int)event.getY(),(int)event.getZ()))) {
+            event.getEntity().discard();
+            event.setSpawnCancelled(true);
+        }
+        if((event.getEntity() instanceof SkyCarrierEntity) && (event.getY() > 50) && event.getLevel().canSeeSky(new BlockPos((int)event.getX(),(int)event.getY(),(int)event.getZ()))) {
+            event.getEntity().discard();
+            event.setSpawnCancelled(true);
+        }
+        if((event.getEntity() instanceof SupplyScampEntity) && (event.getY() > 50) && event.getLevel().canSeeSky(new BlockPos((int)event.getX(),(int)event.getY(),(int)event.getZ()))) {
+            event.getEntity().discard();
+            event.setSpawnCancelled(true);
+        }
+        if((event.getEntity() instanceof SwarmEntity) && (event.getY() > 50) && event.getLevel().canSeeSky(new BlockPos((int)event.getX(),(int)event.getY(),(int)event.getZ()))) {
+            event.getEntity().discard();
+            event.setSpawnCancelled(true);
+        }
+
         if(event.getEntity() instanceof Sheep){ event.getEntity().discard(); event.setSpawnCancelled(true); event.setCanceled(true); }
         if(event.getEntity() instanceof Cat){
             var executor = LogicalSidedProvider.WORKQUEUE.get(LogicalSide.SERVER);
@@ -282,6 +330,7 @@ public class GregitasCore {
 
         }
     }
+
     private static void catSwap(MobSpawnEvent.FinalizeSpawn event) {
         event.getEntity().discard();
         event.setSpawnCancelled(true);
