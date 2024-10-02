@@ -259,39 +259,39 @@ public class GregitasCore {
     }
     @SubscribeEvent
     public void spawnCheck(MobSpawnEvent.FinalizeSpawn event) {
-        if((event.getEntity() instanceof BlundererEntity) && (event.getY() > 50) && event.getLevel().canSeeSky(new BlockPos((int)event.getX(),(int)event.getY(),(int)event.getZ()))) {
+        if((event.getEntity() instanceof BlundererEntity) && (event.getY() > 50) ) {
             event.getEntity().discard();
             event.setSpawnCancelled(true);
         }
-        if((event.getEntity() instanceof CogKnightEntity) && (event.getY() > 50) && event.getLevel().canSeeSky(new BlockPos((int)event.getX(),(int)event.getY(),(int)event.getZ()))) {
+        if((event.getEntity() instanceof CogKnightEntity) && (event.getY() > 50) ) {
             event.getEntity().discard();
             event.setSpawnCancelled(true);
         }
-        if((event.getEntity() instanceof CogMinionEntity) && (event.getY() > 50) && event.getLevel().canSeeSky(new BlockPos((int)event.getX(),(int)event.getY(),(int)event.getZ()))) {
+        if((event.getEntity() instanceof CogMinionEntity) && (event.getY() > 50) ) {
             event.getEntity().discard();
             event.setSpawnCancelled(true);
         }
-        if((event.getEntity() instanceof DissidentEntity) && (event.getY() > 50) && event.getLevel().canSeeSky(new BlockPos((int)event.getX(),(int)event.getY(),(int)event.getZ()))) {
+        if((event.getEntity() instanceof DissidentEntity) && (event.getY() > 50) ) {
             event.getEntity().discard();
             event.setSpawnCancelled(true);
         }
-        if((event.getEntity() instanceof HiveEntity) && (event.getY() > 50) && event.getLevel().canSeeSky(new BlockPos((int)event.getX(),(int)event.getY(),(int)event.getZ()))) {
+        if((event.getEntity() instanceof HiveEntity) && (event.getY() > 50) ) {
             event.getEntity().discard();
             event.setSpawnCancelled(true);
         }
-        if((event.getEntity() instanceof RedcoatEntity) && (event.getY() > 50) && event.getLevel().canSeeSky(new BlockPos((int)event.getX(),(int)event.getY(),(int)event.getZ()))) {
+        if((event.getEntity() instanceof RedcoatEntity) && (event.getY() > 50) ) {
             event.getEntity().discard();
             event.setSpawnCancelled(true);
         }
-        if((event.getEntity() instanceof SkyCarrierEntity) && (event.getY() > 50) && event.getLevel().canSeeSky(new BlockPos((int)event.getX(),(int)event.getY(),(int)event.getZ()))) {
+        if((event.getEntity() instanceof SkyCarrierEntity) && (event.getY() > 50) ) {
             event.getEntity().discard();
             event.setSpawnCancelled(true);
         }
-        if((event.getEntity() instanceof SupplyScampEntity) && (event.getY() > 50) && event.getLevel().canSeeSky(new BlockPos((int)event.getX(),(int)event.getY(),(int)event.getZ()))) {
+        if((event.getEntity() instanceof SupplyScampEntity) && (event.getY() > 50) ) {
             event.getEntity().discard();
             event.setSpawnCancelled(true);
         }
-        if((event.getEntity() instanceof SwarmEntity) && (event.getY() > 50) && event.getLevel().canSeeSky(new BlockPos((int)event.getX(),(int)event.getY(),(int)event.getZ()))) {
+        if((event.getEntity() instanceof SwarmEntity) && (event.getY() > 50) ) {
             event.getEntity().discard();
             event.setSpawnCancelled(true);
         }
