@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "gregitas_core:block/casings/cleanroom/ultra_sterilizing_filter_casing"
+  }
+}

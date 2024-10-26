@@ -34,6 +34,7 @@
   "gregitas_core.message.leave_area": "You left an area owned by ",
   "gregitas_core.multiblock.blast_furnace.temperature": "Current Temperature: %sK",
   "gregitas_core.recipe.cleanerroom.display_name": "Ultra-sterile Cleanroom",
+  "itemGroup.gregitas_core.all": "Gravitas² Core Mod",
   "material.gregitas_core.acidic_impure_hypogen_solution": "Acidic Impure Hypogen Solution",
   "material.gregitas_core.acidic_purified_hypogen_solution": "Acidic Purified Hypogen Solution",
   "material.gregitas_core.allthemodium": "Allthemodium",

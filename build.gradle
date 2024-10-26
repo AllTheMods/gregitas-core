@@ -49,10 +49,16 @@ loom {
             vmArg "-Dproduction=true"
         }
         data {
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             data()
             programArgs "--all", "--mod", modId
             programArgs "--output", generatedResources.absolutePath
             programArgs "--existing", file("src/main/resources").absolutePath
+        }
+        client {
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
         }
     }
 }
@@ -133,6 +139,13 @@ repositories {
             includeGroup "com.railwayteam.railways"
         }
     }
+    maven {
+        name = 'GTCEu Maven'
+        url = 'https://maven.gtceu.com'
+        content {
+            includeGroup 'com.gregtechceu.gtceu'
+        }
+    }
     flatDir {
         dir 'libs'
     }
@@ -150,7 +163,7 @@ dependencies {
 
     modCompileOnly("mezz.jei:jei-${project.minecraft_version}-forge-api:${project.jei_version}") { transitive = false }
     modCompileOnly("mezz.jei:jei-${project.minecraft_version}-common-api:${project.jei_version}") { transitive = false }
-
+//
     modImplementation("com.gregtechceu.gtceu:gtceu-${project.minecraft_version}:${project.gtceu_version}") { transitive = false }
     modImplementation("com.lowdragmc.ldlib:ldlib-forge-${project.minecraft_version}:${project.ldlib_version}") { transitive = false }
     modImplementation("com.tterrag.registrate:Registrate:${project.registrate_version}")
@@ -160,28 +173,31 @@ dependencies {
     modImplementation("dev.ftb.mods:ftb-chunks-forge:${project.ftb_chunks_version}") { transitive = false }
     modImplementation("dev.ftb.mods:ftb-library-forge:${project.ftb_library_version}") { transitive = false }
     modImplementation("dev.ftb.mods:ftb-teams-forge:${project.ftb_teams_version}") { transitive = false }
-
-    modImplementation("com.jozufozu.flywheel:flywheel-forge-1.20.1:0.6.10-7")
+//
+    modImplementation("com.jozufozu.flywheel:flywheel-forge-1.20.1:0.6.11-13")
     modImplementation("com.simibubi.create:create-1.20.1:0.5.1.h-48:all") { transitive = false }
     modImplementation("curse.maven:ice-and-fire-dragons-264231:5122408")
     modImplementation("curse.maven:citadel-331936:4848887")
-    modImplementation("curse.maven:firmalife-453394:5086231")
+    modImplementation("curse.maven:firmalife-453394:5775257")
     modImplementation("curse.maven:apotheosis-313970:5145344")
-    modImplementation("curse.maven:placebo-283644:5191171")
+    modImplementation("curse.maven:attributeslib-898963:5634071")
+    modImplementation("curse.maven:framework-549225:5811593")
+    modImplementation("curse.maven:placebo-283644:5414631")
     modImplementation("curse.maven:scorched-guns-802940:5741395")
     modRuntimeOnly("vazkii.patchouli:Patchouli:${project.minecraft_version}-${project.patchouli_version}-FORGE")
     modRuntimeOnly("top.theillusivec4.curios:curios-forge:${project.curios_version}+${project.minecraft_version}")
     modRuntimeOnly("dev.toma.configuration:configuration-forge-${project.minecraft_version}:${project.configuration_version}")
     modRuntimeOnly("mezz.jei:jei-${project.minecraft_version}-forge:${project.jei_version}") { transitive = false }
     modRuntimeOnly("curse.maven:jade-324717:5072729")
-
-    // Mixin Extras
+//
+//    // Mixin Extras
     implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:${project.mixinextras_version}"))
     implementation(include("io.github.llamalad7:mixinextras-forge:${project.mixinextras_version}"))
-
-    // lombok
+//
+//    // lombok
     compileOnly 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
 }
 
 processResources {
