@@ -22,7 +22,7 @@ import java.util.Map;
 @Mixin(value = MixinHelpers.class, remap = false)
 public class MixinHelpersMixin {
 
-    @Inject(method = "lambda$addMaterialBlockTags$20", at = @At("HEAD"))
+    @Inject(method = "lambda$addMaterialBlockTags$22", at = @At("HEAD"))
     private static void gregitas$addFallingTag(Map<ResourceLocation, List<TagLoader.EntryWithSource>> tagMap, TagPrefix prefix, Material material, BlockEntry<? extends Block> block, CallbackInfo ci) {
         if (TagPrefix.ORES.containsKey(prefix)) {
             tagMap.computeIfAbsent(TFCTags.Blocks.CAN_COLLAPSE.location(), $ -> new ArrayList<>())
