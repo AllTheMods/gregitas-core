@@ -49,16 +49,10 @@ loom {
             vmArg "-Dproduction=true"
         }
         data {
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             data()
             programArgs "--all", "--mod", modId
             programArgs "--output", generatedResources.absolutePath
             programArgs "--existing", file("src/main/resources").absolutePath
-        }
-        client {
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
         }
     }
 }
