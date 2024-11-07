@@ -5,10 +5,12 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
+import com.gregtechceu.gtceu.api.capability.IWorkable;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.TieredEnergyMachine;
 import com.gregtechceu.gtceu.api.machine.feature.IAutoOutputItem;
 import com.gregtechceu.gtceu.api.machine.feature.IFancyUIMachine;
+import com.gregtechceu.gtceu.api.machine.feature.IMachineLife;
 import com.gregtechceu.gtceu.api.machine.feature.IMachineModifyDrops;
 import com.gregtechceu.gtceu.common.machine.electric.FisherMachine;
 
@@ -17,7 +19,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.material.Fluids;
 
 @Mixin(value = FisherMachine.class, remap = false)
-public abstract class FisherMachineMixin extends TieredEnergyMachine implements IAutoOutputItem, IFancyUIMachine, IMachineModifyDrops{
+public abstract class FisherMachineMixin extends TieredEnergyMachine implements IAutoOutputItem, IFancyUIMachine, IMachineLife, IWorkable {
 
 
     @Shadow
