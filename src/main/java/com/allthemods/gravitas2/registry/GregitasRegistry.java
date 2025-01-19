@@ -9,5 +9,5 @@ import net.minecraft.resources.ResourceLocation;
 public class GregitasRegistry {
     public static GTRegistrate GREGITAS_REGISTRATE = GTRegistrate.create(GregitasCore.MOD_ID);
 
-    public static final FoodTrait FreezeDried = FoodTrait.register(new ResourceLocation(GregitasCore.MOD_ID,"freeze_dried"),new FoodTrait(0.01F,"gregitas_core.freeze_dried"));
+    public static final FoodTrait FreezeDried = FoodTrait.register(new ResourceLocation(GregitasCore.MOD_ID,"freeze_dried"),new FoodTrait(0.02F,"gregitas_core.freeze_dried"));
 }
