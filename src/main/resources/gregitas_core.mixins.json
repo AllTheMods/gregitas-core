@@ -16,6 +16,7 @@
     "IDisplayUIMachineMixin",
     "MetaMachineBlockEntityImplMixin",
     "MixinHelpersMixin",
+    "MixinIM_Shards",
     "PlaceBlockSpecialPacketMixin",
     "PlacedItemBlockEntityMixin",
     "RecipeManagerMixin",

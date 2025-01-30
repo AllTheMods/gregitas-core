@@ -179,6 +179,9 @@ dependencies {
     modImplementation("curse.maven:placebo-283644:5414631")
     modImplementation("curse.maven:scorched-guns-802940:5741395")
     modImplementation("curse.maven:create-diesel-generators-869316:5401010")
+    modImplementation("curse.maven:immersive-machinery-1068736:6036154")
+    modImplementation("curse.maven:immersive-aircraft-666014:6036814")
+
     modRuntimeOnly("vazkii.patchouli:Patchouli:${project.minecraft_version}-${project.patchouli_version}-FORGE")
     modRuntimeOnly("top.theillusivec4.curios:curios-forge:${project.curios_version}+${project.minecraft_version}")
     modRuntimeOnly("dev.toma.configuration:configuration-forge-${project.minecraft_version}:${project.configuration_version}")
