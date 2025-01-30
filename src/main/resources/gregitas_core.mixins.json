@@ -17,6 +17,7 @@
     "MetaMachineBlockEntityImplMixin",
     "MixinHelpersMixin",
     "MixinIM_Shards",
+    "MixinRedstoneSheep",
     "PlaceBlockSpecialPacketMixin",
     "PlacedItemBlockEntityMixin",
     "RecipeManagerMixin",
