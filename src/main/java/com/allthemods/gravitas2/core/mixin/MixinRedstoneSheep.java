@@ -15,12 +15,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class MixinRedstoneSheep {
 
     @Inject(method = "isCrop", at = @At(value = "HEAD"), cancellable = true)
-    private static void isCrop(Block block, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
+    private static void isitACrop(Block block, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
 
          callbackInfoReturnable.setReturnValue(block instanceof net.dries007.tfc.common.blocks.crop.CropBlock ||
          block instanceof ShortGrassBlock ||
          block instanceof TallGrassBlock ||
          block instanceof WildCropBlock);
       }
+
+
 
 }
