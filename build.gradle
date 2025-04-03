@@ -164,6 +164,7 @@ dependencies {
     modImplementation("dev.latvian.mods:kubejs-forge:${project.kubejs_version}")
     modImplementation("curse.maven:tfcambiental-940350:${project.tfcambiental_file}")
     modImplementation("curse.maven:terrafirmacraft-302973:${project.terrafirmacraft_file}")
+    modImplementation("curse.maven:beneath-1113980:${project.beneath_file}")
     modImplementation("dev.ftb.mods:ftb-chunks-forge:${project.ftb_chunks_version}") { transitive = false }
     modImplementation("dev.ftb.mods:ftb-library-forge:${project.ftb_library_version}") { transitive = false }
     modImplementation("dev.ftb.mods:ftb-teams-forge:${project.ftb_teams_version}") { transitive = false }
