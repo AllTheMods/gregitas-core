@@ -177,7 +177,7 @@ public class GregitasCore {
                     return TempModifier.defined("coil_machine", (heatBlock.getTemperature() + 273) / 100, 3.0F);
                 }
                 if (rlMachine.isActive()) {
-                    return TempModifier.defined("machine", rlMachine.getChanceTier() * 6.0F, 0.0F);
+                    return TempModifier.defined("machine", rlMachine.getProgress() * 6.0F, 0.0F);
                 }
 
             }

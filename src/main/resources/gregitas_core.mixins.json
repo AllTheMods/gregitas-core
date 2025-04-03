@@ -14,7 +14,7 @@
     "FluidHelperMixin",
     "GTMachinesMixin",
     "GTRecipeModifiersMixin",
-    "IDisplayUIMachineMixin",
+    "LargeBoilerMixin",
     "MetaMachineBlockEntityImplMixin",
     "MixinHelpersMixin",
     "MixinIM_Shards",

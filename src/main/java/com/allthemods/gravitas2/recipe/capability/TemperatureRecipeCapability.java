@@ -17,6 +17,6 @@ public class TemperatureRecipeCapability extends RecipeCapability<Float> {
     }
 
     public Float copyWithModifier(Float content, ContentModifier modifier){
-        return modifier.apply(content).floatValue();
+        return modifier.apply(content);
     }
 }

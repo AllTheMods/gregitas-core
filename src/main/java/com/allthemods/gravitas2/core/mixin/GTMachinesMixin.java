@@ -2,6 +2,7 @@ package com.allthemods.gravitas2.core.mixin;
 
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiController;
 import com.gregtechceu.gtceu.common.data.GTMachines;
+import com.gregtechceu.gtceu.common.data.machines.GTMultiMachines;
 import com.gregtechceu.gtceu.utils.FormattingUtil;
 import net.dries007.tfc.common.capabilities.heat.Heat;
 import net.dries007.tfc.common.capabilities.heat.IHeatBlock;
@@ -14,10 +15,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
-@Mixin(value = GTMachines.class, remap = false)
+@Mixin(value = GTMultiMachines.class, remap = false)
 public abstract class GTMachinesMixin {
 
-    @Inject(method = "lambda$static$127", at = @At("TAIL"))
+    @Inject(method = "lambda$static$10", at = @At("TAIL"))
     private static void gregitas$addEbfText(IMultiController controller, List<Component> textList, CallbackInfo ci) {
         if (controller instanceof IHeatBlock heatBlock && controller.isFormed()) {
             Heat heat = Heat.getHeat(heatBlock.getTemperature());

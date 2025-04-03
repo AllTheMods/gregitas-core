@@ -18,6 +18,6 @@ public class PressureRecipeCapability extends RecipeCapability<Double> {
     }
 
     public Double copyWithModifier(Double content, ContentModifier modifier){
-        return modifier.apply(content).doubleValue();
+        return modifier.apply(content);
     }
 }

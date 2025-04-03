@@ -6,8 +6,6 @@ import com.allthemods.gravitas2.pipelike.pressure.PressurePipeType;
 import com.allthemods.gravitas2.registry.GregitasCreativeModeTabs;
 import com.allthemods.gravitas2.util.GregitasUtil;
 import com.gregtechceu.gtceu.api.block.IFilterType;
-import com.gregtechceu.gtceu.api.item.RendererBlockItem;
-import com.gregtechceu.gtceu.client.renderer.block.TextureOverrideRenderer;
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
 import com.lowdragmc.lowdraglib.Platform;
 import com.tterrag.registrate.util.entry.BlockEntry;
