@@ -3,7 +3,6 @@ package com.allthemods.gravitas2;
 import com.allthemods.gravitas2.block.GregitasBlocks;
 import com.allthemods.gravitas2.block.entity.GregitasBlockEntities;
 import com.allthemods.gravitas2.capability.GregitasCapabilities;
-import com.allthemods.gravitas2.compat.ArmCompat;
 import com.allthemods.gravitas2.data.lang.LangHandler;
 import com.allthemods.gravitas2.machine.GregitasMachines;
 import com.allthemods.gravitas2.material.GregitasElements;
@@ -13,15 +12,11 @@ import com.allthemods.gravitas2.recipe.type.GregitasRecipeTypes;
 import com.allthemods.gravitas2.registry.GregitasRegistry;
 import com.allthemods.gravitas2.util.GregitasUtil;
 import com.allthemods.gravitas2.util.IAFEntityMap;
-import com.eerussianguy.firmalife.FirmaLife;
-import com.eerussianguy.firmalife.common.blocks.AbstractOvenBlock;
 import com.eerussianguy.firmalife.common.blocks.FLBlocks;
 import com.eerussianguy.firmalife.common.blocks.OvenBottomBlock;
-import com.eerussianguy.firmalife.common.blocks.OvenTopBlock;
 import com.github.alexthe666.iceandfire.block.IafBlockRegistry;
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTCEuAPI;
-import com.gregtechceu.gtceu.api.block.ActiveBlock;
 import com.gregtechceu.gtceu.api.capability.recipe.RecipeCapability;
 import com.gregtechceu.gtceu.api.data.chemical.Element;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialEvent;
@@ -31,10 +26,7 @@ import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.machine.feature.IRecipeLogicMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.CleanroomType;
-import com.gregtechceu.gtceu.api.machine.multiblock.CoilWorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
-import com.gregtechceu.gtceu.common.data.GTBlocks;
-import com.gregtechceu.gtceu.config.ConfigHolder;
 import com.lumintorious.tfcambiental.api.AmbientalRegistry;
 import com.lumintorious.tfcambiental.modifier.TempModifier;
 import com.tterrag.registrate.providers.ProviderType;
@@ -57,7 +49,6 @@ import net.minecraft.server.TickTask;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
@@ -88,7 +79,6 @@ import top.ribs.scguns.entity.monster.CogKnightEntity;
 import top.ribs.scguns.entity.monster.CogMinionEntity;
 import top.ribs.scguns.entity.monster.DissidentEntity;
 import top.ribs.scguns.entity.monster.HiveEntity;
-import top.ribs.scguns.entity.monster.HornlinEntity;
 import top.ribs.scguns.entity.monster.RedcoatEntity;
 import top.ribs.scguns.entity.monster.SkyCarrierEntity;
 import top.ribs.scguns.entity.monster.SupplyScampEntity;
@@ -97,7 +87,6 @@ import top.ribs.scguns.entity.monster.SwarmEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 @Mod(GregitasCore.MOD_ID)
@@ -133,7 +122,6 @@ public class GregitasCore {
 
         // Register Integration content
         registerTFCAmbientalBlocks();
-        ArmCompat.registerAll();
     }
 
     public static ResourceLocation id(String path) {
