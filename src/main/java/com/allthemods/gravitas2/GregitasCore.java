@@ -164,10 +164,13 @@ public class GregitasCore {
                 if (machineBlockEntity.getMetaMachine() instanceof IHeatBlock heatBlock) {
                     return TempModifier.defined("coil_machine", (heatBlock.getTemperature() + 273) / 100, 3.0F);
                 }
-                if (rlMachine.isActive()) {
-                    return TempModifier.defined("machine", rlMachine.getProgress() * 6.0F, 0.0F);
+                if (rlMachine.isActive() && machineBlockEntity.getMetaMachine() instanceof IOverclockMachine overclockMachine){
+                    return TempModifier.defined("machine", overclockMachine.getOverclockTier() * 6.0F, 0.0F);
                 }
-
+                if (rlMachine.isActive() && machineBlockEntity.getMetaMachine() instanceof ITieredMachine tieredMachine){
+                    return TempModifier.defined("machine", tieredMachine.getTier() * 6.0F, 0.0F);
+                }
+                
             }
             return TempModifier.none();
         });
