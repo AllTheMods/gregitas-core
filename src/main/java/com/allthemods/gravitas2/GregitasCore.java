@@ -24,7 +24,9 @@ import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialRegistryEv
 import com.gregtechceu.gtceu.api.data.chemical.material.event.PostMaterialEvent;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
+import com.gregtechceu.gtceu.api.machine.feature.IOverclockMachine;
 import com.gregtechceu.gtceu.api.machine.feature.IRecipeLogicMachine;
+import com.gregtechceu.gtceu.api.machine.feature.ITieredMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.CleanroomType;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.lumintorious.tfcambiental.api.AmbientalRegistry;
@@ -161,13 +163,16 @@ public class GregitasCore {
  
         AmbientalRegistry.BLOCK_ENTITIES.register((player, blockEntity) -> {
             if (blockEntity instanceof IMachineBlockEntity machineBlockEntity && machineBlockEntity.getMetaMachine() instanceof IRecipeLogicMachine rlMachine) {
+                
                 if (machineBlockEntity.getMetaMachine() instanceof IHeatBlock heatBlock) {
                     return TempModifier.defined("coil_machine", (heatBlock.getTemperature() + 273) / 100, 3.0F);
                 }
-                if (rlMachine.isActive()) {
-                    return TempModifier.defined("machine", rlMachine.getProgress() * 6.0F, 0.0F);
+                if (rlMachine.isActive() && machineBlockEntity.getMetaMachine() instanceof IOverclockMachine overclockMachine){
+                    return TempModifier.defined("machine", overclockMachine.getOverclockTier() * 6.0F, 0.0F);
                 }
-
+                if (rlMachine.isActive() && machineBlockEntity.getMetaMachine() instanceof ITieredMachine tieredMachine){
+                    return TempModifier.defined("machine", tieredMachine.getTier() * 6.0F, 0.0F);
+                }
             }
             return TempModifier.none();
         });
