@@ -8,6 +8,7 @@
     "BeneathForgeEventsMixin",
     "BoonMixin",
     "BuriedTreasureMixin",
+    "CobbleFix",
     "CoilWorkableElectricMultiblockMachineMixin",
     "MixinDistillationTankBE",
     "FisherMachineMixin",
