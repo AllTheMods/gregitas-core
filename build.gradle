@@ -164,6 +164,7 @@ dependencies {
     modImplementation("curse.maven:immersive-machinery-1068736:6036154")
     modImplementation("curse.maven:immersive-aircraft-666014:6036814")
     modImplementation("curse.maven:medieval-siege-machines-585964:6276088")
+    modImplementation("curse.maven:geckolib-388172:6312918")
 
     modRuntimeOnly("vazkii.patchouli:Patchouli:${project.minecraft_version}-${project.patchouli_version}-FORGE")
     modRuntimeOnly("top.theillusivec4.curios:curios-forge:${project.curios_version}+${project.minecraft_version}")
