@@ -1,6 +1,8 @@
 plugins {
     id 'net.neoforged.moddev.legacyforge' version '2.0.88'
     id "maven-publish"
+    id "java"
+    id "idea"
 }
 
 base {
@@ -175,17 +177,15 @@ dependencies {
 
 }
 
-tasks {
-    processResources {
-        // define properties that can be used during resource processing
-        inputs.property "version", project.version
+def modVersion = project.version
+tasks.withType(ProcessResources).configureEach {
+    // define properties that can be used during resource processing
+    inputs.property "version", modVersion
 
-        filesMatching("META-INF/mods.toml") {
-            expand "version": project.version
-        }
+    filesMatching("META-INF/mods.toml") {
+        expand "version": modVersion
     }
 }
-
 
 tasks.withType(JavaCompile).configureEach {
     // ensure that the encoding is set to UTF-8, no matter what the system default is
@@ -233,5 +233,16 @@ publishing {
         // Notice: This block does NOT have the same function as the block in the top level.
         // The repositories here will be used for publishing your artifact, not for
         // retrieving dependencies.
+    }
+}
+
+idea {
+    project {
+        jdkName = java.sourceCompatibility.toString()
+        languageLevel = java.sourceCompatibility.toString()
+    }
+    module {
+        downloadJavadoc = true
+        downloadSources = true
     }
 }
