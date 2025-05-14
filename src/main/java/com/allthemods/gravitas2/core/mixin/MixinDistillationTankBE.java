@@ -12,7 +12,7 @@ import com.jesz.createdieselgenerators.recipes.RecipeRegistry;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
 
-import dev.architectury.patchedmixin.staticmixin.spongepowered.asm.mixin.Shadow;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -21,8 +21,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
+import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(DistillationTankBlockEntity.class) 
+@Mixin(value = DistillationTankBlockEntity.class, remap = false)
 public abstract class MixinDistillationTankBE extends BlockEntity {
 
     @Shadow
