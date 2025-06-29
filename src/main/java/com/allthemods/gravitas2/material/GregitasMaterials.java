@@ -103,7 +103,12 @@ public class GregitasMaterials {
         GTMaterials.Bismuth.addFlags(MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_ROD);
         GTMaterials.Nickel.addFlags(MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_ROD);
         GTMaterials.Astatine.setProperty(PropertyKey.DUST, new DustProperty());
-        GTMaterials.WroughtIron.addFlags(MaterialFlags.GENERATE_ROTOR);
+        GTMaterials.WroughtIron.addFlags(MaterialFlags.GENERATE_ROTOR, MaterialFlags.GENERATE_RING);
+        GTMaterials.BlackBronze.addFlags(MaterialFlags.GENERATE_RING);
+        GTMaterials.BismuthBronze.addFlags(MaterialFlags.GENERATE_RING);
+        GTMaterials.RedSteel.addFlags(MaterialFlags.GENERATE_RING);
+        GTMaterials.BlueSteel.addFlags(MaterialFlags.GENERATE_RING);
+        GTMaterials.BlackSteel.addFlags(MaterialFlags.GENERATE_RING);
 
         GTMaterials.CertusQuartz.setComponents(new MaterialStack(Certus, 1), new MaterialStack(GTMaterials.Oxygen, 2));
 

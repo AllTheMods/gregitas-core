@@ -64,6 +64,7 @@ public abstract class LargeBoilerMixin extends WorkableMultiblockMachine impleme
         this.throttle = 100;
     }
 
+
     @Override
     public void onStructureFormed() {
         super.onStructureFormed();

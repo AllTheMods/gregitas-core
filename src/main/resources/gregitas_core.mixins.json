@@ -20,6 +20,7 @@
     "MixinDistillationTankBE",
     "MixinHelpersMixin",
     "MixinIM_Shards",
+    "MixinLilyFix",
     "MixinRedstoneSheep",
     "PlaceBlockSpecialPacketMixin",
     "PlacedItemBlockEntityMixin",

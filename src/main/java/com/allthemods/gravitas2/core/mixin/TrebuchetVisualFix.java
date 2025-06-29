@@ -31,8 +31,9 @@ public abstract class TrebuchetVisualFix extends MachineGeoRenderer<Trebuchet> {
     public void preRender(PoseStack poseStack, Trebuchet animatable, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         Optional<GeoBone> projectile = model.getBone("Cobblestone");
         int projectilesize = (animatable.state == Trebuchet.State.IDLE_RELOADED || animatable.shootingticks > 0) && animatable.hasAmmo() ? 1 : 0;
+
         projectile.ifPresent((bone) -> {
-            
+
             bone.setScaleX((float)projectilesize);
         });
         projectile.ifPresent((bone) -> {
