@@ -16,6 +16,8 @@
     "GTMachinesMixin",
     "GTRecipeModifiersMixin",
     "LargeBoilerMixin",
+    "ConfigMenuInventoryMixin",
+    "NotifiableItemStackHandlerMixin",
     "MetaMachineBlockEntityImplMixin",
     "MixinDistillationTankBE",
     "MixinHelpersMixin",

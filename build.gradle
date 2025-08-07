@@ -150,7 +150,7 @@ dependencies {
     modImplementation("dev.ftb.mods:ftb-library-forge:${project.ftb_library_version}") { transitive = false }
     modImplementation("dev.ftb.mods:ftb-teams-forge:${project.ftb_teams_version}") { transitive = false }
 //
-    modImplementation("com.jozufozu.flywheel:flywheel-forge-1.20.1:0.6.11-13")
+
     modImplementation("curse.maven:create-328085:6323270") { transitive = false }
     modImplementation("curse.maven:ice-and-fire-dragons-264231:5122408")
     modImplementation("curse.maven:citadel-331936:4848887")
@@ -165,6 +165,7 @@ dependencies {
     modImplementation("curse.maven:immersive-aircraft-666014:6036814")
     modImplementation("curse.maven:medieval-siege-machines-585964:6276088")
     modImplementation("curse.maven:geckolib-388172:6312918")
+    modImplementation("curse.maven:applied-energistics-2-223794:6852919")
 
     modRuntimeOnly("vazkii.patchouli:Patchouli:${project.minecraft_version}-${project.patchouli_version}-FORGE")
     modRuntimeOnly("top.theillusivec4.curios:curios-forge:${project.curios_version}+${project.minecraft_version}")
