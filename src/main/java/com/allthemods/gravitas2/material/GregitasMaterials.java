@@ -1,5 +1,7 @@
 package com.allthemods.gravitas2.material;
 
+import com.allthemods.gravitas2.compat.G2PropertyKey;
+import com.allthemods.gravitas2.compat.TFCProperty;
 import com.allthemods.gravitas2.material.materials.GregitasElementMaterials;
 import com.allthemods.gravitas2.material.materials.GregitasFirstDegreeMaterials;
 import com.allthemods.gravitas2.material.materials.GregitasHigherDegreeMaterials;
@@ -7,6 +9,8 @@ import com.allthemods.gravitas2.material.materials.GregitasUnknownCompositionMat
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.DustProperty;
+import com.gregtechceu.gtceu.api.data.chemical.material.properties.IMaterialProperty;
+import com.gregtechceu.gtceu.api.data.chemical.material.properties.MaterialProperties;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey;
 import com.gregtechceu.gtceu.api.data.chemical.material.stack.MaterialStack;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
@@ -136,6 +140,59 @@ public class GregitasMaterials {
         TagPrefix.plate.modifyMaterialAmount(Sculk, 1 / 4f);
 
         GTMaterials.WroughtIron.getProperty(PropertyKey.INGOT).setMagneticMaterial(WroughtIronMagnetic);
+
+        GTMaterials.Copper.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(648, 864, 1080, 1));
+        GTMaterials.BismuthBronze.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(591, 788, 985, 2));
+        GTMaterials.Bronze.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(570, 760, 950, 2));
+        GTMaterials.BlackBronze.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(642, 856, 1070, 2));
+        GTMaterials.WroughtIron.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(921, 1228, 1535, GTMaterials.Iron, 3));
+        GTMaterials.Steel.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(924, 1232, 1540, 4));
+        GTMaterials.BlackSteel.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(891, 1188, 1485, 5));
+        GTMaterials.BlueSteel.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(924, 1232, 1540, 6));
+        GTMaterials.RedSteel.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(924, 1232, 1540, 6));
+
+        GTMaterials.Gold.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(636, 848, 1060, 1));
+        GTMaterials.Bismuth.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(162, 216, 270, 1));
+        GTMaterials.Brass.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(558, 744, 930, 2));
+        GTMaterials.Nickel.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(872, 1162, 1453, 1));
+        GTMaterials.RoseGold.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(576, 768, 960, 1));
+        GTMaterials.Silver.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(577, 769, 961, 1));
+        GTMaterials.Tin.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(138, 184, 230, 1));
+        GTMaterials.Zinc.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(252, 336, 420, 1));
+        GTMaterials.SterlingSilver.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(570, 760, 950, 1));
+        GTMaterials.Iron.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(921, 1228, 1535, GTMaterials.Iron, 3));
+
+        GTMaterials.Hematite.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(921, 1228, 1535, GTMaterials.Iron, 3, 90));
+        GTMaterials.YellowLimonite.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(921, 1228, 1535, GTMaterials.Iron, 3, 90));
+        GTMaterials.Magnetite.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(921, 1228, 1535, GTMaterials.Iron, 3, 90));
+        GTMaterials.Pyrite.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(921, 1228, 1535, GTMaterials.Iron, 3, 90));
+        GTMaterials.Goethite.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(921, 1228, 1535, GTMaterials.Iron, 3, 90));
+        GTMaterials.BasalticMineralSand.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(921, 1228, 1535, GTMaterials.Iron, 3, 90));
+        GTMaterials.GraniticMineralSand.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(921, 1228, 1535, GTMaterials.Iron, 3, 90));
+
+        GTMaterials.Malachite.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(138, 184, 1080, GTMaterials.Copper, 1, 90));
+        GTMaterials.Tetrahedrite.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(138, 184, 1080, GTMaterials.Copper, 1, 90));
+        GTMaterials.Chalcopyrite.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(138, 184, 1080, GTMaterials.Copper, 1, 85));
+        GTMaterials.Chalcocite.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(138, 184, 1080, GTMaterials.Copper, 1, 95));
+        GTMaterials.Bornite.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(138, 184, 1080, GTMaterials.Copper, 1, 90));
+
+        GTMaterials.Cassiterite.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(648, 864, 230, GTMaterials.Tin, 1, 100));
+        GTMaterials.CassiteriteSand.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(138, 184, 230, GTMaterials.Tin, 1, 85));
+        GTMaterials.Sphalerite.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(138, 184, 420, GTMaterials.Zinc, 1, 90));
+        GTMaterials.Garnierite.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(138, 184, 1453, GTMaterials.Nickel, 1, 100));
+        GTMaterials.Pentlandite.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(138, 184, 1453, GTMaterials.Nickel, 1, 85));
+
+        GTMaterials.Redstone.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(240, 320, 460, 1));
+        GTMaterials.RedAlloy.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(570, 650, 740, 2));
+        GTMaterials.TinAlloy.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(1000, 1100, 1250, 3));
+        GTMaterials.Lead.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty((int)(330 * 0.6), (int)(330 * 0.8), 330, 2));
+        GTMaterials.Galena.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty((int)(330 * 0.6), (int)(330 * 0.8), 330, GTMaterials.Lead, 2, 85));
+        GTMaterials.Invar.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty((int)(1494 * 0.6), (int)(1494 * 0.8), 1494, 3));
+        GTMaterials.Potin.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty((int)(807 * 0.6), (int)(807 * 0.8), 807, 2));
+        GTMaterials.Cobalt.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty((int)(1495 * 0.6), (int)(1495 * 0.8), 1495, 3));
+        GTMaterials.Cobaltite.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty((int)(1495 * 0.6), (int)(1495 * 0.8), 1495, GTMaterials.Cobalt, 3, 85));
+        GTMaterials.CobaltOxide.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty((int)(1495 * 0.6), (int)(1495 * 0.8), 1495, GTMaterials.Cobalt, 3));
+        GTMaterials.CobaltBrass.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty((int)(1060 * 0.6), (int)(1060 * 0.8), 1060, 3));
 
 
     }

@@ -18,6 +18,7 @@
     "LargeBoilerMixin",
     "ConfigMenuInventoryMixin",
     "NotifiableItemStackHandlerMixin",
+    "MaterialPropertiesMixin",
     "MetaMachineBlockEntityImplMixin",
     "MixinDistillationTankBE",
     "MixinHelpersMixin",

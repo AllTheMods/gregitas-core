@@ -16,8 +16,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = ConfigMenuInventory.class, remap = false)
 public abstract class ConfigMenuInventoryMixin {
-
-
     private static void applyItemCapabilities(ItemStack stack){
         MaterialStack materialStack = ChemicalHelper.getMaterial(stack);
         if(materialStack == null){
@@ -32,7 +30,6 @@ public abstract class ConfigMenuInventoryMixin {
             });
         }
     }
-
     @Inject(
             method = "convertToSuitableStack",
             at = @At(
@@ -46,7 +43,6 @@ public abstract class ConfigMenuInventoryMixin {
     private void injectEncode(ItemStack stack, CallbackInfoReturnable<GenericStack> cil) {
         applyItemCapabilities(stack);
     }
-
     @Inject(
             method = "convertToSuitableStack",
             at = @At(
@@ -56,7 +52,6 @@ public abstract class ConfigMenuInventoryMixin {
             ),
             cancellable = false
     )
-
     private void injectEncodeOf(ItemStack stack , CallbackInfoReturnable<GenericStack> cil){
         applyItemCapabilities(stack);
     }
