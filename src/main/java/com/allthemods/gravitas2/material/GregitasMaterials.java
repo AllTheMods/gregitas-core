@@ -194,6 +194,8 @@ public class GregitasMaterials {
         GTMaterials.CobaltOxide.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty((int)(1495 * 0.6), (int)(1495 * 0.8), 1495, GTMaterials.Cobalt, 3));
         GTMaterials.CobaltBrass.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty((int)(1060 * 0.6), (int)(1060 * 0.8), 1060, 3));
 
-
+         GTMaterials.Electrum.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(600,800,1000,1));
+         GTMaterials.VanadiumSteel.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+         GTMaterials.AnnealedCopper.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(600,800,1000,1));
     }
 }
