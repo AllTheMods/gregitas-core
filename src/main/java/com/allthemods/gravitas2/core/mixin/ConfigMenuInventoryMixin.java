@@ -16,6 +16,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = ConfigMenuInventory.class, remap = false)
 public abstract class ConfigMenuInventoryMixin {
+    //adapted from TFG Coremod
+    //https://github.com/TerraFirmaGreg-Team/Core-Modern/blob/dev/src/main/java/su/terrafirmagreg/core/mixins/common/ae2/ConfigMenuInventoryMixin.java
     private static void applyItemCapabilities(ItemStack stack){
         MaterialStack materialStack = ChemicalHelper.getMaterial(stack);
         if(materialStack == null){

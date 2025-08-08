@@ -15,6 +15,8 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(value = NotifiableItemStackHandler.class, remap = false)
 public abstract class NotifiableItemStackHandlerMixin {
+    //adapted from TFG Coremod
+    //https://github.com/TerraFirmaGreg-Team/Core-Modern/blob/dev/src/main/java/su/terrafirmagreg/core/mixins/common/gtceu/NotifiableItemStackHandlerMixin.java
     @Redirect(
             method = "handleRecipe",
             at = @At(
