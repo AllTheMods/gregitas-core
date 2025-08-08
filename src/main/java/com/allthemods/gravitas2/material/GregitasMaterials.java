@@ -200,6 +200,28 @@ public class GregitasMaterials {
         GTMaterials.VanadiumGallium.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(600,800,1000,1));
         GTMaterials.NickelZincFerrite.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(600,800,1000,1));
         GTMaterials.Aluminium.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GTMaterials.StainlessSteel.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GTMaterials.Kanthal.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GTMaterials.Nichrome.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GTMaterials.ManganesePhosphide.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GTMaterials.MagnesiumDiboride.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GTMaterials.MercuryBariumCalciumCuprate.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GTMaterials.Tungsten.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GTMaterials.TungstenSteel.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GTMaterials.UraniumTriplatinum.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GTMaterials.Cupronickel.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+
+        GTMaterials.Palladium.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GTMaterials.Ruthenium.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GTMaterials.Rhodium.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GTMaterials.Iridium.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GTMaterials.Osmium.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GTMaterials.Ultimet.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GTMaterials.BlueAlloy.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GTMaterials.SamariumIronArsenicOxide.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GTMaterials.HSSG.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GTMaterials.HSSE.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GTMaterials.HSSS.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
 
     }
 }
