@@ -223,6 +223,9 @@ public class GregitasMaterials {
         GTMaterials.HSSG.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
         GTMaterials.HSSE.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
         GTMaterials.HSSS.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GTMaterials.Titanium.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GTMaterials.RhodiumPlatedPalladium.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GTMaterials.NiobiumTitanium.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
 
     }
 }
