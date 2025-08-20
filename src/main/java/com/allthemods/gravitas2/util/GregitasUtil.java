@@ -31,7 +31,14 @@ public class GregitasUtil {
                     return registry.getValue(newId);
                 }
             }
-        } else if (id.getNamespace().equals("gtceu") && id.getPath().startsWith("tfc_")) {
+        }
+        if (id.getNamespace().equals("vintageimprovements")) {
+                ResourceLocation newId = new ResourceLocation("vintage", id.getPath());
+                if (registry.containsKey(newId)) {
+                    return registry.getValue(newId);
+                }
+            }
+        else if (id.getNamespace().equals("gtceu") && id.getPath().startsWith("tfc_")) {
             ResourceLocation newId = GTCEu.id(id.getPath().substring(4));
             if (registry.containsKey(newId)) {
                 return registry.getValue(newId);

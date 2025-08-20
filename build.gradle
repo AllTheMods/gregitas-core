@@ -166,6 +166,7 @@ dependencies {
     modImplementation("curse.maven:medieval-siege-machines-585964:6276088")
     modImplementation("curse.maven:geckolib-388172:6312918")
     modImplementation("curse.maven:applied-energistics-2-223794:6852919")
+    modImplementation("curse.maven:gcyr-922713:6016659")
 
     modRuntimeOnly("vazkii.patchouli:Patchouli:${project.minecraft_version}-${project.patchouli_version}-FORGE")
     modRuntimeOnly("top.theillusivec4.curios:curios-forge:${project.curios_version}+${project.minecraft_version}")

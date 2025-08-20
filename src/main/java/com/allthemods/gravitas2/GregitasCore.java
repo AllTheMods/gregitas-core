@@ -1,5 +1,6 @@
 package com.allthemods.gravitas2;
 
+import argent_matter.gcyr.common.data.GCYRItems;
 import com.allthemods.gravitas2.block.GregitasBlocks;
 import com.allthemods.gravitas2.block.entity.GregitasBlockEntities;
 import com.allthemods.gravitas2.capability.GregitasCapabilities;
@@ -29,6 +30,7 @@ import com.gregtechceu.gtceu.api.machine.feature.IRecipeLogicMachine;
 import com.gregtechceu.gtceu.api.machine.feature.ITieredMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.CleanroomType;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
+import com.gregtechceu.gtceu.common.data.GTItems;
 import com.lumintorious.tfcambiental.api.AmbientalRegistry;
 import com.lumintorious.tfcambiental.modifier.TempModifier;
 import com.tterrag.registrate.providers.ProviderType;
@@ -98,6 +100,7 @@ public class GregitasCore {
 
     public static final CleanroomType CLEANER_ROOM = new CleanroomType("cleanerroom", "gregitas_core.recipe.cleanerroom.display_name");
 
+
     public GregitasCore() {
         //ConfigHolder.init();
 
@@ -160,7 +163,7 @@ public class GregitasCore {
         AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("magma_rhyolite", 3.0F, 1.0F)).filter((mod) -> state.getBlock() == TFCBlocks.MAGMA_BLOCKS.get(Rock.RHYOLITE).get()));
         AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("magma_gabbro", 3.0F, 1.0F)).filter((mod) -> state.getBlock() == TFCBlocks.MAGMA_BLOCKS.get(Rock.GABBRO).get()));
         AmbientalRegistry.BLOCKS.register((player, blockPos, state) -> Optional.of(new TempModifier("magma_granite", 3.0F, 1.0F)).filter((mod) -> state.getBlock() == TFCBlocks.MAGMA_BLOCKS.get(Rock.GRANITE).get()));
- 
+
         AmbientalRegistry.BLOCK_ENTITIES.register((player, blockEntity) -> {
             if (blockEntity instanceof IMachineBlockEntity machineBlockEntity && machineBlockEntity.getMetaMachine() instanceof IRecipeLogicMachine rlMachine) {
                 
@@ -176,6 +179,33 @@ public class GregitasCore {
             }
             return TempModifier.none();
         });
+
+
+        AmbientalRegistry.EQUIPMENT.register((player, stack) -> Optional.of(new TempModifier("nanomuscle_armor", 0f, -10f)).filter((mod) -> {
+            var item = stack.getItem();
+            return (item == GTItems.NANO_HELMET.asItem()
+                    || item == GTItems.NANO_CHESTPLATE.asItem()
+                    || item == GTItems.NANO_LEGGINGS.asItem()
+                    || item == GTItems.NANO_BOOTS.asItem()
+                    || item == GTItems.NANO_CHESTPLATE_ADVANCED.asItem());
+        }));
+
+        AmbientalRegistry.EQUIPMENT.register((player, stack) -> Optional.of(new TempModifier("quarktech_armor", 0f, -10f)).filter((mod) -> {
+            var item = stack.getItem();
+            return (item == GTItems.QUANTUM_HELMET.asItem()
+                    || item == GTItems.QUANTUM_CHESTPLATE.asItem()
+                    || item == GTItems.QUANTUM_LEGGINGS.asItem()
+                    || item == GTItems.QUANTUM_BOOTS.asItem()
+                    || item == GTItems.QUANTUM_CHESTPLATE_ADVANCED.asItem());
+        }));
+
+        AmbientalRegistry.EQUIPMENT.register((player, stack) -> Optional.of(new TempModifier("space_suit", 0f, -10f)).filter((mod) -> {
+            var item = stack.getItem();
+            return (item == GCYRItems.SPACE_SUIT_HELMET.asItem() ||
+                    item == GCYRItems.SPACE_SUIT_CHEST.asItem() ||
+                    item == GCYRItems.SPACE_SUIT_LEGS.asItem() ||
+                    item == GCYRItems.SPACE_SUIT_BOOTS.asItem());
+        }));
     }
 
     // Register mod-bus events in init (like on line 49, with IEventBus#addListener)
@@ -188,8 +218,10 @@ public class GregitasCore {
     public void missingMappings(MissingMappingsEvent event) {
         event.getMappings(ForgeRegistries.Keys.BLOCKS, GTCEu.MOD_ID).forEach(GregitasUtil::remap);
         event.getMappings(ForgeRegistries.Keys.BLOCKS, "gregitas").forEach(GregitasUtil::remap);
+        event.getMappings(ForgeRegistries.Keys.BLOCKS, "vintageimprovements").forEach(GregitasUtil::remap);
         event.getMappings(ForgeRegistries.Keys.ITEMS, GTCEu.MOD_ID).forEach(GregitasUtil::remap);
         event.getMappings(ForgeRegistries.Keys.ITEMS, "gregitas").forEach(GregitasUtil::remap);
+        event.getMappings(ForgeRegistries.Keys.ITEMS, "vintageimprovements").forEach(GregitasUtil::remap);
     }
 
     @SubscribeEvent
