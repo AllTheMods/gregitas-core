@@ -44,15 +44,17 @@ import net.dries007.tfc.common.capabilities.heat.IHeatBlock;
 import net.dries007.tfc.common.entities.TFCEntities;
 import net.dries007.tfc.world.chunkdata.ChunkData;
 import net.dries007.tfc.world.chunkdata.ChunkDataProvider;
+
+
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.*;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.TickTask;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
@@ -68,7 +70,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.common.util.LogicalSidedProvider;
-import net.minecraftforge.event.entity.EntityEvent.EnteringSection;
+import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -77,7 +79,9 @@ import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.ForgeRegistry;
 import net.minecraftforge.registries.MissingMappingsEvent;
+import net.minecraftforge.registries.RegisterEvent;
 import top.ribs.scguns.entity.monster.BlundererEntity;
 import top.ribs.scguns.entity.monster.CogKnightEntity;
 import top.ribs.scguns.entity.monster.CogMinionEntity;
@@ -113,6 +117,7 @@ public class GregitasCore {
         modBus.addGenericListener(MachineDefinition.class, this::registerMachines);
         modBus.addGenericListener(Element.class, this::registerElements);
 
+        modBus.addListener(this::fixDrawers);
         modBus.addListener(this::registerCapabilities);
 
         MinecraftForge.EVENT_BUS.register(this);
@@ -215,7 +220,7 @@ public class GregitasCore {
 
     // try to repair old ore block IDs
     @SubscribeEvent
-    public void missingMappings(MissingMappingsEvent event) {
+    public static void missingMappings(MissingMappingsEvent event) {
         event.getMappings(ForgeRegistries.Keys.BLOCKS, GTCEu.MOD_ID).forEach(GregitasUtil::remap);
         event.getMappings(ForgeRegistries.Keys.BLOCKS, "gregitas").forEach(GregitasUtil::remap);
         event.getMappings(ForgeRegistries.Keys.BLOCKS, "vintageimprovements").forEach(GregitasUtil::remap);
@@ -224,8 +229,22 @@ public class GregitasCore {
         event.getMappings(ForgeRegistries.Keys.ITEMS, "vintageimprovements").forEach(GregitasUtil::remap);
     }
 
+    public void fixDrawers(RegisterEvent event){
+        if (event.getRegistryKey().equals(ForgeRegistries.BLOCK_ENTITY_TYPES.getRegistryKey())) {
+            if (event.getForgeRegistry() instanceof ForgeRegistry<?> fr){
+                LOGGER.info("Fixing Storage Drawers aliases for Gregitas Coremod");
+                fr.addAlias(ResourceLocation.parse("everycomp:sd_full_drawers_1"), ResourceLocation.parse("storagedrawers:standard_drawers_1"));
+                fr.addAlias(ResourceLocation.parse("everycomp:sd_full_drawers_2"), ResourceLocation.parse("storagedrawers:standard_drawers_2"));
+                fr.addAlias(ResourceLocation.parse("everycomp:sd_full_drawers_4"), ResourceLocation.parse("storagedrawers:standard_drawers_4"));
+                fr.addAlias(ResourceLocation.parse("everycomp:sd_half_drawers_1"), ResourceLocation.parse("storagedrawers:standard_drawers_1"));
+                fr.addAlias(ResourceLocation.parse("everycomp:sd_half_drawers_2"), ResourceLocation.parse("storagedrawers:standard_drawers_2"));
+                fr.addAlias(ResourceLocation.parse("everycomp:sd_half_drawers_4"), ResourceLocation.parse("storagedrawers:standard_drawers_4"));
+            }
+        }
+    }
+
     @SubscribeEvent
-    public void detectEnteringClaimedChunks(EnteringSection event) {
+    public static void detectEnteringClaimedChunks(EntityEvent.EnteringSection event) {
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
         if (!event.didChunkChange()) return;
         if (!FTBChunksAPI.api().isManagerLoaded()) return;
@@ -279,11 +298,11 @@ public class GregitasCore {
 
 
     @SubscribeEvent
-    public void initSpawnData(ServerAboutToStartEvent event){
+    public static void initSpawnData(ServerAboutToStartEvent event){
         IAFEntityMap.init();
     }
     @SubscribeEvent
-    public void spawnCheck(MobSpawnEvent.FinalizeSpawn event) {
+    public static void spawnCheck(MobSpawnEvent.FinalizeSpawn event) {
         if((event.getEntity() instanceof BlundererEntity) && (event.getY() > 50) ) {
             event.getEntity().discard();
             event.setSpawnCancelled(true);

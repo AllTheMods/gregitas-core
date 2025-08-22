@@ -20,7 +20,6 @@
     "NotifiableItemStackHandlerMixin",
     "MaterialPropertiesMixin",
     "MetaMachineBlockEntityImplMixin",
-    "MixinDistillationTankBE",
     "MixinHelpersMixin",
     "MixinIM_Shards",
     "MixinLilyFix",

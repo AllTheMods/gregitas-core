@@ -22,7 +22,7 @@ java {
 }
 
 legacyForge {
-    version = "1.20.1-47.3.0"
+    version = "1.20.1-47.4.0"
     runs {
         client {
             client()
