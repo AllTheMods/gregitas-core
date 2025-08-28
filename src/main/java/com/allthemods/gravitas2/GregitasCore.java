@@ -42,6 +42,7 @@ import net.dries007.tfc.common.blocks.rock.AqueductBlock;
 import net.dries007.tfc.common.blocks.rock.Rock;
 import net.dries007.tfc.common.capabilities.heat.IHeatBlock;
 import net.dries007.tfc.common.entities.TFCEntities;
+import net.dries007.tfc.common.entities.predator.Predator;
 import net.dries007.tfc.world.chunkdata.ChunkData;
 import net.dries007.tfc.world.chunkdata.ChunkDataProvider;
 
@@ -96,6 +97,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
+import java.util.function.Predicate;
 
 @Mod(GregitasCore.MOD_ID)
 public class GregitasCore {
@@ -244,7 +246,7 @@ public class GregitasCore {
     }
 
     @SubscribeEvent
-    public static void detectEnteringClaimedChunks(EntityEvent.EnteringSection event) {
+    public void detectEnteringClaimedChunks(EntityEvent.EnteringSection event) {
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
         if (!event.didChunkChange()) return;
         if (!FTBChunksAPI.api().isManagerLoaded()) return;
@@ -298,11 +300,12 @@ public class GregitasCore {
 
 
     @SubscribeEvent
-    public static void initSpawnData(ServerAboutToStartEvent event){
+    public void initSpawnData(ServerAboutToStartEvent event){
+        LOGGER.info("Initializing Spawn Data for Gregitas Coremod");
         IAFEntityMap.init();
     }
     @SubscribeEvent
-    public static void spawnCheck(MobSpawnEvent.FinalizeSpawn event) {
+    public void spawnCheck(MobSpawnEvent.FinalizeSpawn event) {
         if((event.getEntity() instanceof BlundererEntity) && (event.getY() > 50) ) {
             event.getEntity().discard();
             event.setSpawnCancelled(true);
@@ -363,8 +366,9 @@ public class GregitasCore {
             float rainfall = data.getRainfall(pos);
             float avgAnnualTemperature = data.getAverageTemp(pos);
             EntityType<?> entityType = event.getEntity().getType();
-            var climateTest = IAFEntityMap.spawnList.get(entityType);
-            var tempAndRainfall = new float[]{avgAnnualTemperature, rainfall};
+            Predicate<float[]> climateTest = IAFEntityMap.spawnList.get(entityType);
+            if(climateTest == null) { return; }
+            float[] tempAndRainfall = new float[]{avgAnnualTemperature, rainfall};
             if (!climateTest.test(tempAndRainfall)) {
                 event.setSpawnCancelled(true);
                 event.setCanceled(true);
@@ -374,8 +378,7 @@ public class GregitasCore {
 
         }
     }
-
-    private static void catSwap(MobSpawnEvent.FinalizeSpawn event) {
+    public void catSwap(MobSpawnEvent.FinalizeSpawn event) {
         event.getEntity().discard();
         event.setSpawnCancelled(true);
         TFCEntities.CAT.get().spawn(event.getLevel().getLevel(),new BlockPos((int)event.getX(),(int)event.getY(),(int)event.getZ()), MobSpawnType.NATURAL);

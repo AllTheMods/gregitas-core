@@ -25,7 +25,7 @@ license = "LGPLv3" # Want to make your mod open source? Check out https://choose
     # Some more fluff displayed in the Mods panel. Feel free to issue your special thanks here!
     # credits="Thanks to Mojang for making this great game" #optional
     # Some more fluff displayed in the Mods panel. Plug your stuff here!
-    authors="Screret" #optional
+    authors="Screret, Uncandango, thevortex" #optional
     # A multi-line description for your mod. This has no minimum length, but it *is* required!
     description = '''
     Core Mod for Gravitas².

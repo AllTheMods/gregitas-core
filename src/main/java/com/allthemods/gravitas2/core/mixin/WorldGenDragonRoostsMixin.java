@@ -26,6 +26,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
+import java.util.function.Predicate;
+
 @Mixin(value = WorldGenDragonRoosts.class, remap = false)
 public abstract class WorldGenDragonRoostsMixin extends Feature<NoneFeatureConfiguration> implements TypedFeature {
     private static Block TFCRock = TFCBlocks.ROCK_BLOCKS.get(Rock.BASALT).get(Rock.BlockType.HARDENED).get();
@@ -52,12 +54,13 @@ public abstract class WorldGenDragonRoostsMixin extends Feature<NoneFeatureConfi
             ChunkData data = provider.get(worldIn, pos);
             float rainfall = data.getRainfall(pos);
             float avgAnnualTemperature = data.getAverageTemp(pos);
-            var climateTest = IAFEntityMap.dragonList.get(DRAGONTYPE);
-            var tempAndRainfall = new float[]{avgAnnualTemperature, rainfall};
+            Predicate<float[]> climateTest = IAFEntityMap.dragonList.get(DRAGONTYPE);
+            float[] tempAndRainfall = new float[]{avgAnnualTemperature, rainfall};
             if (!climateTest.test(tempAndRainfall)) {
                 //GregitasCore.LOGGER.info("Blocked :" + DRAGONTYPE.getDescription() + " at: " + pos);
                 return false;
             }
+
             RockSettings rocks = data.getRockData().getRock(pos);
             TFCRock = rocks.hardened();
             TFCRock2 = rocks.hardened();
@@ -70,7 +73,6 @@ public abstract class WorldGenDragonRoostsMixin extends Feature<NoneFeatureConfi
             this.hollowOut(context, radius);
             radius += 15;
             this.generateDecoration(context, radius, isMale);
-            GregitasCore.LOGGER.debug("Spawned at " + context.origin());
             return true;
         }
     }

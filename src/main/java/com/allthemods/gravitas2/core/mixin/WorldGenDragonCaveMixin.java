@@ -1,5 +1,6 @@
 package com.allthemods.gravitas2.core.mixin;
 
+import com.allthemods.gravitas2.GregitasCore;
 import com.allthemods.gravitas2.util.IAFEntityMap;
 import com.github.alexthe666.iceandfire.IafConfig;
 import com.github.alexthe666.iceandfire.entity.*;
@@ -28,6 +29,7 @@ import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
 import java.util.Set;
+import java.util.function.Predicate;
 
 @Mixin(value = WorldGenDragonCave.class,remap = false)
 public abstract class WorldGenDragonCaveMixin extends Feature<NoneFeatureConfiguration> implements TypedFeature {
@@ -63,11 +65,14 @@ public abstract class WorldGenDragonCaveMixin extends Feature<NoneFeatureConfigu
             ChunkData data = provider.get(worldIn, pos);
             float rainfall = data.getRainfall(pos);
             float avgAnnualTemperature = data.getAverageTemp(pos);
-            var climateTest = IAFEntityMap.dragonList.get(DRAGONTYPE);
-            var tempAndRainfall = new float[]{avgAnnualTemperature, rainfall};
+
+            Predicate<float[]> climateTest = IAFEntityMap.dragonList.get(DRAGONTYPE);
+            float[] tempAndRainfall = new float[]{avgAnnualTemperature, rainfall};
+
             if (!climateTest.test(tempAndRainfall)) {
                 return false;
             }
+
             RockSettings rocks = data.getRockData().getRock(pos);
             PALETTE_BLOCK1 = rocks.hardened().defaultBlockState();
             this.isMale = rand.nextBoolean();
