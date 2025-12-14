@@ -141,6 +141,9 @@ public class GregitasMaterials {
 
         GTMaterials.WroughtIron.getProperty(PropertyKey.INGOT).setMagneticMaterial(WroughtIronMagnetic);
 
+        GTMaterials.NeodymiumMagnetic.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(1083, 1444, 1805, GTMaterials.Neodymium, 3));
+        GTMaterials.Neodymium.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(1083, 1444, 1805, GTMaterials.Neodymium,1));
+        GTMaterials.IronMagnetic.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(921, 1228, 1535, GTMaterials.Iron, 3));
         GTMaterials.Copper.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(648, 864, 1080, 1));
         GTMaterials.BismuthBronze.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(591, 788, 985, 2));
         GTMaterials.Bronze.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(570, 760, 950, 2));
@@ -226,6 +229,12 @@ public class GregitasMaterials {
         GTMaterials.Titanium.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
         GTMaterials.RhodiumPlatedPalladium.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
         GTMaterials.NiobiumTitanium.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+
+        GTMaterials.Platinum.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GTMaterials.Manganese.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GTMaterials.Antimony.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GTMaterials.Molybdenum.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GregitasMaterials.IgneousAlloy.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
 
     }
 }
