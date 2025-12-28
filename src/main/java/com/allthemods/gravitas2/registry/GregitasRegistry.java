@@ -3,7 +3,15 @@ package com.allthemods.gravitas2.registry;
 import com.allthemods.gravitas2.GregitasCore;
 import com.allthemods.gravitas2.enchants.RefreshingEnchant;
 import com.allthemods.gravitas2.enchants.WarmingEnchant;
+import com.allthemods.gravitas2.recipe.type.GregitasRecipeTypes;
+import com.gregtechceu.gtceu.GTCEu;
+import com.gregtechceu.gtceu.api.GTValues;
+import com.gregtechceu.gtceu.api.data.RotationState;
+import com.gregtechceu.gtceu.api.machine.MachineDefinition;
+import com.gregtechceu.gtceu.api.machine.SimpleTieredMachine;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
+import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
+import com.gregtechceu.gtceu.common.data.machines.GTMachineUtils;
 import net.dries007.tfc.common.capabilities.food.FoodTrait;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -13,6 +21,9 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
+
+import static com.gregtechceu.gtceu.common.data.machines.GTMachineUtils.registerTieredMachines;
+import static com.gregtechceu.gtceu.common.registry.GTRegistration.REGISTRATE;
 
 public class GregitasRegistry {
     public static GTRegistrate GREGITAS_REGISTRATE = GTRegistrate.create(GregitasCore.MOD_ID);
@@ -29,4 +40,7 @@ public class GregitasRegistry {
     public static final RegistryObject<Potion> REFRESHING_POTION = POTIONS.register("refreshing", () -> new Potion(new MobEffectInstance(REFRESHING.get(), 600)));
 
     public static final RegistryObject<Potion> WARMING_POTION = POTIONS.register("warming", () -> new Potion(new MobEffectInstance(WARMING.get(), 600)));
+
+
+
 }

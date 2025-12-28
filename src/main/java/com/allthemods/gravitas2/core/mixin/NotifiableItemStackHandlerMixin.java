@@ -27,7 +27,7 @@ public abstract class NotifiableItemStackHandlerMixin {
     )
     private static ItemStack injectHandleIngredient(CustomItemStackHandler capability, int slot, ItemStack stack, boolean simulated) {
         if(!simulated){
-            MaterialStack materialStack = ChemicalHelper.getMaterial(stack);
+            MaterialStack materialStack = ChemicalHelper.getMaterialStack(stack);
             if(materialStack != null){
                 Material material = materialStack.material();
                 if(material != null && material.hasProperty(G2PropertyKey.TFC_PROPERTY)){

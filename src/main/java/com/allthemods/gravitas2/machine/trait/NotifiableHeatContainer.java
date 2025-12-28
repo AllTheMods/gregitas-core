@@ -37,7 +37,7 @@ public class NotifiableHeatContainer extends NotifiableRecipeHandlerTrait<Float>
     }
 
     @Override
-    public List<Float> handleRecipeInner(IO io, GTRecipe recipe, List<Float> left, @Nullable String slotName, boolean simulate) {
+    public List<Float> handleRecipeInner(IO io, GTRecipe recipe, List<Float> left, boolean simulate) {
         float heat = left.stream().reduce(0.0f, Float::sum);
 
         if (heat > 0) {

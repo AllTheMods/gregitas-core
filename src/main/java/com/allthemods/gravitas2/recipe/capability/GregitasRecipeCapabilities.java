@@ -9,6 +9,6 @@ public class GregitasRecipeCapabilities {
 
     public static void init() {
         GTRegistries.RECIPE_CAPABILITIES.register(TEMP.name, TEMP);
-        GTRegistries.RECIPE_CAPABILITIES.register(PRESSURE.name, PRESSURE);
+
     }
 }

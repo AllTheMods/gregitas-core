@@ -18,11 +18,13 @@ import com.eerussianguy.firmalife.common.blocks.OvenBottomBlock;
 import com.github.alexthe666.iceandfire.block.IafBlockRegistry;
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTCEuAPI;
+import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.capability.recipe.RecipeCapability;
 import com.gregtechceu.gtceu.api.data.chemical.Element;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialEvent;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialRegistryEvent;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.PostMaterialEvent;
+import com.gregtechceu.gtceu.api.gui.GuiTextures;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.machine.feature.IOverclockMachine;
@@ -31,6 +33,10 @@ import com.gregtechceu.gtceu.api.machine.feature.ITieredMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.CleanroomType;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.common.data.GTItems;
+import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
+import com.gregtechceu.gtceu.common.data.GTSoundEntries;
+import com.lowdragmc.lowdraglib.gui.texture.ProgressTexture;
+import com.lowdragmc.lowdraglib.gui.widget.LabelWidget;
 import com.lumintorious.tfcambiental.api.AmbientalRegistry;
 import com.lumintorious.tfcambiental.modifier.TempModifier;
 import com.tterrag.registrate.providers.ProviderType;
@@ -110,13 +116,15 @@ public class GregitasCore {
     public GregitasCore() {
         //ConfigHolder.init();
 
+
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         modBus.addListener(this::addMaterialRegistries);
         modBus.addListener(this::addMaterials);
         modBus.addListener(this::modifyMaterials);
+        //modBus.addGenericListener(MachineDefinition.class, this::registerMachines);
+
+        //modBus.addGenericListener(GTRecipeType.class, this::registerRecipeTypes);
         modBus.addGenericListener(RecipeCapability.class, this::registerRecipeCaps);
-        modBus.addGenericListener(GTRecipeType.class, this::registerRecipeTypes);
-        modBus.addGenericListener(MachineDefinition.class, this::registerMachines);
         modBus.addGenericListener(Element.class, this::registerElements);
 
         modBus.addListener(this::fixDrawers);
@@ -125,14 +133,15 @@ public class GregitasCore {
         GregitasRegistry.POTIONS.register(modBus);
 
         MinecraftForge.EVENT_BUS.register(this);
-
+        GregitasRegistry.GREGITAS_REGISTRATE.registerRegistrate();
+        GregitasRegistry.GREGITAS_REGISTRATE.addDataGenerator(ProviderType.LANG, LangHandler::init);
         // Initialize GT stuffs
         GregitasBlocks.init();
         GregitasBlockEntities.init();
 
-        GregitasRegistry.GREGITAS_REGISTRATE.addDataGenerator(ProviderType.LANG, LangHandler::init);
 
-        GregitasRegistry.GREGITAS_REGISTRATE.registerRegistrate();
+
+
 
         // Register Integration content
         registerTFCAmbientalBlocks();
@@ -279,10 +288,12 @@ public class GregitasCore {
         GregitasRecipeCapabilities.init();
     }
 
+    @SubscribeEvent
     public void registerRecipeTypes(GTCEuAPI.RegisterEvent<ResourceLocation, GTRecipeType> event) {
-        GregitasRecipeTypes.init();
-    }
 
+       // GregitasRecipeTypes.init();
+    }
+    @SubscribeEvent
     public void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event) {
         GregitasMachines.init();
     }
@@ -376,6 +387,9 @@ public class GregitasCore {
         event.setSpawnCancelled(true);
         TFCEntities.CAT.get().spawn(event.getLevel().getLevel(),new BlockPos((int)event.getX(),(int)event.getY(),(int)event.getZ()), MobSpawnType.NATURAL);
     }
+
+
+
 }
 
 

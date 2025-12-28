@@ -1,6 +1,6 @@
 package com.allthemods.gravitas2.machine;
 
-import com.allthemods.gravitas2.machine.multiblock.part.PressureHatchPartMachine;
+
 import com.allthemods.gravitas2.util.GregitasConstants;
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTCEuAPI;
@@ -33,7 +33,6 @@ import static com.gregtechceu.gtceu.utils.FormattingUtil.toEnglishName;
 
 @SuppressWarnings({"Convert2MethodRef", "FunctionalExpressionCanBeFolded"})
 public class GregitasMachines {
-    public static final PartAbility PRESSURE_CONTAINER = new PartAbility("pressure_container");
 
     public final static int[] ELECTRIC_TIERS = GTCEuAPI.isHighTier() ?
             new int[] {GTValues.LV, GTValues.MV, GTValues.HV, GTValues.EV, GTValues.IV, GTValues.LuV, GTValues.ZPM, GTValues.UV, GTValues.UHV, GTValues.UEV, GTValues.UIV, GTValues.UXV, GTValues.OpV} :
@@ -43,7 +42,7 @@ public class GregitasMachines {
             new int[] {GTValues.IV, GTValues.LuV, GTValues.ZPM, GTValues.UV, GTValues.UHV};
     public static final Int2IntFunction defaultTankSizeFunction = tier -> ((tier <= GTValues.LV ? 8 : tier == GTValues.MV ? 12 : tier == GTValues.HV ? 16 : tier == GTValues.EV ? 32 : 64) * (int)FluidHelper.getBucket());
 
-
+/*
     public static final MachineDefinition[] PRESSURE_HATCH = registerPressureTieredMachines("pressure_hatch", (holder, tier) -> {
         double min = GregitasConstants.P[GregitasConstants.EAP];
         double max = GregitasConstants.P[GregitasConstants.EAP];
@@ -59,7 +58,7 @@ public class GregitasMachines {
                     .overlayTieredHullRenderer("pressure_hatch")
                     .register(),
             0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
-/*
+
     public static final MultiblockMachineDefinition BURNER_REACTOR = GREGITAS_REGISTRATE.multiblock("burner_reactor", CoilWorkableElectricMultiblockMachine::new)
             .langValue("Burner Reactor")
             .rotationState(RotationState.NON_Y_AXIS)
@@ -89,9 +88,6 @@ public class GregitasMachines {
             .register();
 */
 
-    public static TraceabilityPredicate pressurePredicate() {
-        return abilities(PRESSURE_CONTAINER).setMaxGlobalLimited(1).setPreviewCount(1);
-    }
 
     public static MachineDefinition[] registerSimpleMachines(String name, GTRecipeType recipeType, Int2IntFunction tankScalingFunction) {
         return registerSimpleMachines(name, recipeType, tankScalingFunction, ELECTRIC_TIERS);
@@ -110,7 +106,7 @@ public class GregitasMachines {
                 .rotationState(RotationState.NON_Y_AXIS)
                 .recipeType(recipeType)
                 .recipeModifier(GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK))
-                .workableTieredHullRenderer(GTCEu.id("block/machines/" + name))
+                //.workableTieredHullRenderer(GTCEu.id("block/machines/" + name))
                 .tooltips(explosion())
                 .tooltips(workableTiered(tier, GTValues.V[tier], GTValues.V[tier] * 64, recipeType, tankScalingFunction.apply(tier), true))
                 .register(), tiers);

@@ -2,6 +2,7 @@ package com.allthemods.gravitas2.core.mixin;
 
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
+import com.gregtechceu.gtceu.api.data.chemical.material.stack.MaterialEntry;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
 import com.gregtechceu.gtceu.core.MixinHelpers;
 import com.tterrag.registrate.util.entry.BlockEntry;
@@ -22,15 +23,14 @@ import java.util.Map;
 @Mixin(value = MixinHelpers.class, remap = false)
 public class MixinHelpersMixin {
 
-    @Inject(method = "lambda$addMaterialBlockTags$22", at = @At("HEAD"))
-    private static void gregitas$addFallingTag(Map<ResourceLocation, List<TagLoader.EntryWithSource>> tagMap, TagPrefix prefix, Material material, BlockEntry<? extends Block> block, CallbackInfo ci) {
-        if (TagPrefix.ORES.containsKey(prefix)) {
-            tagMap.computeIfAbsent(TFCTags.Blocks.CAN_COLLAPSE.location(), $ -> new ArrayList<>())
-                    .add(new TagLoader.EntryWithSource(TagEntry.element(block.getId()), GTValues.CUSTOM_TAG_SOURCE));
-            tagMap.computeIfAbsent(TFCTags.Blocks.CAN_START_COLLAPSE.location(), $ -> new ArrayList<>())
-                    .add(new TagLoader.EntryWithSource(TagEntry.element(block.getId()), GTValues.CUSTOM_TAG_SOURCE));
-            tagMap.computeIfAbsent(TFCTags.Blocks.CAN_TRIGGER_COLLAPSE.location(), $ -> new ArrayList<>())
-                    .add(new TagLoader.EntryWithSource(TagEntry.element(block.getId()), GTValues.CUSTOM_TAG_SOURCE));
-        }
+    @Inject(method = "lambda$generateGTDynamicTags$20", at = @At("HEAD"))
+    private static void gregitas$addFallingTag(Map tagMap, MaterialEntry entry, List blocks, CallbackInfo ci) {
+       /*
+        entry.tagPrefix().getAllBlockTags(entry.material());
+        if (TagPrefix.ORES.containsKey(entry.tagPrefix())) {
+            tagMap.computeIfAbsent(TFCTags.Blocks.CAN_COLLAPSE.location(), $ -> new ArrayList<>().add(new TagLoader.EntryWithSource(TagEntry.element(block.getId()), GTValues.CUSTOM_TAG_SOURCE)));
+            tagMap.computeIfAbsent(TFCTags.Blocks.CAN_START_COLLAPSE.location(), $ -> new ArrayList<>().add(new TagLoader.EntryWithSource(TagEntry.element(block.getId()), GTValues.CUSTOM_TAG_SOURCE)));
+            tagMap.computeIfAbsent(TFCTags.Blocks.CAN_TRIGGER_COLLAPSE.location(), $ -> new ArrayList<>().add(new TagLoader.EntryWithSource(TagEntry.element(block.getId()), GTValues.CUSTOM_TAG_SOURCE)));
+        }*/
     }
 }
