@@ -16,7 +16,7 @@ public class WaterPipeMixin {
     private void gregitas$removeFluidFromSpace(CallbackInfoReturnable<FluidStack> cir) {
         FluidStack stack = cir.getReturnValue();
 
-        if (stack.getFluid() == TFCFluids.RIVER_WATER.get() || stack.getFluid() == TFCFluids.SALT_WATER.getSource()) {
+        if (stack.getFluid() == TFCFluids.RIVER_WATER.get()) {
             cir.setReturnValue(new FluidStack(Fluids.WATER.getSource(), stack.getAmount()));
             cir.cancel();
         }

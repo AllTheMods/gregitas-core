@@ -25,12 +25,12 @@ public class MixinHelpersMixin {
 
     @Inject(method = "lambda$generateGTDynamicTags$20", at = @At("HEAD"))
     private static void gregitas$addFallingTag(Map tagMap, MaterialEntry entry, List blocks, CallbackInfo ci) {
-       /*
+
         entry.tagPrefix().getAllBlockTags(entry.material());
         if (TagPrefix.ORES.containsKey(entry.tagPrefix())) {
             tagMap.computeIfAbsent(TFCTags.Blocks.CAN_COLLAPSE.location(), $ -> new ArrayList<>().add(new TagLoader.EntryWithSource(TagEntry.element(block.getId()), GTValues.CUSTOM_TAG_SOURCE)));
             tagMap.computeIfAbsent(TFCTags.Blocks.CAN_START_COLLAPSE.location(), $ -> new ArrayList<>().add(new TagLoader.EntryWithSource(TagEntry.element(block.getId()), GTValues.CUSTOM_TAG_SOURCE)));
             tagMap.computeIfAbsent(TFCTags.Blocks.CAN_TRIGGER_COLLAPSE.location(), $ -> new ArrayList<>().add(new TagLoader.EntryWithSource(TagEntry.element(block.getId()), GTValues.CUSTOM_TAG_SOURCE)));
-        }*/
+        }
     }
 }
