@@ -7,6 +7,7 @@ import com.allthemods.gravitas2.data.tag.GregitasTagPrefixes;
 import com.allthemods.gravitas2.material.GregitasMaterials;
 import com.allthemods.gravitas2.recipe.capability.GregitasRecipeCapabilities;
 import com.allthemods.gravitas2.registry.GregitasRegistry;
+import com.allthemods.gravitas2.util.OreAddition;
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.addon.GTAddon;
 import com.gregtechceu.gtceu.api.addon.IGTAddon;
@@ -52,6 +53,10 @@ public class GregitasGTAddon implements IGTAddon {
     public static final ContentJS<Float> TEMP_IN = new ContentJS<>(NumberComponent.ANY_FLOAT, GregitasRecipeCapabilities.TEMP, false);
     public static final ContentJS<Float> TEMP_OUT = new ContentJS<>(NumberComponent.ANY_FLOAT, GregitasRecipeCapabilities.TEMP, true);
 
+    @Override
+    public void registerOreVeins() {
+        OreAddition.init();
+    }
     @Override
     public void registerRecipeKeys(KJSRecipeKeyEvent event) {
         event.registerKey(GregitasRecipeCapabilities.PRESSURE, Pair.of(PRESSURE_IN, PRESSURE_OUT));

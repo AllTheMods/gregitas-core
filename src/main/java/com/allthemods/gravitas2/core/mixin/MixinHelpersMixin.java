@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.block;
+
 @Mixin(value = MixinHelpers.class, remap = false)
 public class MixinHelpersMixin {
 
@@ -28,9 +30,9 @@ public class MixinHelpersMixin {
 
         entry.tagPrefix().getAllBlockTags(entry.material());
         if (TagPrefix.ORES.containsKey(entry.tagPrefix())) {
-            tagMap.computeIfAbsent(TFCTags.Blocks.CAN_COLLAPSE.location(), $ -> new ArrayList<>().add(new TagLoader.EntryWithSource(TagEntry.element(block.getId()), GTValues.CUSTOM_TAG_SOURCE)));
-            tagMap.computeIfAbsent(TFCTags.Blocks.CAN_START_COLLAPSE.location(), $ -> new ArrayList<>().add(new TagLoader.EntryWithSource(TagEntry.element(block.getId()), GTValues.CUSTOM_TAG_SOURCE)));
-            tagMap.computeIfAbsent(TFCTags.Blocks.CAN_TRIGGER_COLLAPSE.location(), $ -> new ArrayList<>().add(new TagLoader.EntryWithSource(TagEntry.element(block.getId()), GTValues.CUSTOM_TAG_SOURCE)));
+            tagMap.computeIfAbsent(TFCTags.Blocks.CAN_COLLAPSE.location(), $ -> new ArrayList<>().add(new TagLoader.EntryWithSource(TagEntry.element(entry.material().getResourceLocation()), GTValues.CUSTOM_TAG_SOURCE)));
+            tagMap.computeIfAbsent(TFCTags.Blocks.CAN_START_COLLAPSE.location(), $ -> new ArrayList<>().add(new TagLoader.EntryWithSource(TagEntry.element(entry.material().getResourceLocation()), GTValues.CUSTOM_TAG_SOURCE)));
+            tagMap.computeIfAbsent(TFCTags.Blocks.CAN_TRIGGER_COLLAPSE.location(), $ -> new ArrayList<>().add(new TagLoader.EntryWithSource(TagEntry.element(entry.material().getResourceLocation()), GTValues.CUSTOM_TAG_SOURCE)));
         }
     }
 }
