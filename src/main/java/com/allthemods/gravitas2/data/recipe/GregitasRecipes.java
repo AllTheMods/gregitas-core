@@ -11,7 +11,7 @@ import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.blocks.rock.Rock;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.level.ItemLike;
-
+import net.minecraft.world.level.material.Fluids;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -55,8 +55,8 @@ public class GregitasRecipes {
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.ANDESITE).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
                 .EUt(60)
-                .addData("fluidA", "minecraft:lava")
-                .addData("fluidB", "minecraft:water")
+                .adjacentFluids(Fluids.WATER)
+                .adjacentFluids(Fluids.LAVA)
                 .save(provider);
 
         ROCK_BREAKER_RECIPES.recipeBuilder("granite")
@@ -64,8 +64,8 @@ public class GregitasRecipes {
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.GRANITE).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
                 .EUt(60)
-                .addData("fluidA", "minecraft:lava")
-                .addData("fluidB", "minecraft:water")
+                .adjacentFluids(Fluids.WATER)
+                .adjacentFluids(Fluids.LAVA)
                 .save(provider);
 
         ROCK_BREAKER_RECIPES.recipeBuilder("diorite")
@@ -73,8 +73,8 @@ public class GregitasRecipes {
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.DIORITE).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
                 .EUt(60)
-                .addData("fluidA", "minecraft:lava")
-                .addData("fluidB", "minecraft:water")
+                .adjacentFluids(Fluids.WATER)
+                .adjacentFluids(Fluids.LAVA)
                 .save(provider);
 
         ROCK_BREAKER_RECIPES.recipeBuilder(GregitasCore.id("tfc_basalt"))
@@ -82,8 +82,8 @@ public class GregitasRecipes {
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.BASALT).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
                 .EUt(VA[HV])
-                .addData("fluidA", "minecraft:lava")
-                .addData("fluidB", "minecraft:water")
+                .adjacentFluids(Fluids.WATER)
+                .adjacentFluids(Fluids.LAVA)
                 .save(provider);
 
         ROCK_BREAKER_RECIPES.recipeBuilder(GregitasCore.id("gabbro"))
@@ -91,8 +91,8 @@ public class GregitasRecipes {
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.GABBRO).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
                 .EUt(VA[HV])
-                .addData("fluidA", "minecraft:lava")
-                .addData("fluidB", "minecraft:water")
+                .adjacentFluids(Fluids.WATER)
+                .adjacentFluids(Fluids.LAVA)
                 .save(provider);
 
         ROCK_BREAKER_RECIPES.recipeBuilder(GregitasCore.id("shale"))
@@ -100,8 +100,8 @@ public class GregitasRecipes {
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.SHALE).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
                 .EUt(VA[HV])
-                .addData("fluidA", "minecraft:lava")
-                .addData("fluidB", "minecraft:water")
+                .adjacentFluids(Fluids.WATER)
+                .adjacentFluids(Fluids.LAVA)
                 .save(provider);
 
         ROCK_BREAKER_RECIPES.recipeBuilder(GregitasCore.id("claystone"))
@@ -109,8 +109,8 @@ public class GregitasRecipes {
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.CLAYSTONE).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
                 .EUt(VA[HV])
-                .addData("fluidA", "minecraft:lava")
-                .addData("fluidB", "minecraft:water")
+                .adjacentFluids(Fluids.WATER)
+                .adjacentFluids(Fluids.LAVA)
                 .save(provider);
 
         ROCK_BREAKER_RECIPES.recipeBuilder(GregitasCore.id("limestone"))
@@ -118,8 +118,8 @@ public class GregitasRecipes {
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.LIMESTONE).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
                 .EUt(VA[HV])
-                .addData("fluidA", "minecraft:lava")
-                .addData("fluidB", "minecraft:water")
+                .adjacentFluids(Fluids.WATER)
+                .adjacentFluids(Fluids.LAVA)
                 .save(provider);
 
         ROCK_BREAKER_RECIPES.recipeBuilder(GregitasCore.id("conglomerate"))
@@ -127,8 +127,8 @@ public class GregitasRecipes {
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.CONGLOMERATE).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
                 .EUt(VA[HV])
-                .addData("fluidA", "minecraft:lava")
-                .addData("fluidB", "minecraft:water")
+                .adjacentFluids(Fluids.WATER)
+                .adjacentFluids(Fluids.LAVA)
                 .save(provider);
 
         ROCK_BREAKER_RECIPES.recipeBuilder(GregitasCore.id("dolomite"))
@@ -136,8 +136,8 @@ public class GregitasRecipes {
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.DOLOMITE).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
                 .EUt(VA[HV])
-                .addData("fluidA", "minecraft:lava")
-                .addData("fluidB", "minecraft:water")
+                .adjacentFluids(Fluids.WATER)
+                .adjacentFluids(Fluids.LAVA)
                 .save(provider);
 
         ROCK_BREAKER_RECIPES.recipeBuilder(GregitasCore.id("chert"))
@@ -145,8 +145,8 @@ public class GregitasRecipes {
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.CHERT).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
                 .EUt(VA[HV])
-                .addData("fluidA", "minecraft:lava")
-                .addData("fluidB", "minecraft:water")
+                .adjacentFluids(Fluids.WATER)
+                .adjacentFluids(Fluids.LAVA)
                 .save(provider);
 
         ROCK_BREAKER_RECIPES.recipeBuilder(GregitasCore.id("chalk"))
@@ -154,8 +154,8 @@ public class GregitasRecipes {
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.CHALK).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
                 .EUt(VA[HV])
-                .addData("fluidA", "minecraft:lava")
-                .addData("fluidB", "minecraft:water")
+                .adjacentFluids(Fluids.WATER)
+                .adjacentFluids(Fluids.LAVA)
                 .save(provider);
 
         ROCK_BREAKER_RECIPES.recipeBuilder(GregitasCore.id("rhyolite"))
@@ -163,8 +163,8 @@ public class GregitasRecipes {
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.RHYOLITE).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
                 .EUt(VA[HV])
-                .addData("fluidA", "minecraft:lava")
-                .addData("fluidB", "minecraft:water")
+                .adjacentFluids(Fluids.WATER)
+                .adjacentFluids(Fluids.LAVA)
                 .save(provider);
 
         ROCK_BREAKER_RECIPES.recipeBuilder(GregitasCore.id("dacite"))
@@ -172,8 +172,8 @@ public class GregitasRecipes {
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.DACITE).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
                 .EUt(VA[HV])
-                .addData("fluidA", "minecraft:lava")
-                .addData("fluidB", "minecraft:water")
+                .adjacentFluids(Fluids.WATER)
+                .adjacentFluids(Fluids.LAVA)
                 .save(provider);
 
         ROCK_BREAKER_RECIPES.recipeBuilder(GregitasCore.id("quartzite"))
@@ -181,8 +181,8 @@ public class GregitasRecipes {
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.QUARTZITE).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
                 .EUt(VA[HV])
-                .addData("fluidA", "minecraft:lava")
-                .addData("fluidB", "minecraft:water")
+                .adjacentFluids(Fluids.WATER)
+                .adjacentFluids(Fluids.LAVA)
                 .save(provider);
 
         ROCK_BREAKER_RECIPES.recipeBuilder(GregitasCore.id("slate"))
@@ -190,8 +190,8 @@ public class GregitasRecipes {
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.SLATE).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
                 .EUt(VA[HV])
-                .addData("fluidA", "minecraft:lava")
-                .addData("fluidB", "minecraft:water")
+                .adjacentFluids(Fluids.WATER)
+                .adjacentFluids(Fluids.LAVA)
                 .save(provider);
 
         ROCK_BREAKER_RECIPES.recipeBuilder(GregitasCore.id("phyllite"))
@@ -199,8 +199,8 @@ public class GregitasRecipes {
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.PHYLLITE).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
                 .EUt(VA[HV])
-                .addData("fluidA", "minecraft:lava")
-                .addData("fluidB", "minecraft:water")
+                .adjacentFluids(Fluids.WATER)
+                .adjacentFluids(Fluids.LAVA)
                 .save(provider);
 
         ROCK_BREAKER_RECIPES.recipeBuilder(GregitasCore.id("schist"))
@@ -208,8 +208,8 @@ public class GregitasRecipes {
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.SCHIST).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
                 .EUt(VA[HV])
-                .addData("fluidA", "minecraft:lava")
-                .addData("fluidB", "minecraft:water")
+                .adjacentFluids(Fluids.WATER)
+                .adjacentFluids(Fluids.LAVA)
                 .save(provider);
 
         ROCK_BREAKER_RECIPES.recipeBuilder(GregitasCore.id("gneiss"))
@@ -217,8 +217,8 @@ public class GregitasRecipes {
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.GNEISS).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
                 .EUt(VA[HV])
-                .addData("fluidA", "minecraft:lava")
-                .addData("fluidB", "minecraft:water")
+                .adjacentFluids(Fluids.WATER)
+                .adjacentFluids(Fluids.LAVA)
                 .save(provider);
 
         ROCK_BREAKER_RECIPES.recipeBuilder(GregitasCore.id("marble"))
@@ -226,8 +226,8 @@ public class GregitasRecipes {
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.MARBLE).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
                 .EUt(VA[HV])
-                .addData("fluidA", "minecraft:lava")
-                .addData("fluidB", "minecraft:water")
+                .adjacentFluids(Fluids.WATER)
+                .adjacentFluids(Fluids.LAVA)
                 .save(provider);
 
         }

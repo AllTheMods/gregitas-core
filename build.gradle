@@ -167,6 +167,7 @@ dependencies {
     modImplementation("curse.maven:geckolib-388172:6312918")
     modImplementation("curse.maven:applied-energistics-2-223794:6852919")
     modImplementation("curse.maven:gcyr-922713:6016659")
+    modImplementation("curse.maven:workers-567450:6339807")
 
     modRuntimeOnly("vazkii.patchouli:Patchouli:${project.minecraft_version}-${project.patchouli_version}-FORGE")
     modRuntimeOnly("top.theillusivec4.curios:curios-forge:${project.curios_version}+${project.minecraft_version}")
