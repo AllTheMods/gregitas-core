@@ -27,7 +27,6 @@
     "MixinAbstractVillager",
     "PlaceBlockSpecialPacketMixin",
     "PlacedItemBlockEntityMixin",
-    "RecipeManagerMixin",
     "SpawnSeaSerpentMixin",
     "StainedWattleBlockMixin",
     "SteamBoilerMachineMixin",

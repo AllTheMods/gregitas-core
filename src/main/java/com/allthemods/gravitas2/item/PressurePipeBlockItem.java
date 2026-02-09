@@ -10,7 +10,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 
-public class PressurePipeBlockItem extends PipeBlockItem implements IItemRendererProvider {
+public class PressurePipeBlockItem extends PipeBlockItem {
 
     public PressurePipeBlockItem(PipeBlock block, Properties properties) {
         super(block, properties);
@@ -19,12 +19,5 @@ public class PressurePipeBlockItem extends PipeBlockItem implements IItemRendere
     @Override
     public PressurePipeBlock getBlock() {
         return (PressurePipeBlock) super.getBlock();
-    }
-
-    @Nullable
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public IRenderer getRenderer(ItemStack stack) {
-        return getBlock().getRenderer(getBlock().defaultBlockState());
     }
 }

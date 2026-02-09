@@ -10,9 +10,8 @@ import com.allthemods.gravitas2.pipelike.pressure.PressurePipeType;
 import com.gregtechceu.gtceu.api.block.PipeBlock;
 import com.gregtechceu.gtceu.api.blockentity.PipeBlockEntity;
 import com.gregtechceu.gtceu.api.pipenet.IPipeNode;
-import com.gregtechceu.gtceu.client.model.PipeModel;
-import com.gregtechceu.gtceu.client.renderer.block.PipeBlockRenderer;
-import lombok.Getter;
+import com.gregtechceu.gtceu.api.registry.registrate.provider.GTBlockstateProvider;
+import com.gregtechceu.gtceu.client.model.pipe.PipeModel;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -28,14 +27,14 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class PressurePipeBlock extends PipeBlock<PressurePipeType, PressurePipeData, LevelPressureNet> {
 
-    public final PipeBlockRenderer renderer;
-    @Getter
-    public final PipeModel pipeModel;
 
     public PressurePipeBlock(Properties properties, PressurePipeType pressurePipeType) {
         super(properties, pressurePipeType);
-        this.pipeModel = new PipeModel(pressurePipeType.getThickness(), () -> GregitasCore.id("block/pipe/pressure_pipe_side"), () -> GregitasCore.id("block/pipe/pressure_pipe_open"), null, null);
-        this.renderer = new PipeBlockRenderer(this.pipeModel);
+    }
+
+    @Override
+    public PipeModel createPipeModel(GTBlockstateProvider provider) {
+        return new PipeModel(this, provider, pipeType.getThickness(), GregitasCore.id("block/pipe/pressure_pipe_side"), GregitasCore.id("block/pipe/pressure_pipe_open"));
     }
 
     @Override
@@ -63,11 +62,6 @@ public class PressurePipeBlock extends PipeBlock<PressurePipeType, PressurePipeD
     @Override
     public PressurePipeData getFallbackType() {
         return PressurePipeData.EMPTY;
-    }
-
-    @Override
-    public @Nullable PipeBlockRenderer getRenderer(BlockState state) {
-        return renderer;
     }
 
     @Override
