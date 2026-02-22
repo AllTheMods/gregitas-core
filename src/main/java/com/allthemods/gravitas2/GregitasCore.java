@@ -132,6 +132,7 @@ public class GregitasCore {
         GregitasRegistry.MOBEFFECTS.register(modBus);
         GregitasRegistry.POTIONS.register(modBus);
         GregitasRegistry.BLOCKS.register(modBus);
+        GregitasRegistry.ITEMS.register(modBus);
         MinecraftForge.EVENT_BUS.register(this);
         GregitasRegistry.GREGITAS_REGISTRATE.registerRegistrate();
         GregitasRegistry.GREGITAS_REGISTRATE.addDataGenerator(ProviderType.LANG, LangHandler::init);
@@ -139,7 +140,7 @@ public class GregitasCore {
         GregitasBlocks.init();
         GregitasBlockEntities.init();
 
-        GregitasRegistry.init();
+
 
 
 
@@ -244,6 +245,7 @@ public class GregitasCore {
     }
 
     public void fixDrawers(RegisterEvent event){
+
         if (event.getRegistryKey().equals(ForgeRegistries.BLOCK_ENTITY_TYPES.getRegistryKey())) {
             if (event.getForgeRegistry() instanceof ForgeRegistry<?> fr){
                 LOGGER.info("Fixing Storage Drawers aliases for Gregitas Coremod");
