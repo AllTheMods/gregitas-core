@@ -168,7 +168,8 @@ dependencies {
     modImplementation("curse.maven:applied-energistics-2-223794:6852919")
     modImplementation("curse.maven:gcyr-922713:6016659")
     modImplementation("curse.maven:workers-567450:6339807")
-
+    modImplementation("curse.maven:eureka-ships-654384:7419758")
+    modImplementation("curse.maven:kotlin-for-forge-351264:7471280")
     modRuntimeOnly("vazkii.patchouli:Patchouli:${project.minecraft_version}-${project.patchouli_version}-FORGE")
     modRuntimeOnly("top.theillusivec4.curios:curios-forge:${project.curios_version}+${project.minecraft_version}")
     modRuntimeOnly("dev.toma.configuration:configuration-forge-${project.minecraft_version}:${project.configuration_version}")

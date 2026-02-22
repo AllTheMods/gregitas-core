@@ -131,7 +131,7 @@ public class GregitasCore {
         modBus.addListener(this::registerCapabilities);
         GregitasRegistry.MOBEFFECTS.register(modBus);
         GregitasRegistry.POTIONS.register(modBus);
-
+        GregitasRegistry.BLOCKS.register(modBus);
         MinecraftForge.EVENT_BUS.register(this);
         GregitasRegistry.GREGITAS_REGISTRATE.registerRegistrate();
         GregitasRegistry.GREGITAS_REGISTRATE.addDataGenerator(ProviderType.LANG, LangHandler::init);
@@ -145,6 +145,16 @@ public class GregitasCore {
 
         // Register Integration content
         registerTFCAmbientalBlocks();
+        setupLogFilter();
+    }
+
+    private static void setupLogFilter() {
+        var rootLogger = LogManager.getRootLogger();
+        if (rootLogger instanceof org.apache.logging.log4j.core.Logger logger) {
+            logger.addFilter(new MessageFilter());
+        } else {
+            LOGGER.error("Registration failed with unexpected class: {}", rootLogger.getClass());
+        }
     }
 
     public static ResourceLocation id(String path) {

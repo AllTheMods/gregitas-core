@@ -32,3 +32,5 @@ bin/
 
 run/
 src/generated/.cache/
+libs/Steam_Rails-1.5.3+forge-mc1.20.1.jar
+libs/flywheel-forge-1.20.1-1.0.4.jar

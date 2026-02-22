@@ -24,6 +24,7 @@
     "MixinIM_Shards",
     "MixinLilyFix",
     "MixinRedstoneSheep",
+    "MixinDripstone",
     "MixinAbstractVillager",
     "PlaceBlockSpecialPacketMixin",
     "PlacedItemBlockEntityMixin",

@@ -18,8 +18,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import static com.allthemods.gravitas2.material.GregitasMaterials.*;
-import static com.gregtechceu.gtceu.api.GTValues.HV;
-import static com.gregtechceu.gtceu.api.GTValues.VA;
+import static com.gregtechceu.gtceu.api.GTValues.*;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.*;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ROCK_BREAKER_RECIPES;
@@ -63,7 +62,7 @@ public class GregitasRecipes {
                 .notConsumable(TFCBlocks.ROCK_BLOCKS.get(Rock.GRANITE).get(Rock.BlockType.RAW).get().asItem())
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.GRANITE).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
-                .EUt(60)
+                .EUt(VA[LV])
                 .adjacentFluids(Fluids.WATER)
                 .adjacentFluids(Fluids.LAVA)
                 .save(provider);
@@ -72,7 +71,7 @@ public class GregitasRecipes {
                 .notConsumable(TFCBlocks.ROCK_BLOCKS.get(Rock.DIORITE).get(Rock.BlockType.RAW).get().asItem())
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.DIORITE).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
-                .EUt(60)
+                .EUt(VA[LV])
                 .adjacentFluids(Fluids.WATER)
                 .adjacentFluids(Fluids.LAVA)
                 .save(provider);
@@ -81,7 +80,7 @@ public class GregitasRecipes {
                 .notConsumable(TFCBlocks.ROCK_BLOCKS.get(Rock.BASALT).get(Rock.BlockType.RAW).get().asItem())
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.BASALT).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
-                .EUt(VA[HV])
+                .EUt(VA[LV])
                 .adjacentFluids(Fluids.WATER)
                 .adjacentFluids(Fluids.LAVA)
                 .save(provider);
@@ -90,7 +89,7 @@ public class GregitasRecipes {
                 .notConsumable(TFCBlocks.ROCK_BLOCKS.get(Rock.GABBRO).get(Rock.BlockType.RAW).get().asItem())
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.GABBRO).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
-                .EUt(VA[HV])
+                .EUt(VA[LV])
                 .adjacentFluids(Fluids.WATER)
                 .adjacentFluids(Fluids.LAVA)
                 .save(provider);
@@ -99,7 +98,7 @@ public class GregitasRecipes {
                 .notConsumable(TFCBlocks.ROCK_BLOCKS.get(Rock.SHALE).get(Rock.BlockType.RAW).get().asItem())
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.SHALE).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
-                .EUt(VA[HV])
+                .EUt(VA[LV])
                 .adjacentFluids(Fluids.WATER)
                 .adjacentFluids(Fluids.LAVA)
                 .save(provider);
@@ -108,7 +107,7 @@ public class GregitasRecipes {
                 .notConsumable(TFCBlocks.ROCK_BLOCKS.get(Rock.CLAYSTONE).get(Rock.BlockType.RAW).get().asItem())
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.CLAYSTONE).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
-                .EUt(VA[HV])
+                .EUt(VA[LV])
                 .adjacentFluids(Fluids.WATER)
                 .adjacentFluids(Fluids.LAVA)
                 .save(provider);
@@ -117,7 +116,7 @@ public class GregitasRecipes {
                 .notConsumable(TFCBlocks.ROCK_BLOCKS.get(Rock.LIMESTONE).get(Rock.BlockType.RAW).get().asItem())
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.LIMESTONE).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
-                .EUt(VA[HV])
+                .EUt(VA[LV])
                 .adjacentFluids(Fluids.WATER)
                 .adjacentFluids(Fluids.LAVA)
                 .save(provider);
@@ -126,7 +125,7 @@ public class GregitasRecipes {
                 .notConsumable(TFCBlocks.ROCK_BLOCKS.get(Rock.CONGLOMERATE).get(Rock.BlockType.RAW).get().asItem())
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.CONGLOMERATE).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
-                .EUt(VA[HV])
+                .EUt(VA[LV])
                 .adjacentFluids(Fluids.WATER)
                 .adjacentFluids(Fluids.LAVA)
                 .save(provider);
@@ -135,7 +134,7 @@ public class GregitasRecipes {
                 .notConsumable(TFCBlocks.ROCK_BLOCKS.get(Rock.DOLOMITE).get(Rock.BlockType.RAW).get().asItem())
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.DOLOMITE).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
-                .EUt(VA[HV])
+                .EUt(VA[LV])
                 .adjacentFluids(Fluids.WATER)
                 .adjacentFluids(Fluids.LAVA)
                 .save(provider);
@@ -144,7 +143,7 @@ public class GregitasRecipes {
                 .notConsumable(TFCBlocks.ROCK_BLOCKS.get(Rock.CHERT).get(Rock.BlockType.RAW).get().asItem())
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.CHERT).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
-                .EUt(VA[HV])
+                .EUt(VA[LV])
                 .adjacentFluids(Fluids.WATER)
                 .adjacentFluids(Fluids.LAVA)
                 .save(provider);
@@ -153,7 +152,7 @@ public class GregitasRecipes {
                 .notConsumable(TFCBlocks.ROCK_BLOCKS.get(Rock.CHALK).get(Rock.BlockType.RAW).get().asItem())
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.CHALK).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
-                .EUt(VA[HV])
+                .EUt(VA[LV])
                 .adjacentFluids(Fluids.WATER)
                 .adjacentFluids(Fluids.LAVA)
                 .save(provider);
@@ -162,7 +161,7 @@ public class GregitasRecipes {
                 .notConsumable(TFCBlocks.ROCK_BLOCKS.get(Rock.RHYOLITE).get(Rock.BlockType.RAW).get().asItem())
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.RHYOLITE).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
-                .EUt(VA[HV])
+                .EUt(VA[LV])
                 .adjacentFluids(Fluids.WATER)
                 .adjacentFluids(Fluids.LAVA)
                 .save(provider);
@@ -171,7 +170,7 @@ public class GregitasRecipes {
                 .notConsumable(TFCBlocks.ROCK_BLOCKS.get(Rock.DACITE).get(Rock.BlockType.RAW).get().asItem())
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.DACITE).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
-                .EUt(VA[HV])
+                .EUt(VA[LV])
                 .adjacentFluids(Fluids.WATER)
                 .adjacentFluids(Fluids.LAVA)
                 .save(provider);
@@ -180,7 +179,7 @@ public class GregitasRecipes {
                 .notConsumable(TFCBlocks.ROCK_BLOCKS.get(Rock.QUARTZITE).get(Rock.BlockType.RAW).get().asItem())
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.QUARTZITE).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
-                .EUt(VA[HV])
+                .EUt(VA[LV])
                 .adjacentFluids(Fluids.WATER)
                 .adjacentFluids(Fluids.LAVA)
                 .save(provider);
@@ -189,7 +188,7 @@ public class GregitasRecipes {
                 .notConsumable(TFCBlocks.ROCK_BLOCKS.get(Rock.SLATE).get(Rock.BlockType.RAW).get().asItem())
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.SLATE).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
-                .EUt(VA[HV])
+                .EUt(VA[LV])
                 .adjacentFluids(Fluids.WATER)
                 .adjacentFluids(Fluids.LAVA)
                 .save(provider);
@@ -198,7 +197,7 @@ public class GregitasRecipes {
                 .notConsumable(TFCBlocks.ROCK_BLOCKS.get(Rock.PHYLLITE).get(Rock.BlockType.RAW).get().asItem())
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.PHYLLITE).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
-                .EUt(VA[HV])
+                .EUt(VA[LV])
                 .adjacentFluids(Fluids.WATER)
                 .adjacentFluids(Fluids.LAVA)
                 .save(provider);
@@ -207,7 +206,7 @@ public class GregitasRecipes {
                 .notConsumable(TFCBlocks.ROCK_BLOCKS.get(Rock.SCHIST).get(Rock.BlockType.RAW).get().asItem())
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.SCHIST).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
-                .EUt(VA[HV])
+                .EUt(VA[LV])
                 .adjacentFluids(Fluids.WATER)
                 .adjacentFluids(Fluids.LAVA)
                 .save(provider);
@@ -216,7 +215,7 @@ public class GregitasRecipes {
                 .notConsumable(TFCBlocks.ROCK_BLOCKS.get(Rock.GNEISS).get(Rock.BlockType.RAW).get().asItem())
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.GNEISS).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
-                .EUt(VA[HV])
+                .EUt(VA[LV])
                 .adjacentFluids(Fluids.WATER)
                 .adjacentFluids(Fluids.LAVA)
                 .save(provider);
@@ -225,7 +224,7 @@ public class GregitasRecipes {
                 .notConsumable(TFCBlocks.ROCK_BLOCKS.get(Rock.MARBLE).get(Rock.BlockType.RAW).get().asItem())
                 .outputItems(TFCBlocks.ROCK_BLOCKS.get(Rock.MARBLE).get(Rock.BlockType.RAW).get().asItem())
                 .duration(16)
-                .EUt(VA[HV])
+                .EUt(VA[LV])
                 .adjacentFluids(Fluids.WATER)
                 .adjacentFluids(Fluids.LAVA)
                 .save(provider);
