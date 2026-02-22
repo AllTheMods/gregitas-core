@@ -18,7 +18,7 @@ def modId = project.mod_id
 def generatedResources = file("src/generated")
 
 java {
-    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_21
 }
 
 legacyForge {
@@ -150,8 +150,11 @@ dependencies {
     modImplementation("dev.ftb.mods:ftb-library-forge:${project.ftb_library_version}") { transitive = false }
     modImplementation("dev.ftb.mods:ftb-teams-forge:${project.ftb_teams_version}") { transitive = false }
 //
+    modImplementation("curse.maven:architectury-api-419699:5137938")
+    modImplementation("curse.maven:guideme-1173950:7127447")
+    modImplementation("curse.maven:rhino-416294:6186971")
     modImplementation("curse.maven:railcraft-reborn-901491:7191620")
-    modImplementation("curse.maven:create-328085:6323270") { transitive = false }
+    modImplementation("curse.maven:create-328085:6641603") { transitive = false }
     modImplementation("curse.maven:ice-and-fire-dragons-264231:5122408")
     modImplementation("curse.maven:citadel-331936:4848887")
     modImplementation("curse.maven:firmalife-453394:5775257")
@@ -160,16 +163,17 @@ dependencies {
     modImplementation("curse.maven:framework-549225:5811593")
     modImplementation("curse.maven:placebo-283644:5414631")
     modImplementation("curse.maven:scorched-guns-802940:5741395")
-    modImplementation("curse.maven:create-diesel-generators-869316:5401010")
-    modImplementation("curse.maven:immersive-machinery-1068736:6036154")
-    modImplementation("curse.maven:immersive-aircraft-666014:6036814")
+    modImplementation("curse.maven:create-diesel-generators-869316:7350909")
+    modImplementation("curse.maven:immersive-machinery-1068736:6492547")
+    modImplementation("curse.maven:immersive-aircraft-666014:6972825")
     modImplementation("curse.maven:medieval-siege-machines-585964:6276088")
     modImplementation("curse.maven:geckolib-388172:6312918")
     modImplementation("curse.maven:applied-energistics-2-223794:6852919")
-    modImplementation("curse.maven:gcyr-922713:6016659")
+    modImplementation("curse.maven:gcyr-922713:7601233")
     modImplementation("curse.maven:workers-567450:6339807")
+    modImplementation("curse.maven:valkyrien-skies-258371:7568034")
     modImplementation("curse.maven:eureka-ships-654384:7419758")
-    modImplementation("curse.maven:kotlin-for-forge-351264:7471280")
+    modImplementation("curse.maven:kotlin-for-forge-351264:7291067")
     modRuntimeOnly("vazkii.patchouli:Patchouli:${project.minecraft_version}-${project.patchouli_version}-FORGE")
     modRuntimeOnly("top.theillusivec4.curios:curios-forge:${project.curios_version}+${project.minecraft_version}")
     modRuntimeOnly("dev.toma.configuration:configuration-forge-${project.minecraft_version}:${project.configuration_version}")
