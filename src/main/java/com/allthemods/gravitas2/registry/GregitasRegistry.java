@@ -50,7 +50,7 @@ public class GregitasRegistry {
     public static final RegistryObject<Potion> WARMING_POTION = POTIONS.register("warming", () -> new Potion(new MobEffectInstance(WARMING.get(), 600)));
 
 
-   static {
+   public static void init() {
         BlockBehaviour.Properties properties = BlockBehaviour.Properties.of();
         for(IWoodType woodType : GWoodType.values()) {
            BLOCKS.register(woodType + "_ships_helm", () -> new ShipHelmBlock(properties,woodType));

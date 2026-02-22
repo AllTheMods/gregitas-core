@@ -139,7 +139,7 @@ public class GregitasCore {
         GregitasBlocks.init();
         GregitasBlockEntities.init();
 
-
+        GregitasRegistry.init();
 
 
 
