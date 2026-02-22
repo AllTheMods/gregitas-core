@@ -129,10 +129,12 @@ public class GregitasCore {
 
         modBus.addListener(this::fixDrawers);
         modBus.addListener(this::registerCapabilities);
+
         GregitasRegistry.MOBEFFECTS.register(modBus);
         GregitasRegistry.POTIONS.register(modBus);
         GregitasRegistry.BLOCKS.register(modBus);
         GregitasRegistry.ITEMS.register(modBus);
+        GregitasRegistry.CREATIVE_TABS.register(modBus);
         MinecraftForge.EVENT_BUS.register(this);
         GregitasRegistry.GREGITAS_REGISTRATE.registerRegistrate();
         GregitasRegistry.GREGITAS_REGISTRATE.addDataGenerator(ProviderType.LANG, LangHandler::init);

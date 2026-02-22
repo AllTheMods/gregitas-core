@@ -1,0 +1,11 @@
+{
+  "parent": "vs_eureka:block/template_ship_helm",
+  "textures": {
+    "log": "tfc:block/wood/log/chestnut",
+    "log_top": "tfc:block/wood/log_top/chestnut",
+    "planks": "tfc:block/wood/planks/chestnut",
+    "iron_block": "block/iron_block",
+    "particle": "tfc:block/wood/planks/chestnut",
+    "gold_block": "block/gold_block"
+  }
+}

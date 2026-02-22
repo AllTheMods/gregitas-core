@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "gregitas_core:block/palm_ship_helm"
+    },
+    "facing=east": {
+      "model": "gregitas_core:block/palm_ship_helm",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "gregitas_core:block/palm_ship_helm",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "gregitas_core:block/palm_ship_helm",
+      "y": 270
+    }
+  }
+}
