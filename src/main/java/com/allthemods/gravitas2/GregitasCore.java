@@ -132,8 +132,8 @@ public class GregitasCore {
 
         GregitasRegistry.MOBEFFECTS.register(modBus);
         GregitasRegistry.POTIONS.register(modBus);
-
-
+        GregitasRegistry.BLOCKS.register(modBus);
+        GregitasRegistry.ITEMS.register(modBus);
         MinecraftForge.EVENT_BUS.register(this);
         GregitasRegistry.GREGITAS_REGISTRATE.registerRegistrate();
         GregitasRegistry.GREGITAS_REGISTRATE.addDataGenerator(ProviderType.LANG, LangHandler::init);

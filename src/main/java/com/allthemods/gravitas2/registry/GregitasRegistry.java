@@ -1,8 +1,10 @@
 package com.allthemods.gravitas2.registry;
 
 import com.allthemods.gravitas2.GregitasCore;
+import com.allthemods.gravitas2.block.CoinPile;
 import com.allthemods.gravitas2.enchants.RefreshingEnchant;
 import com.allthemods.gravitas2.enchants.WarmingEnchant;
+import com.github.alexthe666.iceandfire.block.BlockGoldPile;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
@@ -43,6 +45,9 @@ public class GregitasRegistry {
 
     public static final RegistryObject<Potion> REFRESHING_POTION = POTIONS.register("refreshing", () -> new Potion(new MobEffectInstance(REFRESHING.get(), 600)));
     public static final RegistryObject<Potion> WARMING_POTION = POTIONS.register("warming", () -> new Potion(new MobEffectInstance(WARMING.get(), 600)));
+
+    public static final RegistryObject<CoinPile> MoneyPile = BLOCKS.register("coin_pile", () -> new CoinPile());
+    public static final RegistryObject<BlockItem> MoneyPileItem = ITEMS.register("coin_pile", () -> new BlockItem(MoneyPile.get(), new Item.Properties()));
 
 
 }

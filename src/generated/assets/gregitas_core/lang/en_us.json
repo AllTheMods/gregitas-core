@@ -114,5 +114,7 @@
   "tagprefix.rhyolite": "Rhyolite %s Ore",
   "tagprefix.schist": "Schist %s Ore",
   "tagprefix.shale": "Shale %s Ore",
-  "tagprefix.slate": "Slate %s Ore"
+  "tagprefix.slate": "Slate %s Ore",
+  "block.gregitas_core.coin_pile": "Coin Pile",
+  "item.gregitas_core.coin_pile": "Coin Pile"
 }
