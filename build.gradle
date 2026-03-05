@@ -171,6 +171,8 @@ dependencies {
     modImplementation("curse.maven:applied-energistics-2-223794:6852919")
     modImplementation("curse.maven:gcyr-922713:7601233")
     modImplementation("curse.maven:workers-567450:6339807")
+    modImplementation("curse.maven:workerstfc-1250925:7613978")
+
     modImplementation("curse.maven:valkyrien-skies-258371:7568034")
     modImplementation("curse.maven:eureka-ships-654384:7419758")
     modImplementation("curse.maven:kotlin-for-forge-351264:7291067")

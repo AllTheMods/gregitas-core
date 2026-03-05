@@ -21,6 +21,7 @@
     "NotifiableItemStackHandlerMixin",
     "MaterialPropertiesMixin",
     "MetaMachineBlockEntityImplMixin",
+    "MinerAIMixin",
     "MixinIM_Shards",
     "MixinLilyFix",
     "MixinRedstoneSheep",

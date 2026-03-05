@@ -231,6 +231,9 @@ public class GregitasMaterials {
         GTMaterials.RhodiumPlatedPalladium.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
         GTMaterials.NiobiumTitanium.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
 
+        GTMaterials.Plutonium239.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+        GTMaterials.Plutonium241.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+
         GTMaterials.Samarium.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
         GTMaterials.Trinium.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
         GTMaterials.Platinum.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
