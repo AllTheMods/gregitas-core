@@ -42,6 +42,17 @@ public class LangHandler extends com.gregtechceu.gtceu.data.lang.LangHandler {
         provider.add(GregitasTagPrefixes.oreGranite.getUnlocalizedName(), GregitasTagPrefixes.oreGranite.langValue());
         provider.add(GregitasTagPrefixes.oreDiorite.getUnlocalizedName(), GregitasTagPrefixes.oreDiorite.langValue());
         // Materials
+        provider.add(GregitasMaterials.Acetylene.getUnlocalizedName(), "Acetylene");
+        provider.add(GregitasMaterials.Zircon.getUnlocalizedName(), "Zircon");
+        provider.add(GregitasMaterials.Wolframite.getUnlocalizedName(), "Wolframite");
+        provider.add(GregitasMaterials.Smithsonite.getUnlocalizedName(), "Smithsonite");
+        provider.add(GregitasMaterials.Vanadinite.getUnlocalizedName(), "Vanadinite");
+        provider.add(GregitasMaterials.Millerite.getUnlocalizedName(), "Millerite");
+        provider.add(GregitasMaterials.Acanthite.getUnlocalizedName(), "Acanthite");
+        provider.add(GregitasMaterials.Cuprite.getUnlocalizedName(), "Cuprite");
+        provider.add(GregitasMaterials.Thorianite.getUnlocalizedName(), "Thorianite");
+        provider.add(GregitasMaterials.Thorite.getUnlocalizedName(), "Thorite");
+        provider.add(GregitasMaterials.Anatase.getUnlocalizedName(), "Anatase");
         //replace(provider, GregitasMaterials.AllTheModium.getUnlocalizedName(), "AllTheModium");
         //replace(provider, GregitasMaterials.AllthemodiumNaquadahMixture.getUnlocalizedName(), "AllTheModium-Naquadah Mixture");
     }

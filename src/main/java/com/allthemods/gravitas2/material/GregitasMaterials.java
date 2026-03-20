@@ -4,13 +4,21 @@ import com.allthemods.gravitas2.compat.G2PropertyKey;
 import com.allthemods.gravitas2.compat.TFCProperty;
 import com.allthemods.gravitas2.material.materials.GregitasElementMaterials;
 import com.allthemods.gravitas2.material.materials.GregitasFirstDegreeMaterials;
+import com.allthemods.gravitas2.material.materials.GregitasIGMaterials;
 import com.allthemods.gravitas2.material.materials.GregitasHigherDegreeMaterials;
 import com.allthemods.gravitas2.material.materials.GregitasUnknownCompositionMaterials;
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags;
+import com.gregtechceu.gtceu.api.GTValues;
+import com.gregtechceu.gtceu.api.data.chemical.material.properties.BlastProperty;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.DustProperty;
+import com.gregtechceu.gtceu.api.data.chemical.material.properties.FluidProperty;
+import com.gregtechceu.gtceu.api.data.chemical.material.properties.IngotProperty;
+import com.gregtechceu.gtceu.api.fluids.FluidBuilder;
+import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.IMaterialProperty;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.MaterialProperties;
+import com.gregtechceu.gtceu.api.data.chemical.material.properties.OreProperty;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey;
 import com.gregtechceu.gtceu.api.data.chemical.material.stack.MaterialStack;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
@@ -36,6 +44,17 @@ public class GregitasMaterials {
     //endregion
 
     //region first degree
+    public static Material Acetylene;
+    public static Material Zircon;
+    public static Material Wolframite;
+    public static Material Smithsonite;
+    public static Material Vanadinite;
+    public static Material Millerite;
+    public static Material Acanthite;
+    public static Material Cuprite;
+    public static Material Thorianite;
+    public static Material Thorite;
+    public static Material Anatase;
     public static Material KaolinClay;
     public static Material IgneousAlloy;
     public static Material AllthemodiumNaquadahMixture;
@@ -99,6 +118,7 @@ public class GregitasMaterials {
     public static void init() {
         GregitasElementMaterials.init();
         GregitasFirstDegreeMaterials.init();
+        GregitasIGMaterials.init();
         GregitasUnknownCompositionMaterials.init();
         GregitasHigherDegreeMaterials.init();
     }
@@ -107,6 +127,28 @@ public class GregitasMaterials {
         GTMaterials.Bismuth.addFlags(MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_ROD);
         GTMaterials.Nickel.addFlags(MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_ROD);
         GTMaterials.Astatine.setProperty(PropertyKey.DUST, new DustProperty());
+        GTMaterials.Hafnium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        GTMaterials.Hafnium.setProperty(PropertyKey.BLAST, new BlastProperty(2506, BlastProperty.GasTier.HIGH));
+        GTMaterials.Hafnium.setProperty(PropertyKey.FLUID,
+                new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder().temperature(2506)));
+        GTMaterials.Hafnium.addFlags(
+                MaterialFlags.GENERATE_PLATE,
+                MaterialFlags.GENERATE_ROD,
+                MaterialFlags.GENERATE_FOIL,
+                MaterialFlags.GENERATE_BOLT_SCREW,
+                MaterialFlags.GENERATE_RING);
+        GTMaterials.Zirconium.setMaterialARGB(0xC8D8E8);
+        GTMaterials.Zirconium.setMaterialSecondaryARGB(0x6888A0);
+        GTMaterials.Zirconium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        GTMaterials.Zirconium.setProperty(PropertyKey.BLAST, new BlastProperty(2128, BlastProperty.GasTier.HIGH));
+        GTMaterials.Zirconium.setProperty(PropertyKey.FLUID,
+                new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder().temperature(2128)));
+        GTMaterials.Zirconium.addFlags(
+                MaterialFlags.GENERATE_PLATE,
+                MaterialFlags.GENERATE_ROD,
+                MaterialFlags.GENERATE_FOIL,
+                MaterialFlags.GENERATE_BOLT_SCREW,
+                MaterialFlags.GENERATE_RING);
         GTMaterials.WroughtIron.addFlags(MaterialFlags.GENERATE_ROTOR, MaterialFlags.GENERATE_RING);
         GTMaterials.BlackBronze.addFlags(MaterialFlags.GENERATE_RING);
         GTMaterials.BismuthBronze.addFlags(MaterialFlags.GENERATE_RING);
@@ -238,6 +280,37 @@ public class GregitasMaterials {
         GTMaterials.Antimony.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
         GTMaterials.Molybdenum.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
         GregitasMaterials.IgneousAlloy.setProperty(G2PropertyKey.TFC_PROPERTY, new TFCProperty(800,1000,1200,1));
+
+        OreProperty prop;
+        prop = Zircon.getProperty(PropertyKey.ORE);
+        prop.setOreByProducts(GTMaterials.Zirconium, GTMaterials.Hafnium);
+
+        prop = Wolframite.getProperty(PropertyKey.ORE);
+        prop.setOreByProducts(GTMaterials.Tungsten, GTMaterials.Manganese, GTMaterials.Arsenic);
+
+        prop = Smithsonite.getProperty(PropertyKey.ORE);
+        prop.setOreByProducts(GTMaterials.Zinc, GTMaterials.Copper);
+
+        prop = Vanadinite.getProperty(PropertyKey.ORE);
+        prop.setOreByProducts(GTMaterials.Vanadium, GTMaterials.Lead);
+
+        prop = Millerite.getProperty(PropertyKey.ORE);
+        prop.setOreByProducts(GTMaterials.Nickel, GTMaterials.Chromium);
+
+        prop = Acanthite.getProperty(PropertyKey.ORE);
+        prop.setOreByProducts(GTMaterials.Silver, GTMaterials.Antimony, GTMaterials.Lead);
+
+        prop = Cuprite.getProperty(PropertyKey.ORE);
+        prop.setOreByProducts(GTMaterials.Copper, GTMaterials.Iron);
+
+        prop = Thorianite.getProperty(PropertyKey.ORE);
+        prop.setOreByProducts(GTMaterials.Thorium, GTMaterials.Uranium238, GTMaterials.RareEarth);
+
+        prop = Thorite.getProperty(PropertyKey.ORE);
+        prop.setOreByProducts(GTMaterials.Thorium, GTMaterials.Zirconium, GTMaterials.RareEarth);
+
+        prop = Anatase.getProperty(PropertyKey.ORE);
+        prop.setOreByProducts(GTMaterials.Titanium, GTMaterials.Silicon);
 
     }
 }
