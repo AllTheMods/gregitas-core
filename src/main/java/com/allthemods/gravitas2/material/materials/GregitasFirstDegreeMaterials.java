@@ -74,6 +74,12 @@ public class GregitasFirstDegreeMaterials {
                 .components(Certus, 1, Hydrogen, 4)
                 .buildAndRegister();
 
+        Acetylene = new Material.Builder(GregitasCore.id("acetylene"))
+                .gas()
+                .color(0xd4d4d4)
+                .components(Carbon, 2, Hydrogen, 2)
+                .buildAndRegister();
+
         WroughtIronMagnetic = new Material.Builder(GregitasCore.id("magnetic_wrought_iron"))
                 .ingot()
                 .color(0xbcbcbc).secondaryColor(0x521c0b).iconSet(MaterialIconSet.MAGNETIC)
