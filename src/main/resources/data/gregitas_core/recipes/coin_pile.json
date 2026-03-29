@@ -5,6 +5,6 @@
 
   },
   "pattern": ["## ", "   ", "   "],
-  "result": {"item": "gregitas_cpre:coin_pile", "count": 1},
+  "result": {"item": "gregitas_core:coin_pile", "count": 1},
   "show_notification": true
 }
